@@ -1,0 +1,22 @@
+{
+  "status": "pending_final_deck",
+  "updatedAt": "2026-03-08T00:00:00Z",
+  "expectedFinalDeck": [
+    "artifacts/exports/slides/esheria-workflow-executive-deck.pptx",
+    "artifacts/exports/slides/esheria-workflow-executive-deck.pdf"
+  ],
+  "finalDeckPresent": [],
+  "supportingAssets": {
+    "diagramPngCount": 12,
+    "dashboardPngCount": 5
+  },
+  "sourceReferences": [
+    "docs/presentation/executive-deck-outline.md",
+    "artifacts/slides/source/README.md"
+  ],
+  "notes": [
+    "Slide assets are available for deck assembly.",
+    "Finalized executive deck export has not been committed yet.",
+    "Do not add placeholder/fake deck files."
+  ]
+}

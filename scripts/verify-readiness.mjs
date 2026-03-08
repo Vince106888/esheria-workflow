@@ -19,6 +19,11 @@ const reportPath = path.resolve(
 
 const requireSubmissionPdfs = process.env.REQUIRE_SUBMISSION_PDFS !== "0";
 const requireBuildOutput = process.env.REQUIRE_BUILD_OUTPUT !== "0";
+const requireExecutiveDeck = process.env.REQUIRE_EXECUTIVE_DECK === "1";
+const expectedExecutiveDeckFiles = [
+  "artifacts/exports/slides/esheria-workflow-executive-deck.pdf",
+  "artifacts/exports/slides/esheria-workflow-executive-deck.pptx",
+];
 
 const checks = [];
 const warnings = [];
@@ -91,12 +96,41 @@ if (requireSubmissionPdfs) {
   );
 }
 
+let executiveDeckReady = true;
+for (const relPath of expectedExecutiveDeckFiles) {
+  const ok = await exists(path.join(root, relPath));
+  checks.push({
+    label: "executive deck deliverable",
+    path: relPath,
+    kind: "file",
+    required: requireExecutiveDeck,
+    ok,
+  });
+  if (!ok) {
+    executiveDeckReady = false;
+    const message = `Missing executive deck deliverable: ${relPath}`;
+    if (requireExecutiveDeck) {
+      errors.push(message);
+    } else {
+      warnings.push(`${message} (required for CEO submission)`);
+    }
+  }
+}
+
+const hostingReady = errors.length === 0;
+const submissionReady = hostingReady && executiveDeckReady;
+
 const report = {
   generatedAt: new Date().toISOString(),
   status: errors.length > 0 ? "failed" : "passed",
   config: {
     requireSubmissionPdfs,
     requireBuildOutput,
+    requireExecutiveDeck,
+  },
+  readiness: {
+    hostingReady,
+    submissionReady,
   },
   checks,
   warnings,

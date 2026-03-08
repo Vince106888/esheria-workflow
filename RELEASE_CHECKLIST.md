@@ -41,7 +41,13 @@ Use this checklist before publishing a review branch or sending submission artif
 - [ ] Executive proposal DOCX present
 - [ ] Technical blueprint DOCX present
 - [ ] Product design appendix DOCX present
+- [ ] Official submission PDFs are current in:
+  - `artifacts/exports/pdf/executive_proposal.pdf`
+  - `artifacts/exports/pdf/technical_blueprint.pdf`
 - [ ] Slides export support assets present under `artifacts/exports/slides/assets/`
+- [ ] Final executive deck files present:
+  - `artifacts/exports/slides/esheria-workflow-executive-deck.pptx`
+  - `artifacts/exports/slides/esheria-workflow-executive-deck.pdf`
 - [ ] Diagram exports present under `diagrams/exports/`
 
 ## 6) Final Git Hygiene

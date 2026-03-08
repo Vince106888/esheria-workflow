@@ -10,6 +10,10 @@ const slidesSourceRoot = path.join(root, "artifacts", "slides", "source");
 const requiredTex = ["executive_proposal.tex", "technical_blueprint.tex"];
 const requiredPdf = ["executive_proposal.pdf", "technical_blueprint.pdf"];
 const slideDeckExtensions = new Set([".pptx", ".odp", ".key", ".pdf"]);
+const expectedExecutiveDeck = [
+  "esheria-workflow-executive-deck.pptx",
+  "esheria-workflow-executive-deck.pdf",
+];
 const strictPdfFreshness = process.env.STRICT_PDF_FRESHNESS === "1";
 
 const exists = async (target) => {
@@ -65,9 +69,14 @@ if (await exists(exportsSlidesRoot)) {
     .filter((entry) => entry.isFile())
     .map((entry) => entry.name)
     .filter((name) => slideDeckExtensions.has(path.extname(name).toLowerCase()));
+  const missingExpectedDecks = expectedExecutiveDeck.filter((name) => !deckFiles.includes(name));
   if (deckFiles.length === 0) {
     warnings.push(
       "No finalized slide deck found in artifacts/exports/slides (.pptx/.odp/.key/.pdf)."
+    );
+  } else if (missingExpectedDecks.length > 0) {
+    warnings.push(
+      `Canonical executive deck filenames missing: ${missingExpectedDecks.join(", ")}`
     );
   }
 }

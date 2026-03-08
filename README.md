@@ -180,8 +180,24 @@ Primary submission artifacts are expected under:
 - `artifacts/esheria-executive-proposal.docx`
 - `artifacts/esheria-technical-blueprint.docx`
 - `artifacts/esheria-product-design-appendix.docx`
-- `artifacts/exports/pdf/*.pdf`
+- `artifacts/exports/pdf/executive_proposal.pdf`
+- `artifacts/exports/pdf/technical_blueprint.pdf`
+- `artifacts/exports/slides/esheria-workflow-executive-deck.pptx` (final deck, required)
+- `artifacts/exports/slides/esheria-workflow-executive-deck.pdf` (final deck companion, required)
 - `artifacts/exports/slides/assets/**` (supporting visuals)
+
+Current deck status is tracked in:
+- `artifacts/exports/slides/deliverable-manifest.json`
+
+If the deck files are not present yet, submission is not complete even if hosting is ready.
+
+## Reviewer Open Order
+
+For CEO/exec review, open these first:
+
+1. `artifacts/exports/pdf/executive_proposal.pdf`
+2. `artifacts/exports/pdf/technical_blueprint.pdf`
+3. `docs/presentation/executive-deck-outline.md` (until final deck files are exported)
 
 ## Review Navigation
 

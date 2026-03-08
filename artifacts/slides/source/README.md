@@ -10,3 +10,6 @@ Expected source files:
 Current status:
 - Finalized executive deck export is not yet present.
 - Do not create placeholder fake decks for submission.
+- Final export targets are:
+  - `artifacts/exports/slides/esheria-workflow-executive-deck.pptx`
+  - `artifacts/exports/slides/esheria-workflow-executive-deck.pdf`
