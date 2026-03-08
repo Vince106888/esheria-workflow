@@ -1,7 +1,15 @@
 import { DASHBOARD_SIDEBAR_OVERRIDES } from "./dashboardSidebarConfig";
 
 const PEN_DASHBOARD_COMPONENT_ID = "4Z7PP";
-const PEN_DASHBOARD_URL = "/artifacts/visuals/architecture-artifacts.pen";
+const BASE_URL = import.meta.env.BASE_URL || "/";
+const NORMALIZED_BASE_URL = BASE_URL.endsWith("/") ? BASE_URL : `${BASE_URL}/`;
+
+function withBase(path = "") {
+  if (!path.startsWith("/")) return path;
+  return `${NORMALIZED_BASE_URL}${path.slice(1)}`;
+}
+
+const PEN_DASHBOARD_URL = withBase("/artifacts/visuals/architecture-artifacts.pen");
 
 const FIELD_IDS = {
   sidebarBrand: "Q5JA0",
@@ -207,8 +215,8 @@ function parseDashboardFrame(frame, sidebarDefaults) {
     })),
     approval,
     timeline,
-    htmlUrl: `/artifacts/visuals/dashboards/html/${slug}.html`,
-    pngUrl: `/artifacts/visuals/dashboards/png/${slug}.png`,
+    htmlUrl: withBase(`/artifacts/visuals/dashboards/html/${slug}.html`),
+    pngUrl: withBase(`/artifacts/visuals/dashboards/png/${slug}.png`),
   };
 }
 

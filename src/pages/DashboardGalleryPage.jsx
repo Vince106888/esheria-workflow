@@ -82,6 +82,7 @@ function isLandingModule(label = "", index = 0) {
 
 export default function DashboardGalleryPage() {
   const section = sectionById.dashboards;
+  const brandLogoSrc = `${import.meta.env.BASE_URL}assets/img/logo/vl-footer-logo5.1.png`;
   const [status, setStatus] = useState("loading");
   const [error, setError] = useState("");
   const [dashboards, setDashboards] = useState([]);
@@ -278,7 +279,7 @@ export default function DashboardGalleryPage() {
               <div className="dashboard-runtime-layout">
                 <aside className="dashboard-runtime-sidebar">
                   <div className="dashboard-runtime-brand">
-                    <img className="dashboard-runtime-logo" src="/assets/img/logo/vl-footer-logo5.1.png" alt="Esheria" />
+                    <img className="dashboard-runtime-logo" src={brandLogoSrc} alt="Esheria" />
                     <div className="dashboard-runtime-brand-text">{active.sidebarBrand || "Esheria OS"}</div>
                   </div>
                   <div className="dashboard-runtime-nav-title">Dashboard Navigation</div>
