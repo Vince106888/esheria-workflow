@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resources for Technical and Commercial Review | Esheria</title>
+  <link rel="icon" type="image/png" href="../assets/vl-footer-logo5.1.png" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <header class="topbar"><div class="inner"><a class="brand-link" href="../index.html" aria-label="Esheria home"><img class="brand-logo" src="../assets/vl-footer-logo5.1.png" alt="Esheria" /></a><nav class="topbar-nav"><a class="" href="../index.html">Home</a><a class="" href="../pages/product.html">Product</a><a class="" href="../pages/solutions.html">Solutions</a><a class="" href="../pages/platform.html">Platform</a><a class="" href="../pages/security.html">Security</a><a class="" href="../pages/integrations.html">Integrations</a><a class="" href="../pages/analytics.html">Analytics</a><a class="" href="../pages/pricing.html">Pricing</a><a class="" href="../pages/customers.html">Customers</a><a class="active" href="../pages/resources.html">Resources</a><a class="" href="../pages/appendix.html">Appendix</a></nav><button class="theme-toggle" data-theme-toggle type="button">Dark Mode</button><a class="top-cta" href="../pages/pricing.html">Book Demo</a></div></header>
+  <main>
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <span class="kicker"><i></i>Resources</span>
+          <h1>Resources for Technical and Commercial Review</h1>
+          <p>Everything stakeholders need to evaluate product fit and implementation readiness.</p>
+          <p>Resource center consolidates architecture docs, blueprint references, and visual artifacts.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="/overview">Open Full Artifact Portal</a>
+            <a class="btn btn-secondary" href="/artifacts/exports/pdf/technical_blueprint.pdf">Download Technical PDF</a>
+          </div>
+        </div>
+        <aside>
+          <h3 class="surface-title">Value Signals</h3>
+          <ul class="hero-highlights"><li>Technical blueprint</li><li>Implementation roadmap</li><li>Cross-artifact consistency checks</li></ul>
+        </aside>
+      </div>
+      
+    </section>
+    <section class="section-grid">
+      <article class="card">
+        <h3>Resource Modules</h3>
+        <div class="module-grid"><article class="module"><b>Architecture Notes</b><span>System rationale, tradeoffs, and governance model definitions.</span></article><article class="module"><b>Visual Artifacts</b><span>Diagrams and dashboards aligned with implementation reality.</span></article><article class="module"><b>Export Packages</b><span>PDF, DOCX, and slide-ready outputs for stakeholder communication.</span></article></div>
+      </article>
+      <section class="surface-card"><h3 class="surface-title">Page-Specific Lens</h3><ul class="signal-list"><li><b>Technical blueprint</b><span>Reference signal used by technical and commercial reviewers.</span></li><li><b>Implementation roadmap</b><span>Reference signal used by technical and commercial reviewers.</span></li><li><b>Cross-artifact consistency checks</b><span>Reference signal used by technical and commercial reviewers.</span></li><li><b>Technical Blueprint</b><span>Evidence link to implementation and review documents.</span></li><li><b>Implementation Roadmap</b><span>Evidence link to implementation and review documents.</span></li></ul></section>
+    </section>
+    
+    <section class="card"><h3>Resource Index</h3><ul class="resource-list"><li><b>Technical Blueprint</b><span>Linked reference for technical and commercial validation.</span></li><li><b>Implementation Roadmap</b><span>Linked reference for technical and commercial validation.</span></li><li><b>Consistency Review</b><span>Linked reference for technical and commercial validation.</span></li></ul></section>
+    
+    <section class="evidence-strip">
+      <h3 class="evidence-title">Evidence + Next Steps</h3>
+      <div class="evidence-links"><a class="evidence-link" href="/docs/architecture/technical-blueprint.md">Technical Blueprint</a><a class="evidence-link" href="/docs/architecture/implementation-roadmap.md">Implementation Roadmap</a><a class="evidence-link" href="/docs/architecture/consistency-review.md">Consistency Review</a><a class="evidence-link" href="../pages/customers.html">Customers</a><a class="evidence-link" href="../pages/appendix.html">Appendix</a><a class="evidence-link" href="../pages/pricing.html">Pricing</a></div>
+    </section>
+    <div class="footer"><img class="footer-logo" src="../assets/vl-footer-logo5.1.png" alt="Esheria" /><span>Esheria product website artifact &middot; marketing narrative + app-shell launch surfaces</span></div>
+  </main>
+  <script>
+  (() => {
+    const THEME_KEY = "esheria-theme";
+    const root = document.documentElement;
+    const themeToggle = document.querySelector("[data-theme-toggle]");
+    const resolveTheme = () => {
+      try {
+        const stored = window.localStorage.getItem(THEME_KEY);
+        if (stored === "dark" || stored === "light") return stored;
+      } catch {}
+      return window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+    };
+    const applyTheme = (theme) => {
+      root.dataset.theme = theme;
+      if (!themeToggle) return;
+      themeToggle.textContent = theme === "dark" ? "Light Mode" : "Dark Mode";
+      themeToggle.setAttribute("aria-label", "Switch to " + (theme === "dark" ? "light" : "dark") + " theme");
+    };
+    let theme = resolveTheme();
+    applyTheme(theme);
+    if (themeToggle) {
+      themeToggle.addEventListener("click", () => {
+        theme = theme === "dark" ? "light" : "dark";
+        applyTheme(theme);
+        try {
+          window.localStorage.setItem(THEME_KEY, theme);
+        } catch {}
+      });
+    }
+
+    const roleSurface = document.querySelector("[data-role-surface]");
+    if (roleSurface) {
+      const roleButtons = Array.from(roleSurface.querySelectorAll("[data-role-btn]"));
+      const rolePanels = Array.from(roleSurface.querySelectorAll("[data-role-panel]"));
+      const setRole = (roleId) => {
+        roleButtons.forEach((button) => button.classList.toggle("active", button.dataset.roleBtn === roleId));
+        rolePanels.forEach((panel) => panel.classList.toggle("active", panel.dataset.rolePanel === roleId));
+      };
+      roleButtons.forEach((button) => button.addEventListener("click", () => setRole(button.dataset.roleBtn || "")));
+    }
+
+    const pricingToggle = document.querySelector("[data-pricing-toggle]");
+    if (pricingToggle) {
+      const billingButtons = Array.from(pricingToggle.querySelectorAll("[data-billing]"));
+      const priceNodes = Array.from(document.querySelectorAll("[data-price]"));
+      const setBilling = (mode) => {
+        billingButtons.forEach((button) => button.classList.toggle("active", button.dataset.billing === mode));
+        priceNodes.forEach((node) => {
+          const value = mode === "annual" ? node.getAttribute("data-annual") : node.getAttribute("data-monthly");
+          if (value) node.textContent = value;
+        });
+      };
+      billingButtons.forEach((button) => button.addEventListener("click", () => setBilling(button.dataset.billing || "monthly")));
+      setBilling("monthly");
+    }
+  })();
+  </script>
+</body>
+</html>
