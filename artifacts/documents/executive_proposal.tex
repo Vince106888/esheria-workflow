@@ -1,0 +1,63 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+\title{Esheria Legal Workflow OS: Executive Proposal}
+\date{2026-03-07}
+\begin{document}
+\maketitle
+
+\section{Strategic Shift}
+Esheria moves from product-fragmented capabilities to a unified multi-tenant legal workflow operating system. The strategic thesis is orchestration-first integration with strict tenancy, governance, and auditability controls.
+
+\section{Current Architecture}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/system-context.png}
+\caption{Current system context across actors, services, and enterprise integrations}
+\end{figure}
+
+\section{Platform Architecture}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/layered-architecture.png}
+\caption{Target layered architecture with control and data plane split}
+\end{figure}
+
+\section{Workflow Example}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/contract-intake-sequence.png}
+\caption{Contract intake and review workflow sequence}
+\end{figure}
+
+\section{Dashboards}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/dashboard-topology.png}
+\caption{Customer vs operator dashboard topology and analytics separation}
+\end{figure}
+
+\section{Integrations}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/service-integration-map.png}
+\caption{Connector gateway integration map across Esheria services}
+\end{figure}
+
+\section{Deployment}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/deployment-topology.png}
+\caption{Deployment topology across EKS, SageMaker, and shared data services}
+\end{figure}
+
+\section{Roadmap}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/current-vs-target-architecture.png}
+\caption{Transformation roadmap from current to target architecture}
+\end{figure}
+
+\end{document}

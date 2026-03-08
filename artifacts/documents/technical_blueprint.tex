@@ -1,0 +1,67 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.9in]{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+\title{Esheria Legal Workflow OS: Technical Blueprint}
+\date{2026-03-07}
+\begin{document}
+\maketitle
+
+\section{System Architecture}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/layered-architecture.png}
+\caption{System architecture layers and boundaries}
+\end{figure}
+
+\section{API Boundaries}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/api-boundary-map.png}
+\caption{Platform API and connector boundary map}
+\end{figure}
+
+\section{Ontology Model}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/ontology-er.png}
+\caption{Canonical ontology and key entity relationships}
+\end{figure}
+
+\section{Workflow Engine Design}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/workflow-state-machine.png}
+\caption{Workflow state machine with deterministic transitions}
+\end{figure}
+
+\section{Tenancy Model}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/dashboard-topology.png}
+\caption{Tenant-scoped customer analytics separated from internal analytics}
+\end{figure}
+
+\section{Control vs Data Plane}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/control-vs-data-plane.png}
+\caption{Control-plane and data-plane responsibility split}
+\end{figure}
+
+\section{Deployment Topology}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/deployment-topology.png}
+\caption{Deployment topology for runtime services and shared infrastructure}
+\end{figure}
+
+\section{Integration Architecture}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/service-integration-map.png}
+\caption{Connector integration architecture}
+\end{figure}
+
+\end{document}
