@@ -25,6 +25,7 @@ function pathToSlug(path) {
 
 const knownPaths = navSections.map((item) => item.to);
 const HEADERLESS_ROUTES = new Set(["/legacy-architecture", "/legacy-diagrams"]);
+const ROUTER_BASENAME = (import.meta.env.BASE_URL || "/").replace(/\/$/, "") || "/";
 
 function NotFoundPage() {
   return (
@@ -77,7 +78,7 @@ function AppRoutes() {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={ROUTER_BASENAME}>
       <AppRoutes />
     </BrowserRouter>
   );
