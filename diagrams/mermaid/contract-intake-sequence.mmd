@@ -1,0 +1,47 @@
+sequenceDiagram
+  autonumber
+  participant Inst as Institution User
+  participant UI as Institution Workspace UI
+  participant WF as Workflow Engine
+  participant Doc as Document Service
+  participant OCR as OCR Connector
+  participant CE as Compliance Connector
+  participant RE as Research Connector
+  participant RV as Review Service
+  participant AU as Audit Service
+  participant EX as Export Service
+
+  Inst->>UI: Submit contract intake package
+  UI->>WF: Start workflow(contract-intake-review)
+  WF->>AU: Record event intake_received
+  WF->>Doc: Create matter/document records
+  Doc->>AU: Record document_ingested
+
+  WF->>OCR: Request OCR extraction (async)
+  OCR-->>WF: OCR text + confidence + artifacts
+  WF->>AU: Record ocr_completed
+
+  WF->>CE: Resolve obligations/clauses and run compliance check
+  CE-->>WF: Findings, risks, issue log candidates
+  WF->>AU: Record compliance_analysis_completed
+
+  WF->>RE: Optional legal citation enrichment
+  RE-->>WF: Citation cards and confidence scores
+  WF->>RV: Create review task bundle
+  RV-->>UI: Review queue updated
+
+  Inst->>UI: Approve / request changes / escalate
+  UI->>RV: Submit review decision
+  RV->>WF: Decision event
+  WF->>AU: Record decision and actor context
+
+  alt Approved
+    WF->>EX: Generate export package
+    EX-->>WF: Export artifact URI
+    WF->>AU: Record exported
+  else Changes requested
+    WF->>RV: Re-open task and assign follow-up
+    WF->>AU: Record changes_requested
+  end
+
+  WF-->>UI: Final workflow state and trace_id

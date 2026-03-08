@@ -1,0 +1,46 @@
+flowchart LR
+  classDef cp fill:#1e3a8a,stroke:#60a5fa,color:#dbeafe;
+  classDef dp fill:#78350f,stroke:#f59e0b,color:#ffedd5;
+  classDef shared fill:#0f172a,stroke:#64748b,color:#e2e8f0;
+
+  subgraph ControlPlane[Control Plane]
+    CP1[Tenant Provisioning]:::cp
+    CP2[Identity and Access Policy]:::cp
+    CP3[Workflow Definition Registry]:::cp
+    CP4[Connector Configuration]:::cp
+    CP5[Governance and Audit Policy]:::cp
+  end
+
+  subgraph DataPlane[Data Plane]
+    DP1[Workflow Runtime]:::dp
+    DP2[Document Intake and Processing]:::dp
+    DP3[Review Task Execution]:::dp
+    DP4[Capability Invocation]:::dp
+    DP5[Evidence and Event Capture]:::dp
+  end
+
+  subgraph SharedSystems[Shared Services]
+    SH1[Connector Gateway]:::shared
+    SH2[Observability]:::shared
+    SH3[Transactional and Event Stores]:::shared
+  end
+
+  CP1 --> DP1
+  CP2 --> DP1
+  CP3 --> DP1
+  CP4 --> SH1
+  CP5 --> DP5
+
+  DP1 --> DP2
+  DP1 --> DP3
+  DP1 --> DP4
+  DP4 --> SH1
+  DP5 --> SH3
+
+  DP1 --> SH2
+  DP2 --> SH2
+  DP3 --> SH2
+  SH1 --> SH2
+
+  CP2 -. issues claims and policies .-> SH1
+  CP5 -. enforces governance .-> SH3

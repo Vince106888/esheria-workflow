@@ -1,0 +1,29 @@
+sequenceDiagram
+  autonumber
+  participant User as Institution User
+  participant IdP as Enterprise IdP
+  participant IG as Platform API Gateway
+  participant ITS as Identity/Tenant Service
+  participant WF as Workflow Engine
+  participant CG as Connector Gateway
+  participant Down as Downstream Service
+
+  User->>IdP: Authenticate (OIDC/SAML)
+  IdP-->>User: ID token / auth code
+  User->>IG: API request with access token
+  IG->>ITS: Validate token, resolve tenant and roles
+  ITS-->>IG: Auth context {tenant_id, org_id, user_id, roles}
+  IG->>WF: Forward request with tenant context and trace_id
+
+  WF->>CG: Invoke connector action with workflow context
+  CG->>ITS: Request short-lived service token (scoped)
+  ITS-->>CG: Service token {tenant_id, workflow_run_id, policy_hash}
+  CG->>Down: Call downstream API with mapped auth
+  Down-->>CG: Response payload
+  CG-->>WF: Normalized response + contract envelope
+
+  WF->>IG: Return API response
+  IG-->>User: Response with trace_id
+
+  Note over ITS,CG: Tenant boundary enforced at policy + token issuance
+  Note over WF,CG: All calls carry trace_id and workflow_run_id

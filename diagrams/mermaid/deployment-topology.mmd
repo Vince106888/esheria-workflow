@@ -1,0 +1,64 @@
+flowchart TB
+  classDef boundary fill:#111827,stroke:#6b7280,color:#f3f4f6;
+  classDef k8s fill:#0f3d4c,stroke:#14b8a6,color:#e6fffa;
+  classDef ext fill:#1f2937,stroke:#a78bfa,color:#ede9fe;
+  classDef data fill:#1e293b,stroke:#f59e0b,color:#ffedd5;
+
+  subgraph Internet
+    Browser[Institution + Operator Browsers]:::boundary
+    ApiClient[Enterprise API Clients]:::boundary
+  end
+
+  Ingress[ALB / API Gateway Ingress]:::boundary
+  Browser --> Ingress
+  ApiClient --> Ingress
+
+  subgraph EKS Cluster
+    direction TB
+    APIGW[Platform API Gateway]:::k8s
+    Ctrl[Control Plane Services<br/>identity, policy, tenant, integration mgr]:::k8s
+    DataPlane[Data Plane Services<br/>workflow, document, review, audit, notifications]:::k8s
+    Conn[Connector Gateway]:::k8s
+    Workers[Async Workers]:::k8s
+    APIGW --> Ctrl
+    APIGW --> DataPlane
+    DataPlane --> Conn
+    DataPlane --> Workers
+  end
+
+  Ingress --> APIGW
+
+  subgraph Capability Services
+    OCR[esheria-ocr on SageMaker Endpoint]:::ext
+    Contract[esheria-contract-engine API]:::ext
+    Research[esheria-ai retrieval API]:::ext
+    Drafting[lexdraft API]:::ext
+    InternalAnalytics[esheria-analytics API]:::ext
+  end
+
+  Conn --> OCR
+  Conn --> Contract
+  Conn --> Research
+  Conn --> Drafting
+  Conn --> InternalAnalytics
+
+  subgraph Data and Infra
+    TxDB[(Transactional DB)]:::data
+    Obj[(Object Storage)]:::data
+    Queue[(Event Bus / Queue)]:::data
+    Search[(Search / Retrieval Index)]:::data
+    Metrics[(Analytics Warehouse)]:::data
+    Obs[(Logs / Traces / Metrics)]:::data
+    Secrets[(Secrets + Config)]:::data
+  end
+
+  DataPlane --> TxDB
+  DataPlane --> Obj
+  DataPlane --> Queue
+  DataPlane --> Search
+  DataPlane --> Metrics
+  Ctrl --> Secrets
+  APIGW --> Obs
+  DataPlane --> Obs
+  Conn --> Obs
+

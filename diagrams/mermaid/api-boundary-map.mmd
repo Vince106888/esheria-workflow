@@ -1,0 +1,50 @@
+flowchart TB
+  classDef edge fill:#0f172a,stroke:#64748b,color:#e2e8f0;
+  classDef platform fill:#0f3d4c,stroke:#14b8a6,color:#e6fffa;
+  classDef connector fill:#312e81,stroke:#a78bfa,color:#ede9fe;
+  classDef downstream fill:#1f2937,stroke:#94a3b8,color:#f8fafc;
+
+  subgraph EdgeBoundary[Client and Edge Boundary]
+    UI[Institution UI / Operator UI]:::edge
+    APIClients[Enterprise API Clients]:::edge
+  end
+
+  subgraph PlatformBoundary[Platform API Boundary]
+    PublicAPI[Public Platform API<br/>/v1/workflows, /v1/matters, /v1/reviews, /v1/analytics]:::platform
+    InternalAPI[Operator API<br/>/v1/operators, /v1/tenants, /v1/incidents]:::platform
+    EventAPI[Event Ingestion API<br/>/v1/events]:::platform
+  end
+
+  subgraph ConnectorBoundary[Connector Contract Boundary]
+    OCRAPI[OCR Contract<br/>/connector/ocr/*]:::connector
+    ComplianceAPI[Compliance Contract<br/>/connector/compliance/*]:::connector
+    ResearchAPI[Research Contract<br/>/connector/research/*]:::connector
+    DraftAPI[Drafting Contract<br/>/connector/drafting/*]:::connector
+    InternalAnalyticsAPI[Internal Analytics Contract<br/>/connector/internal-analytics/*]:::connector
+  end
+
+  subgraph DownstreamBoundary[Downstream Service APIs]
+    OcrSvc[esheria-ocr endpoints]:::downstream
+    ContractSvc[esheria-contract-engine /api/v1/*]:::downstream
+    ResearchSvc[esheria-ai retrieval endpoints]:::downstream
+    DraftSvc[lexdraft /api/*]:::downstream
+    AnalyticsSvc[esheria-analytics /analytics/*]:::downstream
+  end
+
+  UI --> PublicAPI
+  UI --> InternalAPI
+  APIClients --> PublicAPI
+  APIClients --> EventAPI
+
+  PublicAPI --> OCRAPI
+  PublicAPI --> ComplianceAPI
+  PublicAPI --> ResearchAPI
+  PublicAPI --> DraftAPI
+  InternalAPI --> InternalAnalyticsAPI
+
+  OCRAPI --> OcrSvc
+  ComplianceAPI --> ContractSvc
+  ResearchAPI --> ResearchSvc
+  DraftAPI --> DraftSvc
+  InternalAnalyticsAPI --> AnalyticsSvc
+

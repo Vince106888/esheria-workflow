@@ -1,0 +1,83 @@
+flowchart TB
+  classDef layer fill:#0f172a,stroke:#334155,color:#e2e8f0;
+  classDef customer fill:#022c22,stroke:#14b8a6,color:#ccfbf1;
+  classDef operator fill:#3f1d2e,stroke:#f472b6,color:#fce7f3;
+  classDef control fill:#1e3a8a,stroke:#60a5fa,color:#dbeafe;
+  classDef data fill:#78350f,stroke:#f59e0b,color:#ffedd5;
+  classDef conn fill:#312e81,stroke:#a78bfa,color:#ede9fe;
+  classDef infra fill:#111827,stroke:#6b7280,color:#f3f4f6;
+
+  subgraph L5[Layer 5 - Experience]
+    CWS[Institution Workspace]:::customer
+    CReview[Contract Intake and Review UI]:::customer
+    CAnalytics[Institution Analytics]:::customer
+    OConsole[Operator Console]:::operator
+    OOps[Workflow Ops Monitor]:::operator
+  end
+
+  subgraph L4[Layer 4 - Control Plane]
+    Identity[Identity and Tenant Service]:::control
+    Policy[Policy Service]:::control
+    Integrations[Integration Manager]:::control
+    Governance[Operator Governance]:::control
+  end
+
+  subgraph L3[Layer 3 - Data Plane]
+    Workflow[Workflow Engine]:::data
+    DocSvc[Document Service]:::data
+    ReviewSvc[Review/Task Service]:::data
+    AuditSvc[Audit/Evidence Service]:::data
+    EventSvc[Analytics Event Service]:::data
+    Notify[Notification Service]:::data
+  end
+
+  subgraph L2[Layer 2 - Connector Layer]
+    OCRConn[OCR Connector]:::conn
+    ComplianceConn[Compliance Connector]:::conn
+    ResearchConn[Research Connector]:::conn
+    DraftConn[Drafting Connector]:::conn
+    AnalyticsConn[Internal Analytics Connector]:::conn
+  end
+
+  subgraph L1[Layer 1 - Data and Infrastructure]
+    TxDB[Transactional Store]:::infra
+    ObjStore[Object Storage]:::infra
+    Queue[Event Bus/Queue]:::infra
+    Search[Search/Retrieval Index]:::infra
+    Metrics[Analytics Warehouse/Metrics]:::infra
+    Obs[Observability Stack]:::infra
+    Secrets[Config/Secrets/Flags]:::infra
+  end
+
+  CWS --> Identity
+  CReview --> Workflow
+  CAnalytics --> EventSvc
+  OConsole --> Governance
+  OOps --> Workflow
+
+  Identity --> Workflow
+  Policy --> Workflow
+  Integrations --> OCRConn
+  Integrations --> ComplianceConn
+  Governance --> EventSvc
+
+  Workflow --> DocSvc
+  Workflow --> ReviewSvc
+  Workflow --> AuditSvc
+  Workflow --> Notify
+  Workflow --> OCRConn
+  Workflow --> ComplianceConn
+  Workflow --> ResearchConn
+  Workflow --> DraftConn
+  EventSvc --> AnalyticsConn
+
+  DocSvc --> ObjStore
+  DocSvc --> TxDB
+  ReviewSvc --> TxDB
+  AuditSvc --> TxDB
+  AuditSvc --> ObjStore
+  Workflow --> Queue
+  Workflow --> Search
+  EventSvc --> Metrics
+  Workflow --> Obs
+  Identity --> Secrets

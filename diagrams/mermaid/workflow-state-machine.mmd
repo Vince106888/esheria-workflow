@@ -1,0 +1,28 @@
+stateDiagram-v2
+  [*] --> draft
+  draft --> intake_received: submit_intake
+  intake_received --> preprocessing: validate_payload
+  preprocessing --> compliance_analysis: ocr_and_normalize_complete
+  preprocessing --> failed: ocr_failed
+  compliance_analysis --> review_pending: obligations_and_risks_resolved
+  compliance_analysis --> failed: compliance_engine_error
+  review_pending --> changes_requested: reviewer_requests_changes
+  review_pending --> escalated: reviewer_escalates
+  review_pending --> approved: reviewer_approves
+  changes_requested --> preprocessing: resubmitted
+  escalated --> review_pending: reassigned
+  approved --> exported: export_generated
+  approved --> failed: export_failed
+  exported --> archived: close_workflow
+  failed --> review_pending: manual_recovery
+  archived --> [*]
+
+  note right of review_pending
+    tenant-scoped review queue
+    decision and evidence are audited
+  end note
+
+  note right of failed
+    failures emit incident events
+    operator console can retry/replay
+  end note

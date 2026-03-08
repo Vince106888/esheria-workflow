@@ -1,0 +1,140 @@
+erDiagram
+  TENANT ||--o{ ORGANIZATION : owns
+  TENANT ||--o{ USER : scopes
+  ORGANIZATION ||--o{ USER : has
+  ORGANIZATION ||--o{ MATTER : runs
+  MATTER ||--o{ DOCUMENT : contains
+  DOCUMENT ||--o{ CLAUSE : extracts
+  MATTER ||--o{ OBLIGATION : maps
+  CLAUSE ||--o{ RISK : triggers
+  MATTER ||--o{ REVIEW : requires
+  REVIEW ||--o{ REVIEW_ACTION : logs
+  MATTER ||--o{ WORKFLOW_RUN : executes
+  WORKFLOW_DEFINITION ||--o{ WORKFLOW_RUN : versioned_by
+  WORKFLOW_RUN ||--o{ TASK : schedules
+  WORKFLOW_RUN ||--o{ EVIDENCE : captures
+  TENANT ||--o{ INTEGRATION_CONFIG : configures
+
+  TENANT {
+    string tenant_id PK
+    string name
+    string status
+    string plan
+    datetime created_at
+  }
+
+  ORGANIZATION {
+    string org_id PK
+    string tenant_id FK
+    string name
+    string industry
+    string region
+  }
+
+  USER {
+    string user_id PK
+    string tenant_id FK
+    string org_id FK
+    string email
+    string role
+  }
+
+  MATTER {
+    string matter_id PK
+    string tenant_id FK
+    string org_id FK
+    string title
+    string status
+    string owner_user_id FK
+  }
+
+  DOCUMENT {
+    string document_id PK
+    string matter_id FK
+    string source
+    string storage_uri
+    string parse_status
+    int version
+  }
+
+  CLAUSE {
+    string clause_id PK
+    string document_id FK
+    string clause_type
+    string normalized_text
+    float confidence
+  }
+
+  OBLIGATION {
+    string obligation_id PK
+    string matter_id FK
+    string source_clause_id FK
+    string severity
+    string status
+  }
+
+  RISK {
+    string risk_id PK
+    string matter_id FK
+    string clause_id FK
+    string severity
+    string policy_reference
+  }
+
+  REVIEW {
+    string review_id PK
+    string matter_id FK
+    string assigned_to FK
+    string status
+    string decision
+  }
+
+  REVIEW_ACTION {
+    string action_id PK
+    string review_id FK
+    string action_type
+    string actor_user_id FK
+    string reason
+  }
+
+  WORKFLOW_DEFINITION {
+    string workflow_def_id PK
+    string name
+    string version
+    string state_schema
+  }
+
+  WORKFLOW_RUN {
+    string workflow_run_id PK
+    string workflow_def_id FK
+    string matter_id FK
+    string state
+    datetime started_at
+    datetime ended_at
+  }
+
+  TASK {
+    string task_id PK
+    string workflow_run_id FK
+    string task_type
+    string assignee
+    string status
+    datetime due_at
+  }
+
+  EVIDENCE {
+    string evidence_id PK
+    string workflow_run_id FK
+    string source_type
+    string uri
+    string hash
+    datetime captured_at
+  }
+
+  INTEGRATION_CONFIG {
+    string integration_id PK
+    string tenant_id FK
+    string connector_type
+    string status
+    string config_ref
+  }

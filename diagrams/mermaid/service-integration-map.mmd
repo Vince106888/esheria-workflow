@@ -1,0 +1,50 @@
+flowchart LR
+  classDef platform fill:#0f3d4c,stroke:#14b8a6,color:#e6fffa;
+  classDef connector fill:#312e81,stroke:#a78bfa,color:#ede9fe;
+  classDef service fill:#1f2937,stroke:#94a3b8,color:#f1f5f9;
+  classDef external fill:#111827,stroke:#f59e0b,color:#ffedd5;
+
+  PG[Platform Gateway API]:::platform
+  WG[Workflow Engine]:::platform
+  CG[Connector Gateway]:::platform
+
+  PG --> WG
+  WG --> CG
+
+  OCRC[OCR Connector]:::connector
+  CCC[Compliance Connector]:::connector
+  RSC[Research Connector]:::connector
+  DRC[Drafting Connector]:::connector
+  IAC[Internal Analytics Connector]:::connector
+  EGC["Edge Browser Connector (future)"]:::connector
+
+  CG --> OCRC
+  CG --> CCC
+  CG --> RSC
+  CG --> DRC
+  CG --> IAC
+  CG -.-> EGC
+
+  OCRS[esheria-ocr]:::service
+  CES[esheria-contract-engine]:::service
+  AIS[esheria-ai retrieval]:::service
+  LDS[lexdraft API]:::service
+  ANS[esheria-analytics API]:::service
+  LPS[lexchat-plugin]:::service
+
+  OCRC --> OCRS
+  CCC --> CES
+  RSC --> AIS
+  DRC --> LDS
+  IAC --> ANS
+  EGC -.-> LPS
+
+  DMS[Document Management Systems]:::external
+  CRM[CRM/ERP Systems]:::external
+  SSO[Enterprise IdP]:::external
+  ESIGN[E-sign Platforms]:::external
+
+  PG <--> DMS
+  PG <--> CRM
+  PG <--> SSO
+  PG <--> ESIGN

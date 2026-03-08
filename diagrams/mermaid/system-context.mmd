@@ -1,0 +1,44 @@
+flowchart LR
+  classDef actor fill:#111827,stroke:#6b7280,color:#f9fafb;
+  classDef core fill:#0f3d4c,stroke:#14b8a6,color:#e6fffa;
+  classDef service fill:#1f2937,stroke:#a78bfa,color:#f5f3ff;
+  classDef ext fill:#1e293b,stroke:#f59e0b,color:#fffbeb;
+
+  Institution[Institution Users<br/>Legal Ops, Compliance, Reviewers]:::actor
+  Operator[Esheria Operators<br/>Ops, Support, Platform Admin]:::actor
+  Public[Public/Prospects]:::actor
+
+  Platform[Esheria Legal Workflow OS<br/>Control Plane + Data Plane]:::core
+
+  Institution -->|workspace API| Platform
+  Operator -->|operator API| Platform
+  Public -->|onboarding/demo API| Platform
+
+  subgraph Existing Services
+    AI[esheria-ai<br/>Research/Retrieval]:::service
+    Draft[lexdraft<br/>Drafting/Review]:::service
+    Contract[esheria-contract-engine<br/>Compliance/Clauses]:::service
+    OCR[esheria-ocr<br/>OCR Inference]:::service
+    Analytics[esheria-analytics<br/>Internal Analytics]:::service
+    Plugin["lexchat-plugin<br/>Browser Edge (future)"]:::service
+  end
+
+  Platform -->|research connector| AI
+  Platform -->|drafting connector| Draft
+  Platform -->|compliance connector| Contract
+  Platform -->|ocr connector| OCR
+  Platform -->|internal analytics connector| Analytics
+  Platform -.->|future edge connector| Plugin
+
+  subgraph External Enterprise Systems
+    DMS[Document Management<br/>SharePoint/Drive/Box]:::ext
+    SSO[Identity/SSO<br/>OIDC/SAML]:::ext
+    ERP[ERP/CRM]:::ext
+    ESign[E-Signature]:::ext
+  end
+
+  Platform <--> DMS
+  Platform <--> SSO
+  Platform <--> ERP
+  Platform <--> ESign
+

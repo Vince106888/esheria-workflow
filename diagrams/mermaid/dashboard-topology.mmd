@@ -1,0 +1,50 @@
+flowchart LR
+  classDef customer fill:#022c22,stroke:#14b8a6,color:#ccfbf1;
+  classDef operator fill:#3f1d2e,stroke:#f472b6,color:#fce7f3;
+  classDef shared fill:#1e293b,stroke:#94a3b8,color:#e2e8f0;
+  classDef data fill:#111827,stroke:#f59e0b,color:#ffedd5;
+
+  subgraph Customer Side
+    C1[Institution Workspace]:::customer
+    C2[Review Queue Dashboard]:::customer
+    C3[Risk and SLA Dashboard]:::customer
+    C4[Tenant Settings Dashboard]:::customer
+  end
+
+  subgraph Shared Platform APIs
+    S1[Workflow API]:::shared
+    S2[Document and Review API]:::shared
+    S3[Customer Analytics API<br/>Tenant scoped]:::shared
+    S4[Connector Gateway API]:::shared
+  end
+
+  subgraph Operator Side
+    O1[Operator Admin Console]:::operator
+    O2[Tenant Provisioning Dashboard]:::operator
+    O3[Workflow Ops and Incident Monitor]:::operator
+    O4[Internal Commercial Analytics]:::operator
+  end
+
+  subgraph Analytics Stores
+    D1[Customer Analytics Store<br/>Tenant isolated]:::data
+    D2[Esheria Internal Analytics Store<br/>Cross-tenant internal only]:::data
+  end
+
+  C1 --> S1
+  C2 --> S2
+  C3 --> S3
+  C4 --> S3
+
+  O1 --> S1
+  O2 --> S1
+  O3 --> S4
+  O4 --> D2
+
+  S3 --> D1
+  S1 --> D1
+  S4 --> D2
+
+  D1 -. strict tenant boundaries .-> C3
+  D2 -. internal role boundaries .-> O4
+
+
