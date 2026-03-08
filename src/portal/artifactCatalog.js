@@ -189,14 +189,27 @@ export const portalSections = [
     title: "Documents",
     description: "Curated narrative and technical source notes for executive and engineering review.",
     bestFor: "Storyline alignment, architecture reasoning, and source-traceable technical deep dives.",
-    reviewHint: "Use this page for authored notes; use Downloads for packaged PDF/DOCX artifact files.",
+    reviewHint: "Use this page for primary PDFs and authored notes; use Downloads for full packaged export sets.",
     items: [
+      {
+        label: "Executive Proposal (PDF)",
+        url: "/artifacts/exports/pdf/executive_proposal.pdf",
+        type: "Primary PDF",
+        summary: "Board-oriented proposal narrative and value case.",
+        recommended: true,
+      },
+      {
+        label: "Technical Blueprint (PDF)",
+        url: "/artifacts/exports/pdf/technical_blueprint.pdf",
+        type: "Primary PDF",
+        summary: "Implementation-grade architecture and integration blueprint.",
+        recommended: true,
+      },
       {
         label: "Executive Deck Outline",
         url: "/docs/presentation/executive-deck-outline.md",
         type: "Narrative Outline",
         summary: "Board storyline and decision flow for executive review.",
-        recommended: true,
       },
       {
         label: "Appendix Outline",

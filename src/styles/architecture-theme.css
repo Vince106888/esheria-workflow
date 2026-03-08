@@ -48,6 +48,8 @@
   --artifact-hero-surface-end: #0d121d;
   --artifact-hero-kicker-shadow: 0 0 12px color-mix(in srgb, var(--artifact-accent) 40%, transparent);
   --artifact-hero-title-shadow: 0 0 22px color-mix(in srgb, var(--artifact-accent) 18%, transparent);
+  --explorer-hero-surface-start: #111a30;
+  --explorer-hero-surface-end: #0f1420;
 }
 
 :root[data-theme="light"] {
@@ -98,6 +100,8 @@
   --artifact-hero-surface-end: #eaf1ff;
   --artifact-hero-kicker-shadow: 0 0 0 transparent;
   --artifact-hero-title-shadow: 0 0 0 transparent;
+  --explorer-hero-surface-start: #ffffff;
+  --explorer-hero-surface-end: #e8efff;
 }
 
 * {

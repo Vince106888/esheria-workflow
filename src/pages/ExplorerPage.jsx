@@ -736,7 +736,7 @@ export default function ExplorerPage() {
           <div style={{
             border: "1px solid var(--tone-border)",
             borderRadius: "16px",
-            background: "linear-gradient(150deg, #111a30, #0f1420 66%)",
+            background: "linear-gradient(150deg, var(--explorer-hero-surface-start), var(--explorer-hero-surface-end) 66%)",
             padding: "26px 24px 0",
             marginBottom: "14px",
           }}>
