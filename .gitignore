@@ -6,6 +6,7 @@ dist/
 
 # Temporary/local process outputs
 artifacts/.tmp-server*.log
+artifacts/reports/
 .codex_status_short*.txt
 
 # LaTeX transient build files (keep source .tex and final .pdf)

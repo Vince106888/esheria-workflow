@@ -1,0 +1,74 @@
+name: CI - Readiness
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  readiness:
+    name: Validate Build and Submission Readiness
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build app output
+        run: npm run build
+
+      - name: Build artifact website outputs
+        run: npm run artifacts:build
+
+      - name: Verify artifact exports
+        run: npm run verify:artifacts
+
+      - name: Verify repository readiness
+        env:
+          READINESS_REPORT_PATH: ${{ runner.temp }}/readiness-report.json
+        run: npm run verify:readiness
+
+      - name: Upload readiness report
+        uses: actions/upload-artifact@v4
+        with:
+          name: readiness-report
+          path: ${{ runner.temp }}/readiness-report.json
+          if-no-files-found: error
+
+      - name: Upload Vite build output
+        uses: actions/upload-artifact@v4
+        with:
+          name: webapp-dist
+          path: dist
+          if-no-files-found: error
+
+      - name: Upload static review website
+        uses: actions/upload-artifact@v4
+        with:
+          name: static-review-website
+          path: artifacts/website
+          if-no-files-found: error
+
+      - name: Upload submission PDFs
+        uses: actions/upload-artifact@v4
+        with:
+          name: submission-pdf-exports
+          path: artifacts/exports/pdf
+          if-no-files-found: error
+
+      - name: Upload submission slides assets
+        uses: actions/upload-artifact@v4
+        with:
+          name: submission-slides-assets
+          path: artifacts/exports/slides
+          if-no-files-found: error

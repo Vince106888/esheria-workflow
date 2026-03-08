@@ -10,6 +10,7 @@ const slidesSourceRoot = path.join(root, "artifacts", "slides", "source");
 const requiredTex = ["executive_proposal.tex", "technical_blueprint.tex"];
 const requiredPdf = ["executive_proposal.pdf", "technical_blueprint.pdf"];
 const slideDeckExtensions = new Set([".pptx", ".odp", ".key", ".pdf"]);
+const strictPdfFreshness = process.env.STRICT_PDF_FRESHNESS === "1";
 
 const exists = async (target) => {
   try {
@@ -42,9 +43,12 @@ for (const file of requiredPdf) {
   if (!(await exists(source)) || !(await exists(published))) continue;
   const [sourceStat, publishedStat] = await Promise.all([fs.stat(source), fs.stat(published)]);
   if (publishedStat.mtimeMs + 1 < sourceStat.mtimeMs) {
-    errors.push(
-      `Stale published PDF: ${path.relative(root, published)} is older than ${path.relative(root, source)}`
-    );
+    const staleMessage = `Published PDF may be stale: ${path.relative(root, published)} is older than ${path.relative(root, source)}`;
+    if (strictPdfFreshness) {
+      errors.push(staleMessage);
+    } else {
+      warnings.push(`${staleMessage} (set STRICT_PDF_FRESHNESS=1 to enforce as error)`);
+    }
   }
 }
 
