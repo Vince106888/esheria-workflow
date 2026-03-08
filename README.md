@@ -68,7 +68,7 @@ Then open `http://localhost:8080/`.
 ## Key Commands
 
 - `npm run dev`: run Vite app locally
-- `npm run build`: produce app build output in `dist/`
+- `npm run build`: produce app build output in `dist/` and generate `dist/404.html` SPA fallback for GitHub Pages route refreshes
 - `npm run artifacts:hub`: build app + serve cockpit and repo artifacts from one local server
 - `npm run artifacts:serve`: lightweight static server for repository root (PowerShell/Python)
 - `npm run review`: alias of `artifacts:hub`

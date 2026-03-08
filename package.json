@@ -4,7 +4,7 @@
   "description": "Esheria legal workflow architecture and artifact workspace",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/generate-pages-404.mjs",
     "preview": "vite preview",
     "artifacts:build": "node scripts/build-artifacts.mjs",
     "artifacts:compile-docs": "node scripts/compile-docs.mjs",

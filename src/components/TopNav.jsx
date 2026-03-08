@@ -5,6 +5,7 @@ import { useTheme } from "../theme/ThemeProvider";
 export default function TopNav() {
   const { isDark, theme, toggleTheme } = useTheme();
   const location = useLocation();
+  const brandLogoSrc = `${import.meta.env.BASE_URL}assets/img/logo/vl-footer-logo5.1.png`;
   const activeIndex = navSections.findIndex(
     (item) => location.pathname === item.to || location.pathname.startsWith(`${item.to}/`)
   );
@@ -20,7 +21,7 @@ export default function TopNav() {
         <div className="top-nav-left">
           <div className="brand-wrap">
             <div className="brand-row">
-              <img className="brand-logo" src="/assets/img/logo/vl-footer-logo5.1.png" alt="Esheria" />
+              <img className="brand-logo" src={brandLogoSrc} alt="Esheria" />
               <div className="brand">Unified Artifact Portal</div>
             </div>
             <div className="brand-context">
