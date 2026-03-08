@@ -53,8 +53,12 @@ const artifactsRoot = path.join(root, "artifacts");
 const websiteRoot = path.join(artifactsRoot, "website");
 const websitePagesRoot = path.join(websiteRoot, "pages");
 const docsRoot = path.join(artifactsRoot, "documents");
-const generatedRoot = path.join(artifactsRoot, "generated");
-const generatedDocTemplatesRoot = path.join(generatedRoot, "documents", "templates");
+const generatedDocTemplatesRoot = path.join(
+  artifactsRoot,
+  "generated",
+  "documents",
+  "templates"
+);
 const visualsRoot = path.join(artifactsRoot, "visuals");
 const diagSourceSvgRoot = path.join(visualsRoot, "diagrams", "source", "svg");
 const diagSourcePngRoot = path.join(visualsRoot, "diagrams", "source", "png");
@@ -1848,18 +1852,13 @@ const technicalTex = `\\documentclass[10pt]{article}
 `;
 
 // Non-destructive rule:
-// - Generated template LaTeX must never overwrite curated canonical docs in artifacts/documents.
-// - Canonical docs are only bootstrapped when missing; templates are always written to artifacts/generated.
-await write(
-  path.join(generatedDocTemplatesRoot, "executive_proposal.template.tex"),
-  executiveTex
-);
-await write(
-  path.join(generatedDocTemplatesRoot, "technical_blueprint.template.tex"),
-  technicalTex
-);
+// - Canonical docs in artifacts/documents must never be overwritten by generator output.
+// - If authored docs are missing, bootstrap once from default templates.
 await writeIfMissing(path.join(docsRoot, "executive_proposal.tex"), executiveTex);
 await writeIfMissing(path.join(docsRoot, "technical_blueprint.tex"), technicalTex);
+
+// Remove legacy generated LaTeX templates to avoid stale editor diagnostics.
+await fs.rm(generatedDocTemplatesRoot, { recursive: true, force: true });
 
 await writeIfMissing(
   path.join(exportsSlidesRoot, "README.md"),
