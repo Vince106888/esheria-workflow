@@ -1,17 +1,10 @@
-const DIAGRAM_DOWNLOAD_IDS = [
-  "api-boundary-map",
-  "auth-and-tenant-boundary",
-  "contract-intake-sequence",
-  "control-vs-data-plane",
-  "current-vs-target-architecture",
-  "dashboard-topology",
-  "deployment-topology",
-  "layered-architecture",
-  "ontology-er",
-  "service-integration-map",
-  "system-context",
-  "workflow-state-machine",
-];
+import diagramRegistry from "../architecture/diagramRegistry";
+
+const uniqueDiagrams = (diagramRegistry || []).filter(
+  (diagram, index, list) => list.findIndex((entry) => entry.id === diagram.id) === index
+);
+
+const DIAGRAM_DOWNLOAD_IDS = uniqueDiagrams.map((diagram) => diagram.id);
 
 const DASHBOARD_SLIDE_DOWNLOAD_IDS = [
   "institution-analytics",
@@ -36,6 +29,18 @@ const titleFromId = (id) =>
     .split("-")
     .map((token) => (token === "vs" ? "vs" : token.charAt(0).toUpperCase() + token.slice(1)))
     .join(" ");
+
+const diagramGalleryItems = uniqueDiagrams.map((diagram, index) => {
+  const title = diagram?.title?.replace(/\s+Diagram$/i, "") || titleFromId(diagram.id);
+  const isExecutive = diagram?.audiences?.includes("executive");
+  return {
+    label: `Enhanced: ${title}`,
+    url: `/artifacts/visuals/diagrams/enhanced/html/${diagram.id}.html`,
+    type: isExecutive ? "Board Visual" : "Technical Visual",
+    summary: diagram?.purpose || `Enhanced diagram render for ${title}.`,
+    recommended: index < 3,
+  };
+});
 
 const downloadDocumentItems = [
   {
@@ -135,53 +140,8 @@ export const portalSections = [
     title: "Diagram Gallery",
     description: "Executive-ready architecture visuals with direct access to source exports.",
     bestFor: "Architecture narrative in both 5-minute executive and 20-minute technical reviews.",
-    reviewHint: "Start with enhanced visuals, then open source PNG/SVG/Mermaid for implementation traceability.",
-    items: [
-      {
-        label: "Enhanced: System Context",
-        url: "/artifacts/visuals/diagrams/enhanced/html/system-context.html",
-        type: "Board Visual",
-        summary: "Actors, platform core, and enterprise boundary.",
-        recommended: true,
-      },
-      {
-        label: "Enhanced: Current vs Target",
-        url: "/artifacts/visuals/diagrams/enhanced/html/current-vs-target-architecture.html",
-        type: "Board Visual",
-        summary: "Strategic shift from fragmented services to orchestrated platform.",
-        recommended: true,
-      },
-      {
-        label: "Enhanced: Layered Architecture",
-        url: "/artifacts/visuals/diagrams/enhanced/html/layered-architecture.html",
-        type: "Technical Visual",
-        summary: "Experience, control plane, data plane, and connectors.",
-      },
-      {
-        label: "Enhanced PNG Export",
-        url: "/artifacts/visuals/diagrams/enhanced/png/system-context.png",
-        type: "Image Export",
-        summary: "Slide-ready PNG for the system context visual.",
-      },
-      {
-        label: "Source PNG Export",
-        url: "/diagrams/exports/png/system-context.png",
-        type: "Source Export",
-        summary: "Raw rendered diagram image from Mermaid source.",
-      },
-      {
-        label: "Source SVG Export",
-        url: "/diagrams/exports/svg/system-context.svg",
-        type: "Source Export",
-        summary: "Editable vector form for publishing workflows.",
-      },
-      {
-        label: "Mermaid Source",
-        url: "/diagrams/mermaid/system-context.mmd",
-        type: "Source Definition",
-        summary: "Canonical Mermaid definition for architecture traceability.",
-      },
-    ],
+    reviewHint: "Use enhanced renders here; open Downloads for PNG/SVG/Mermaid source assets.",
+    items: diagramGalleryItems,
   },
   {
     id: "documents",
