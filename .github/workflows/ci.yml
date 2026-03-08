@@ -30,6 +30,9 @@ jobs:
       - name: Build artifact website outputs
         run: npm run artifacts:build
 
+      - name: Sync static review assets into Pages output
+        run: npm run pages:sync
+
       - name: Verify artifact exports
         run: npm run verify:artifacts
 

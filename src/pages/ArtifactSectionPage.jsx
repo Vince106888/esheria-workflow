@@ -7,11 +7,22 @@ const PDF_EXT_PATTERN = /\.pdf(?:\?.*)?$/i;
 const HTML_EXT_PATTERN = /\.html?(?:\?.*)?$/i;
 const TEXT_EXT_PATTERN = /\.(md|txt|json|ya?ml|toml|csv|log|tex|js|jsx|ts|tsx|css|scss|mjs|cjs|py|java|go|rs|sh|bat|xml)(?:\?.*)?$/i;
 const DOWNLOAD_ONLY_EXT_PATTERN = /\.(docx?|xlsx?|pptx?|zip)(?:\?.*)?$/i;
+const ABSOLUTE_URL_PATTERN = /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i;
+const BASE_URL = import.meta.env.BASE_URL || "/";
+const NORMALIZED_BASE_URL = BASE_URL.endsWith("/") ? BASE_URL : `${BASE_URL}/`;
 const SOURCE_PREVIEW_ROUTE = {
   "/src/pages/ExecutivePage.jsx": "/executive",
   "/src/pages/BlueprintPage.jsx": "/blueprint",
   "/src/pages/ExplorerPage.jsx": "/explorer",
 };
+
+function resolveRuntimeUrl(url = "") {
+  if (!url) return "";
+  if (ABSOLUTE_URL_PATTERN.test(url)) return url;
+  if (url.startsWith("data:") || url.startsWith("blob:") || url.startsWith("#")) return url;
+  if (url.startsWith("/")) return `${NORMALIZED_BASE_URL}${url.slice(1)}`;
+  return url;
+}
 
 function isImageUrl(url = "") {
   return IMAGE_EXT_PATTERN.test(url);
@@ -175,6 +186,11 @@ export default function ArtifactSectionPage({ sectionId }) {
     return section.items.findIndex((item) => item.url === activeItem.url);
   }, [section, activeItem]);
   const activeAsset = useMemo(() => resolveAssetPreview(activeItem), [activeItem]);
+  const resolvedItemUrl = useMemo(() => resolveRuntimeUrl(activeItem?.url || ""), [activeItem]);
+  const resolvedAssetSrc = useMemo(
+    () => resolveRuntimeUrl(activeAsset?.src || ""),
+    [activeAsset]
+  );
 
   const prevItem = activeIndex > 0 ? section.items[activeIndex - 1] : null;
   const nextItem = activeIndex >= 0 && activeIndex < section.items.length - 1 ? section.items[activeIndex + 1] : null;
@@ -194,22 +210,22 @@ export default function ArtifactSectionPage({ sectionId }) {
   const activeNavLabel = activeNavIndex >= 0 ? navSections[activeNavIndex].label : section.navLabel || section.title;
 
   const copyActiveUrl = useCallback(() => {
-    if (!activeItem?.url) return;
-    const absolute = `${window.location.origin}${activeItem.url}`;
+    if (!resolvedItemUrl) return;
+    const absolute = new URL(resolvedItemUrl, window.location.origin).toString();
     navigator?.clipboard?.writeText(absolute).catch(() => {
       window.prompt("Copy link:", absolute);
     });
-  }, [activeItem]);
+  }, [resolvedItemUrl]);
 
   useEffect(() => {
-    if (!activeAsset?.src || activeAsset.kind !== "text") {
+    if (!resolvedAssetSrc || activeAsset.kind !== "text") {
       setTextPreview({ status: "idle", content: "", error: "" });
       return;
     }
     const controller = new AbortController();
     setTextPreview({ status: "loading", content: "", error: "" });
 
-    fetch(activeAsset.src, { signal: controller.signal, cache: "no-store" })
+    fetch(resolvedAssetSrc, { signal: controller.signal, cache: "no-store" })
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Unable to load source (${response.status})`);
@@ -225,7 +241,7 @@ export default function ArtifactSectionPage({ sectionId }) {
       });
 
     return () => controller.abort();
-  }, [activeAsset.kind, activeAsset.src]);
+  }, [activeAsset.kind, resolvedAssetSrc]);
 
   if (!section) {
     return <Navigate to="/overview" replace />;
@@ -339,13 +355,13 @@ export default function ArtifactSectionPage({ sectionId }) {
                 <button type="button" className="inline" onClick={copyActiveUrl}>
                   Copy Link
                 </button>
-                {activeItem?.url ? (
-                  <a className="inline-link" href={activeItem.url} download={activeDownloadName}>
+                {resolvedItemUrl ? (
+                  <a className="inline-link" href={resolvedItemUrl} download={activeDownloadName}>
                     Download
                   </a>
                 ) : null}
-                {activeItem?.url ? (
-                  <a className="inline-link" href={activeItem.url} target="_blank" rel="noreferrer">
+                {resolvedItemUrl ? (
+                  <a className="inline-link" href={resolvedItemUrl} target="_blank" rel="noreferrer">
                     Open Raw
                   </a>
                 ) : null}
@@ -356,7 +372,7 @@ export default function ArtifactSectionPage({ sectionId }) {
               activeAsset.kind === "image" ? (
                 <div className="artifact-image-viewer">
                   <img
-                    src={activeItem.url}
+                    src={resolvedAssetSrc}
                     alt={activeItem.label}
                     style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }}
                   />
@@ -380,7 +396,7 @@ export default function ArtifactSectionPage({ sectionId }) {
                 </div>
               ) : activeAsset.kind === "pdf" ? (
                 <object
-                  data={activeAsset.src}
+                  data={resolvedAssetSrc}
                   type="application/pdf"
                   className="artifact-viewer"
                   style={{ height: showSidebar ? "calc(100vh - 350px)" : "calc(100vh - 310px)" }}
@@ -390,7 +406,7 @@ export default function ArtifactSectionPage({ sectionId }) {
               ) : (
                 <iframe
                   title={activeItem.label}
-                  src={activeAsset.src}
+                  src={resolvedAssetSrc}
                   className="artifact-viewer"
                   style={{ height: showSidebar ? "calc(100vh - 350px)" : "calc(100vh - 310px)" }}
                 />

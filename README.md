@@ -69,6 +69,7 @@ Then open `http://localhost:8080/`.
 
 - `npm run dev`: run Vite app locally
 - `npm run build`: produce app build output in `dist/` and generate `dist/404.html` SPA fallback for GitHub Pages route refreshes
+- `npm run pages:sync`: mirror review assets (`artifacts/`, `diagrams/`, `docs/`, `src/`) into `dist/` for Pages-hosted artifact browsing
 - `npm run artifacts:hub`: build app + serve cockpit and repo artifacts from one local server
 - `npm run artifacts:serve`: lightweight static server for repository root (PowerShell/Python)
 - `npm run review`: alias of `artifacts:hub`
@@ -112,6 +113,7 @@ Deploy trigger model:
 Before deployment, CD re-runs:
 - build
 - artifact generation
+- static asset sync into deploy output
 - artifact verification
 - readiness verification
 
