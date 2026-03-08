@@ -1,0 +1,35 @@
+
+:root {
+  --bg: #0a1324;
+  --panel: #111c32;
+  --line: #2a4063;
+  --text: #edf3fb;
+  --muted: #a4b5ce;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: radial-gradient(circle at 20% 0%, #1a3259 0%, #0a1324 48%); color: var(--text); font-family: "IBM Plex Sans", "Segoe UI", sans-serif; min-height: 100vh; }
+.canvas { max-width: 1920px; width: 100%; min-height: 100vh; margin: 0 auto; padding: clamp(18px, 3vw, 42px); }
+.head { display: flex; justify-content: space-between; align-items: flex-start; gap: 18px; }
+.title h1 { margin: 0; font-size: 40px; }
+.title p { margin: 8px 0 0; color: var(--muted); font-size: 18px; max-width: 980px; }
+.legend { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; max-width: 560px; }
+.chip { border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; font-size: 12px; color: var(--muted); }
+.diagram {
+  margin-top: 24px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 18px;
+}
+.diagram img { width: 100%; max-width: 100%; height: auto; max-height: min(68vh, 920px); object-fit: contain; object-position: top center; display: block; border-radius: 10px; margin: 0 auto; }
+.notes { margin-top: 14px; display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.note { background: #0f192d; border: 1px solid #243959; border-radius: 10px; padding: 10px; color: var(--muted); font-size: 13px; line-height: 1.4; }
+@media (max-width: 1200px) {
+  .head { flex-direction: column; }
+  .legend { justify-content: flex-start; max-width: none; }
+}
+@media (max-width: 900px) {
+  .title h1 { font-size: 30px; }
+  .title p { font-size: 15px; }
+  .notes { grid-template-columns: 1fr; }
+}

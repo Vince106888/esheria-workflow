@@ -1,0 +1,2139 @@
+{
+  "version": "2.8",
+  "children": [
+    {
+      "type": "frame",
+      "id": "KDrCW",
+      "x": 0,
+      "y": 0,
+      "name": "Website /index",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "$surface.bg",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 24,
+      "children": [
+        {
+          "id": "PFueJ",
+          "type": "ref",
+          "ref": "pvjcD",
+          "width": "fill_container",
+          "height": "fill_container",
+          "name": "indexInst",
+          "descendants": {
+            "z223d": {
+              "content": "Esheria Legal Workflow OS"
+            },
+            "Loz54": {
+              "content": "Strategic architecture index for the multi-tenant legal workflow platform."
+            },
+            "yepRH": {
+              "fill": [
+                "$surface.canvas",
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "../../diagrams/exports/png/current-vs-target-architecture.png",
+                  "mode": "fill"
+                }
+              ]
+            },
+            "7NINo": {
+              "content": "Unified B2B legal operating system built by orchestrating existing Esheria capabilities under shared tenancy, policy, and audit boundaries."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "KfVS0",
+      "x": 1600,
+      "y": 0,
+      "name": "Website /thesis",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "$surface.bg",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 24,
+      "children": [
+        {
+          "id": "FZkpk",
+          "type": "ref",
+          "ref": "pvjcD",
+          "width": "fill_container",
+          "height": "fill_container",
+          "name": "thesisInst",
+          "descendants": {
+            "z223d": {
+              "content": "Platform Thesis"
+            },
+            "Loz54": {
+              "content": "From fragmented products to a control-plane-governed operating system."
+            },
+            "yepRH": {
+              "fill": [
+                "$surface.canvas",
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "../../diagrams/exports/png/layered-architecture.png",
+                  "mode": "fill"
+                }
+              ]
+            },
+            "7NINo": {
+              "content": "The thesis is orchestration-first integration: preserve proven services, centralize policy, identity, and workflow semantics."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "zXUaI",
+      "x": 3200,
+      "y": 0,
+      "name": "Website /current-system",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "$surface.bg",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 24,
+      "children": [
+        {
+          "id": "Rnb9D",
+          "type": "ref",
+          "ref": "pvjcD",
+          "width": "fill_container",
+          "height": "fill_container",
+          "name": "currentInst",
+          "descendants": {
+            "z223d": {
+              "content": "Current System"
+            },
+            "Loz54": {
+              "content": "Evidence-based map of existing services and actor interactions."
+            },
+            "yepRH": {
+              "fill": [
+                "$surface.canvas",
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "../../diagrams/exports/png/system-context.png",
+                  "mode": "fill"
+                }
+              ]
+            },
+            "7NINo": {
+              "content": "Current systems already provide deep legal capabilities, but orchestration, tenancy, and policy controls are fragmented."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "jMaEd",
+      "x": 4800,
+      "y": 0,
+      "name": "Website /platform-architecture",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "$surface.bg",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 24,
+      "children": [
+        {
+          "id": "vmFBR",
+          "type": "ref",
+          "ref": "pvjcD",
+          "width": "fill_container",
+          "height": "fill_container",
+          "name": "platformInst",
+          "descendants": {
+            "z223d": {
+              "content": "Platform Architecture"
+            },
+            "Loz54": {
+              "content": "Target control-plane and data-plane architecture boundaries."
+            },
+            "yepRH": {
+              "fill": [
+                "$surface.canvas",
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "../../diagrams/exports/png/control-vs-data-plane.png",
+                  "mode": "fill"
+                }
+              ]
+            },
+            "7NINo": {
+              "content": "Identity, tenancy, and governance live in the control plane while workflow execution and connectors operate in the data plane."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "DdXi5",
+      "x": 0,
+      "y": 1200,
+      "name": "Website /workflow",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "$surface.bg",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 24,
+      "children": [
+        {
+          "id": "zCZov",
+          "type": "ref",
+          "ref": "pvjcD",
+          "width": "fill_container",
+          "height": "fill_container",
+          "name": "workflowInst",
+          "descendants": {
+            "z223d": {
+              "content": "Workflow"
+            },
+            "Loz54": {
+              "content": "Contract intake through compliance, review, and approval execution path."
+            },
+            "yepRH": {
+              "fill": [
+                "$surface.canvas",
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "../../diagrams/exports/png/contract-intake-sequence.png",
+                  "mode": "fill"
+                }
+              ]
+            },
+            "7NINo": {
+              "content": "Workflow runtime orchestrates asynchronous OCR and compliance checks, role-aware approvals, and immutable evidence events."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "Q8xBy",
+      "x": 1600,
+      "y": 1200,
+      "name": "Website /dashboards",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "$surface.bg",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 24,
+      "children": [
+        {
+          "id": "alDRQ",
+          "type": "ref",
+          "ref": "pvjcD",
+          "width": "fill_container",
+          "height": "fill_container",
+          "name": "dashInst",
+          "descendants": {
+            "z223d": {
+              "content": "Dashboards"
+            },
+            "Loz54": {
+              "content": "Institution and operator surfaces separated by analytics and access boundaries."
+            },
+            "yepRH": {
+              "fill": [
+                "$surface.canvas",
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "../../diagrams/exports/png/dashboard-topology.png",
+                  "mode": "fill"
+                }
+              ]
+            },
+            "7NINo": {
+              "content": "Customer dashboards remain tenant-scoped while internal operations views remain cross-tenant and policy-gated."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "muPfH",
+      "x": 3200,
+      "y": 1200,
+      "name": "Website /integrations",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "$surface.bg",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 24,
+      "children": [
+        {
+          "id": "pzFb1",
+          "type": "ref",
+          "ref": "pvjcD",
+          "width": "fill_container",
+          "height": "fill_container",
+          "name": "integrationInst",
+          "descendants": {
+            "z223d": {
+              "content": "Integrations"
+            },
+            "Loz54": {
+              "content": "Connector gateway strategy and downstream contract normalization."
+            },
+            "yepRH": {
+              "fill": [
+                "$surface.canvas",
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "../../diagrams/exports/png/service-integration-map.png",
+                  "mode": "fill"
+                }
+              ]
+            },
+            "7NINo": {
+              "content": "Gateway adapters absorb service heterogeneity, normalize errors and traces, and keep platform APIs stable."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "va6X3",
+      "x": 4800,
+      "y": 1200,
+      "name": "Website /analytics",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "$surface.bg",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 24,
+      "children": [
+        {
+          "id": "sk4DZ",
+          "type": "ref",
+          "ref": "pvjcD",
+          "width": "fill_container",
+          "height": "fill_container",
+          "name": "analyticsInst",
+          "descendants": {
+            "z223d": {
+              "content": "Analytics"
+            },
+            "Loz54": {
+              "content": "API boundary controls for customer analytics and internal telemetry."
+            },
+            "yepRH": {
+              "fill": [
+                "$surface.canvas",
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "../../diagrams/exports/png/api-boundary-map.png",
+                  "mode": "fill"
+                }
+              ]
+            },
+            "7NINo": {
+              "content": "Tenant analytics APIs and internal observability channels are deliberately separated to prevent data boundary leakage."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "Ydzmo",
+      "x": 0,
+      "y": 2400,
+      "name": "Website /deployment",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "$surface.bg",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 24,
+      "children": [
+        {
+          "id": "BzT2V",
+          "type": "ref",
+          "ref": "pvjcD",
+          "width": "fill_container",
+          "height": "fill_container",
+          "name": "deploymentInst",
+          "descendants": {
+            "z223d": {
+              "content": "Deployment"
+            },
+            "Loz54": {
+              "content": "Runtime topology across EKS, SageMaker, queues, stores, and observability."
+            },
+            "yepRH": {
+              "fill": [
+                "$surface.canvas",
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "../../diagrams/exports/png/deployment-topology.png",
+                  "mode": "fill"
+                }
+              ]
+            },
+            "7NINo": {
+              "content": "Platform services run in Kubernetes while specialized AI workloads remain connector-accessed and operationally isolated."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "oIzxy",
+      "x": 1600,
+      "y": 2400,
+      "name": "Website /roadmap",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "$surface.bg",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 24,
+      "children": [
+        {
+          "id": "MswG8",
+          "type": "ref",
+          "ref": "pvjcD",
+          "width": "fill_container",
+          "height": "fill_container",
+          "name": "roadmapInst",
+          "descendants": {
+            "z223d": {
+              "content": "Roadmap"
+            },
+            "Loz54": {
+              "content": "Phased transformation from architecture normalization to integrated platform rollout."
+            },
+            "yepRH": {
+              "fill": [
+                "$surface.canvas",
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "../../diagrams/exports/png/current-vs-target-architecture.png",
+                  "mode": "fill"
+                }
+              ]
+            },
+            "7NINo": {
+              "content": "Execution proceeds from architecture and governance alignment to MVP workflow integration and enterprise-scale operations."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "raydR",
+      "x": 3200,
+      "y": 2400,
+      "name": "Website /appendix",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "$surface.bg",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 24,
+      "children": [
+        {
+          "id": "EaClB",
+          "type": "ref",
+          "ref": "pvjcD",
+          "width": "fill_container",
+          "height": "fill_container",
+          "name": "appendixInst",
+          "descendants": {
+            "z223d": {
+              "content": "Appendix"
+            },
+            "Loz54": {
+              "content": "Technical references spanning ontology, state machine, auth, and API boundaries."
+            },
+            "yepRH": {
+              "fill": [
+                "$surface.canvas",
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "../../diagrams/exports/png/ontology-er.png",
+                  "mode": "fill"
+                }
+              ]
+            },
+            "7NINo": {
+              "content": "Canonical entities, workflow state semantics, and trust boundaries provide implementation-level precision for technical review."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "3ld5y",
+      "x": 0,
+      "y": 3800,
+      "name": "Dashboard / Institution Workspace",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "$surface.bg",
+      "children": [
+        {
+          "id": "F197y",
+          "type": "ref",
+          "ref": "4Z7PP",
+          "width": "fill_container",
+          "height": "fill_container",
+          "name": "instDash",
+          "descendants": {
+            "oTPQg": {
+              "content": "Institution Workspace"
+            },
+            "OwIgc": {
+              "content": "Tenant Scoped"
+            },
+            "51kW0": {
+              "content": "Active Matters\n482"
+            },
+            "PnoI6": {
+              "content": "Pending Reviews\n96"
+            },
+            "n8UJw": {
+              "content": "SLA Risk\n12%"
+            },
+            "L6uyG": {
+              "content": "High Severity\n18"
+            },
+            "gYdEn": {
+              "content": "Analytics Chart\nIntake      ████████ 84\nReview      ███████  76\nApproval    ██████   64\nEscalation  ███      31\n\nActivity Log\n09:08 Matter M-2201 uploaded by KCB Legal.\n09:16 Clause risk score elevated to medium.\n09:27 Reviewer added comments for revision."
+            },
+            "F1aJL": {
+              "content": "Approval Panel\nPending: M-2201 Master Service Agreement\nAction: Approve | Request Changes | Escalate\n\nTimeline\n08:52 Intake submitted\n09:04 OCR + extraction completed\n09:12 Compliance review started\n09:24 Legal reviewer assigned"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "yCnyq",
+      "x": 1600,
+      "y": 3800,
+      "name": "Dashboard / Operator Console",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "$surface.bg",
+      "children": [
+        {
+          "id": "MK6iJ",
+          "type": "ref",
+          "ref": "4Z7PP",
+          "width": "fill_container",
+          "height": "fill_container",
+          "name": "opDash",
+          "descendants": {
+            "oTPQg": {
+              "content": "Operator Console"
+            },
+            "OwIgc": {
+              "content": "Internal Control Plane"
+            },
+            "51kW0": {
+              "content": "Active Tenants\n74"
+            },
+            "PnoI6": {
+              "content": "Provisioning Queue\n9"
+            },
+            "n8UJw": {
+              "content": "Policy Violations\n3"
+            },
+            "L6uyG": {
+              "content": "Incidents Open\n5"
+            },
+            "gYdEn": {
+              "content": "Analytics Chart\nTenant Health ███████  79\nPolicy Drift  ███      28\nOps Throughput██████   66\nEscalations   ██       14\n\nActivity Log\n09:05 Tenant TN-44 quota updated.\n09:17 Policy set PS-07 rolled to staging.\n09:39 Connector latency warning acknowledged."
+            },
+            "F1aJL": {
+              "content": "Approval Panel\nPending: Tenant TN-52 onboarding request\nAction: Approve | Hold | Reject\n\nTimeline\n08:41 Request created\n09:02 Identity policy attached\n09:14 RBAC bundle validated\n09:36 Awaiting operator approval"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "TxIva",
+      "x": 3200,
+      "y": 3800,
+      "name": "Dashboard / Workflow Monitoring",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "$surface.bg",
+      "children": [
+        {
+          "id": "EGix5",
+          "type": "ref",
+          "ref": "4Z7PP",
+          "width": "fill_container",
+          "height": "fill_container",
+          "name": "wfDash",
+          "descendants": {
+            "oTPQg": {
+              "content": "Workflow Monitoring"
+            },
+            "OwIgc": {
+              "content": "Runtime Operations"
+            },
+            "51kW0": {
+              "content": "Runs Active\n311"
+            },
+            "PnoI6": {
+              "content": "Failures\n17"
+            },
+            "n8UJw": {
+              "content": "Retries Pending\n24"
+            },
+            "L6uyG": {
+              "content": "P95 Latency\n2.8s"
+            },
+            "gYdEn": {
+              "content": "Analytics Chart\nRun Success   ████████ 88\nStep Errors   ██       21\nRetry Queue   ███      33\nThroughput    ███████  73\n\nActivity Log\n09:09 WF-1198 OCR step failed; retry queued.\n09:15 WF-1212 compliance check timed out.\n09:31 WF-1182 replay completed successfully."
+            },
+            "F1aJL": {
+              "content": "Approval Panel\nPending: Retry budget increase for connector group A\nAction: Approve | Escalate | Defer\n\nTimeline\n08:57 Workflow batch started\n09:10 Failure spike detected\n09:18 Alert routed to on-call\n09:42 Mitigation in progress"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "j2eSS",
+      "x": 4800,
+      "y": 3800,
+      "name": "Dashboard / Institution Analytics",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "$surface.bg",
+      "children": [
+        {
+          "id": "YmJ6I",
+          "type": "ref",
+          "ref": "4Z7PP",
+          "width": "fill_container",
+          "height": "fill_container",
+          "name": "anaDash",
+          "descendants": {
+            "oTPQg": {
+              "content": "Institution Analytics"
+            },
+            "OwIgc": {
+              "content": "Tenant Performance"
+            },
+            "51kW0": {
+              "content": "Turnaround\n2.1d"
+            },
+            "PnoI6": {
+              "content": "SLA Compliance\n93%"
+            },
+            "n8UJw": {
+              "content": "Risk Escalations\n27"
+            },
+            "L6uyG": {
+              "content": "Throughput\n1,204"
+            },
+            "gYdEn": {
+              "content": "Analytics Chart\nCycle Time   ███████  72\nSLA Pass     ████████ 93\nHigh Risk    ███      29\nTeam Output  ██████   68\n\nActivity Log\n08:49 Weekly trend report generated.\n09:13 SLA breach risk on two matters.\n09:33 Review backlog reduced after reassignments."
+            },
+            "F1aJL": {
+              "content": "Approval Panel\nPending: Dashboard KPI baseline refresh\nAction: Approve | Modify | Reject\n\nTimeline\n08:40 Data extraction complete\n09:01 KPI computation published\n09:20 Analyst validation done\n09:44 Executive packet ready"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "jBLyd",
+      "x": 0,
+      "y": 5000,
+      "name": "Dashboard / Support Incident Center",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "$surface.bg",
+      "children": [
+        {
+          "id": "VVlwc",
+          "type": "ref",
+          "ref": "4Z7PP",
+          "width": "fill_container",
+          "height": "fill_container",
+          "name": "supportDash",
+          "descendants": {
+            "oTPQg": {
+              "content": "Support / Incident Center"
+            },
+            "OwIgc": {
+              "content": "Incident Response"
+            },
+            "51kW0": {
+              "content": "P1 Incidents\n1"
+            },
+            "PnoI6": {
+              "content": "P2 Incidents\n4"
+            },
+            "n8UJw": {
+              "content": "Impacted Tenants\n7"
+            },
+            "L6uyG": {
+              "content": "Avg Mitigation\n34m"
+            },
+            "gYdEn": {
+              "content": "Analytics Chart\nOpen Cases    ███      24\nResolved 24h  ██████   66\nEscalations   ██       18\nSLA at Risk   ████     41\n\nActivity Log\n09:02 P1 incident INC-402 opened.\n09:11 Root-cause triage assigned to platform ops.\n09:29 Tenant advisory sent to affected customers."
+            },
+            "F1aJL": {
+              "content": "Approval Panel\nPending: Emergency connector rollback\nAction: Execute | Defer | Cancel\n\nTimeline\n08:58 Alert from observability stack\n09:06 Incident commander assigned\n09:22 Temporary mitigation deployed\n09:40 Permanent fix review in progress"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "5uOEK",
+      "x": 0,
+      "y": 6400,
+      "name": "Enhanced Diagram / system-context",
+      "clip": true,
+      "width": 1920,
+      "height": 1080,
+      "fill": "$surface.bg",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 32,
+      "children": [
+        {
+          "id": "WqI38",
+          "type": "ref",
+          "ref": "304uc",
+          "width": "fill_container",
+          "height": "fill_container",
+          "name": "dSystem",
+          "descendants": {
+            "ueXeA": {
+              "content": "System Context"
+            },
+            "muB3V": {
+              "content": "Actors, platform boundaries, and existing services with trust zones."
+            },
+            "raME1": {
+              "fill": [
+                "$surface.canvas",
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "../../diagrams/exports/png/system-context.png",
+                  "mode": "fit"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "t7Oaq",
+      "x": 2100,
+      "y": 6400,
+      "name": "Enhanced Diagram / layered-architecture",
+      "clip": true,
+      "width": 1920,
+      "height": 1080,
+      "fill": "$surface.bg",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 32,
+      "children": [
+        {
+          "id": "BxLYG",
+          "type": "ref",
+          "ref": "304uc",
+          "width": "fill_container",
+          "height": "fill_container",
+          "name": "dLayer",
+          "descendants": {
+            "ueXeA": {
+              "content": "Layered Architecture"
+            },
+            "muB3V": {
+              "content": "Experience, control plane, data plane, connector layer, and infrastructure."
+            },
+            "raME1": {
+              "fill": [
+                "$surface.canvas",
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "../../diagrams/exports/png/layered-architecture.png",
+                  "mode": "fit"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "irKq7",
+      "x": 4200,
+      "y": 6400,
+      "name": "Enhanced Diagram / dashboard-topology",
+      "clip": true,
+      "width": 1920,
+      "height": 1080,
+      "fill": "$surface.bg",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 32,
+      "children": [
+        {
+          "id": "FJ3aR",
+          "type": "ref",
+          "ref": "304uc",
+          "width": "fill_container",
+          "height": "fill_container",
+          "name": "dDash",
+          "descendants": {
+            "ueXeA": {
+              "content": "Dashboard Topology"
+            },
+            "muB3V": {
+              "content": "Tenant analytics and operator analytics separation with strict access boundaries."
+            },
+            "raME1": {
+              "fill": [
+                "$surface.canvas",
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "../../diagrams/exports/png/dashboard-topology.png",
+                  "mode": "fit"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "JK1E5",
+      "x": 6300,
+      "y": 6400,
+      "name": "Enhanced Diagram / contract-intake-sequence",
+      "clip": true,
+      "width": 1920,
+      "height": 1080,
+      "fill": "$surface.bg",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 32,
+      "children": [
+        {
+          "id": "8dtDH",
+          "type": "ref",
+          "ref": "304uc",
+          "width": "fill_container",
+          "height": "fill_container",
+          "name": "dContract",
+          "descendants": {
+            "ueXeA": {
+              "content": "Contract Intake Sequence"
+            },
+            "muB3V": {
+              "content": "Step-by-step orchestration from submission through approval and export."
+            },
+            "raME1": {
+              "fill": [
+                "$surface.canvas",
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "../../diagrams/exports/png/contract-intake-sequence.png",
+                  "mode": "fit"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "ML5Cx",
+      "x": 0,
+      "y": 7600,
+      "name": "Enhanced Diagram / service-integration-map",
+      "clip": true,
+      "width": 1920,
+      "height": 1080,
+      "fill": "$surface.bg",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 32,
+      "children": [
+        {
+          "id": "bu5IM",
+          "type": "ref",
+          "ref": "304uc",
+          "width": "fill_container",
+          "height": "fill_container",
+          "name": "dIntegration",
+          "descendants": {
+            "ueXeA": {
+              "content": "Service Integration Map"
+            },
+            "muB3V": {
+              "content": "Gateway adapters, downstream services, and normalized contract boundaries."
+            },
+            "raME1": {
+              "fill": [
+                "$surface.canvas",
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "../../diagrams/exports/png/service-integration-map.png",
+                  "mode": "fit"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "ck0nC",
+      "x": 2100,
+      "y": 7600,
+      "name": "Enhanced Diagram / ontology-er",
+      "clip": true,
+      "width": 1920,
+      "height": 1080,
+      "fill": "$surface.bg",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 32,
+      "children": [
+        {
+          "id": "p7GlO",
+          "type": "ref",
+          "ref": "304uc",
+          "width": "fill_container",
+          "height": "fill_container",
+          "name": "dOntology",
+          "descendants": {
+            "ueXeA": {
+              "content": "Ontology ER Model"
+            },
+            "muB3V": {
+              "content": "Canonical entities and relationships for workflows, evidence, and tenancy."
+            },
+            "raME1": {
+              "fill": [
+                "$surface.canvas",
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "../../diagrams/exports/png/ontology-er.png",
+                  "mode": "fit"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "chxbH",
+      "x": 4200,
+      "y": 7600,
+      "name": "Enhanced Diagram / deployment-topology",
+      "clip": true,
+      "width": 1920,
+      "height": 1080,
+      "fill": "$surface.bg",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 32,
+      "children": [
+        {
+          "id": "i1wxN",
+          "type": "ref",
+          "ref": "304uc",
+          "width": "fill_container",
+          "height": "fill_container",
+          "name": "dDeploy",
+          "descendants": {
+            "ueXeA": {
+              "content": "Deployment Topology"
+            },
+            "muB3V": {
+              "content": "Ingress, EKS services, SageMaker OCR, queues, stores, and observability fabric."
+            },
+            "raME1": {
+              "fill": [
+                "$surface.canvas",
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "../../diagrams/exports/png/deployment-topology.png",
+                  "mode": "fit"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "bQRvZ",
+      "x": 6300,
+      "y": 7600,
+      "name": "Enhanced Diagram / control-vs-data-plane",
+      "clip": true,
+      "width": 1920,
+      "height": 1080,
+      "fill": "$surface.bg",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 32,
+      "children": [
+        {
+          "id": "UUbMm",
+          "type": "ref",
+          "ref": "304uc",
+          "width": "fill_container",
+          "height": "fill_container",
+          "name": "dPlane",
+          "descendants": {
+            "ueXeA": {
+              "content": "Control vs Data Plane"
+            },
+            "muB3V": {
+              "content": "Governance responsibilities separated from runtime workflow execution paths."
+            },
+            "raME1": {
+              "fill": [
+                "$surface.canvas",
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "../../diagrams/exports/png/control-vs-data-plane.png",
+                  "mode": "fit"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "v39Bw",
+      "x": 0,
+      "y": 8800,
+      "name": "Enhanced Diagram / auth-and-tenant-boundary",
+      "clip": true,
+      "width": 1920,
+      "height": 1080,
+      "fill": "$surface.bg",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 32,
+      "children": [
+        {
+          "id": "O7xUt",
+          "type": "ref",
+          "ref": "304uc",
+          "width": "fill_container",
+          "height": "fill_container",
+          "name": "dAuth",
+          "descendants": {
+            "ueXeA": {
+              "content": "Auth and Tenant Boundary"
+            },
+            "muB3V": {
+              "content": "Identity flows, tenant claims, and policy enforcement boundaries."
+            },
+            "raME1": {
+              "fill": [
+                "$surface.canvas",
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "../../diagrams/exports/png/auth-and-tenant-boundary.png",
+                  "mode": "fit"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "8lZrM",
+      "x": 2100,
+      "y": 8800,
+      "name": "Enhanced Diagram / api-boundary-map",
+      "clip": true,
+      "width": 1920,
+      "height": 1080,
+      "fill": "$surface.bg",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 32,
+      "children": [
+        {
+          "id": "ZdPgs",
+          "type": "ref",
+          "ref": "304uc",
+          "width": "fill_container",
+          "height": "fill_container",
+          "name": "dApi",
+          "descendants": {
+            "ueXeA": {
+              "content": "API Boundary Map"
+            },
+            "muB3V": {
+              "content": "Platform-facing APIs, operator APIs, and downstream service contracts."
+            },
+            "raME1": {
+              "fill": [
+                "$surface.canvas",
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "../../diagrams/exports/png/api-boundary-map.png",
+                  "mode": "fit"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "BRMgY",
+      "x": 4200,
+      "y": 8800,
+      "name": "Enhanced Diagram / workflow-state-machine",
+      "clip": true,
+      "width": 1920,
+      "height": 1080,
+      "fill": "$surface.bg",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 32,
+      "children": [
+        {
+          "id": "y4vuF",
+          "type": "ref",
+          "ref": "304uc",
+          "width": "fill_container",
+          "height": "fill_container",
+          "name": "dState",
+          "descendants": {
+            "ueXeA": {
+              "content": "Workflow State Machine"
+            },
+            "muB3V": {
+              "content": "Deterministic state transitions, failure handling, and audit checkpoints."
+            },
+            "raME1": {
+              "fill": [
+                "$surface.canvas",
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "../../diagrams/exports/png/workflow-state-machine.png",
+                  "mode": "fit"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "hNF05",
+      "x": 6300,
+      "y": 8800,
+      "name": "Enhanced Diagram / current-vs-target-architecture",
+      "clip": true,
+      "width": 1920,
+      "height": 1080,
+      "fill": "$surface.bg",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 32,
+      "children": [
+        {
+          "id": "puMp4",
+          "type": "ref",
+          "ref": "304uc",
+          "width": "fill_container",
+          "height": "fill_container",
+          "name": "dTarget",
+          "descendants": {
+            "ueXeA": {
+              "content": "Current vs Target Architecture"
+            },
+            "muB3V": {
+              "content": "Transformation map from current fragmentation to unified platform operating model."
+            },
+            "raME1": {
+              "fill": [
+                "$surface.canvas",
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "../../diagrams/exports/png/current-vs-target-architecture.png",
+                  "mode": "fit"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "pvjcD",
+      "x": 8200,
+      "y": 0,
+      "name": "Component / Website Page",
+      "reusable": true,
+      "width": 1392,
+      "height": 976,
+      "fill": "$surface.bg",
+      "layout": "vertical",
+      "gap": 16,
+      "children": [
+        {
+          "type": "frame",
+          "id": "Uipx0",
+          "name": "Nav Bar",
+          "width": "fill_container",
+          "height": 56,
+          "fill": "$surface.panel",
+          "cornerRadius": "$radius.md",
+          "stroke": {
+            "thickness": 1,
+            "fill": "$border.default"
+          },
+          "padding": [
+            0,
+            16
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "xnLRi",
+              "name": "navText",
+              "fill": "$text.secondary",
+              "content": "Index | Thesis | Current System | Platform Architecture | Workflow | Dashboards | Integrations | Analytics | Deployment | Roadmap | Appendix",
+              "fontFamily": "IBM Plex Sans",
+              "fontSize": 13,
+              "fontWeight": "500"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "4A0If",
+          "name": "Hero",
+          "width": "fill_container",
+          "height": 500,
+          "fill": "$surface.panelAlt",
+          "cornerRadius": "$radius.lg",
+          "stroke": {
+            "thickness": 1,
+            "fill": "$border.default"
+          },
+          "layout": "vertical",
+          "gap": 12,
+          "padding": 20,
+          "children": [
+            {
+              "type": "text",
+              "id": "z223d",
+              "name": "heroTitle",
+              "fill": "$text.primary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Esheria Legal Workflow OS",
+              "fontFamily": "Space Grotesk",
+              "fontSize": 40,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "Loz54",
+              "name": "heroSub",
+              "fill": "$text.secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Enterprise architecture view",
+              "lineHeight": 1.4,
+              "fontFamily": "IBM Plex Sans",
+              "fontSize": 16,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "yepRH",
+              "name": "heroImage",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": [
+                "$surface.canvas",
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "../../diagrams/exports/png/current-vs-target-architecture.png",
+                  "mode": "fill"
+                }
+              ],
+              "cornerRadius": "$radius.md",
+              "stroke": {
+                "thickness": 1,
+                "fill": "$border.default"
+              }
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "dMpWi",
+          "name": "bodyRow",
+          "width": "fill_container",
+          "height": "fill_container",
+          "gap": 16,
+          "children": [
+            {
+              "type": "frame",
+              "id": "vz6PW",
+              "name": "narrativeCard",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "$surface.panel",
+              "cornerRadius": "$radius.md",
+              "stroke": {
+                "thickness": 1,
+                "fill": "$border.default"
+              },
+              "layout": "vertical",
+              "gap": 10,
+              "padding": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "Yqxfk",
+                  "name": "narrativeHead",
+                  "fill": "$accent.customer",
+                  "content": "Narrative",
+                  "fontFamily": "IBM Plex Sans",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "7NINo",
+                  "name": "narrativeBody",
+                  "fill": "$text.secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Unified B2B legal operating system built by orchestrating existing Esheria services under shared tenancy, policy, and audit boundaries.",
+                  "lineHeight": 1.45,
+                  "fontFamily": "IBM Plex Sans",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "czhU5",
+              "name": "calloutCard",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "$surface.panel",
+              "cornerRadius": "$radius.md",
+              "stroke": {
+                "thickness": 1,
+                "fill": "$border.default"
+              },
+              "layout": "vertical",
+              "gap": 8,
+              "padding": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "x7s0h",
+                  "name": "calloutHead",
+                  "fill": "$accent.control",
+                  "content": "Architecture Callouts",
+                  "fontFamily": "IBM Plex Sans",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "sdU4x",
+                  "name": "callout1",
+                  "fill": "$text.secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "• Capability-first reuse of existing legal engines.",
+                  "lineHeight": 1.4,
+                  "fontFamily": "IBM Plex Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "29Ag7",
+                  "name": "callout2",
+                  "fill": "$text.secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "• Control plane unifies tenancy, policy, and identity.",
+                  "lineHeight": 1.4,
+                  "fontFamily": "IBM Plex Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "5NGqS",
+                  "name": "callout3",
+                  "fill": "$text.secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "• Data plane workflows emit complete audit evidence.",
+                  "lineHeight": 1.4,
+                  "fontFamily": "IBM Plex Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "ALcuc",
+          "name": "footer",
+          "fill": "$accent.infra",
+          "textGrowth": "fixed-width",
+          "width": "fill_container",
+          "content": "Export-ready architecture page for PDF and slide packaging",
+          "fontFamily": "IBM Plex Mono",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "4Z7PP",
+      "x": 8200,
+      "y": 1200,
+      "name": "Component / Dashboard Screen",
+      "reusable": true,
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "$surface.bg",
+      "children": [
+        {
+          "type": "frame",
+          "id": "bBJt9",
+          "name": "sidebar",
+          "width": 250,
+          "height": "fill_container",
+          "fill": "$surface.panel",
+          "stroke": {
+            "thickness": 1,
+            "fill": "$border.default"
+          },
+          "layout": "vertical",
+          "gap": 12,
+          "padding": 20,
+          "children": [
+            {
+              "type": "text",
+              "id": "Q5JA0",
+              "name": "brand",
+              "fill": "$text.primary",
+              "content": "Esheria OS",
+              "fontFamily": "Space Grotesk",
+              "fontSize": 20,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "3UUlo",
+              "name": "nav",
+              "fill": "$text.secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Workspace\nIntake Queue\nApprovals\nWorkflow Runs\nAnalytics\nIntegrations\nActivity Logs\nIncident Center",
+              "lineHeight": 1.7,
+              "fontFamily": "IBM Plex Sans",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "L8bsA",
+          "name": "main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": 20,
+          "children": [
+            {
+              "type": "frame",
+              "id": "rKYYa",
+              "name": "top",
+              "width": "fill_container",
+              "height": 64,
+              "fill": "$surface.panel",
+              "cornerRadius": "$radius.md",
+              "stroke": {
+                "thickness": 1,
+                "fill": "$border.default"
+              },
+              "padding": [
+                0,
+                16
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "oTPQg",
+                  "name": "title",
+                  "fill": "$text.primary",
+                  "content": "Dashboard Title",
+                  "fontFamily": "Space Grotesk",
+                  "fontSize": 30,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "OwIgc",
+                  "name": "badge",
+                  "fill": "$accent.control",
+                  "content": "Enterprise View",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "tg74I",
+              "name": "cards",
+              "width": "fill_container",
+              "height": 128,
+              "gap": 12,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "jIrWc",
+                  "name": "card1",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "fill": "$surface.panelAlt",
+                  "cornerRadius": "$radius.md",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border.default"
+                  },
+                  "padding": 14,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "51kW0",
+                      "name": "card1t",
+                      "fill": "$text.primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Active Matters\n482",
+                      "lineHeight": 1.7,
+                      "fontFamily": "IBM Plex Sans",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "HywlD",
+                  "name": "card2",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "fill": "$surface.panelAlt",
+                  "cornerRadius": "$radius.md",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border.default"
+                  },
+                  "padding": 14,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "PnoI6",
+                      "name": "card2t",
+                      "fill": "$text.primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Pending Reviews\n96",
+                      "lineHeight": 1.7,
+                      "fontFamily": "IBM Plex Sans",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "8Yjav",
+                  "name": "card3",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "fill": "$surface.panelAlt",
+                  "cornerRadius": "$radius.md",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border.default"
+                  },
+                  "padding": 14,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "n8UJw",
+                      "name": "card3t",
+                      "fill": "$text.primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "SLA Risk\n12%",
+                      "lineHeight": 1.7,
+                      "fontFamily": "IBM Plex Sans",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "SAOSJ",
+                  "name": "card4",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "fill": "$surface.panelAlt",
+                  "cornerRadius": "$radius.md",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border.default"
+                  },
+                  "padding": 14,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "L6uyG",
+                      "name": "card4t",
+                      "fill": "$text.primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "High Severity\n18",
+                      "lineHeight": 1.7,
+                      "fontFamily": "IBM Plex Sans",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "3Tci7",
+              "name": "contentRow",
+              "width": "fill_container",
+              "height": "fill_container",
+              "gap": 12,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "JP1PL",
+                  "name": "leftPanel",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "fill": "$surface.panel",
+                  "cornerRadius": "$radius.md",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border.default"
+                  },
+                  "layout": "vertical",
+                  "gap": 10,
+                  "padding": 14,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "gYdEn",
+                      "name": "leftContent",
+                      "fill": "$text.secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Analytics Chart\nThroughput  ████████ 84\nSLA        ███████  78\nApprovals  ██████   69\nRisk       ████     41\n\nActivity Log\n09:12 Workflow WF-1198 failed OCR parse.\n09:20 Operator acknowledged and opened advisory.\n09:35 Connector recovered and replay triggered.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "iH2kb",
+                  "name": "rightPanel",
+                  "width": 360,
+                  "height": "fill_container",
+                  "fill": "$surface.panel",
+                  "cornerRadius": "$radius.md",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border.default"
+                  },
+                  "layout": "vertical",
+                  "gap": 10,
+                  "padding": 14,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "F1aJL",
+                      "name": "rightContent",
+                      "fill": "$text.secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Approval Panel\nPending: Contract WF-1202 requires legal lead signoff.\nAction: Approve | Escalate | Hold\n\nTimeline\n08:55 Intake submitted\n09:03 OCR completed\n09:12 Compliance flag raised\n09:26 Reviewer assigned\n09:41 Decision pending",
+                      "lineHeight": 1.55,
+                      "fontFamily": "IBM Plex Sans",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "304uc",
+      "x": 8200,
+      "y": 2400,
+      "name": "Component / Enhanced Diagram Board",
+      "reusable": true,
+      "clip": true,
+      "width": 1920,
+      "height": 1080,
+      "fill": "$surface.bg",
+      "layout": "vertical",
+      "gap": 20,
+      "padding": 32,
+      "children": [
+        {
+          "type": "frame",
+          "id": "GpFhl",
+          "name": "head",
+          "width": "fill_container",
+          "height": 156,
+          "gap": 20,
+          "justifyContent": "space_between",
+          "children": [
+            {
+              "type": "frame",
+              "id": "Q8dCs",
+              "name": "headLeft",
+              "width": "fill_container",
+              "height": "fill_container",
+              "layout": "vertical",
+              "gap": 10,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "ueXeA",
+                  "name": "diagTitle",
+                  "fill": "$text.primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Diagram Title",
+                  "fontFamily": "Space Grotesk",
+                  "fontSize": 48,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "muB3V",
+                  "name": "diagSub",
+                  "fill": "$text.secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Executive-ready architecture visualization",
+                  "lineHeight": 1.35,
+                  "fontFamily": "IBM Plex Sans",
+                  "fontSize": 19,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "lf7t0",
+              "name": "headRight",
+              "width": 520,
+              "height": "fill_container",
+              "fill": "$surface.panel",
+              "cornerRadius": "$radius.md",
+              "stroke": {
+                "thickness": 1,
+                "fill": "$border.default"
+              },
+              "layout": "vertical",
+              "gap": 10,
+              "padding": 12,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "rEHeL",
+                  "name": "legendTitle",
+                  "fill": "$accent.control",
+                  "content": "Layer Legend",
+                  "fontFamily": "IBM Plex Sans",
+                  "fontSize": 13,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "7HEmv",
+                  "name": "legendText",
+                  "fill": "$text.secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Customer #15B5A6 | Operator #E35D7A | Control Plane #4A78FF | Data Plane #F0A12B | Connectors #8A6BFF | Infra #8893A8",
+                  "lineHeight": 1.5,
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "pCUVl",
+          "name": "diagPanel",
+          "width": "fill_container",
+          "height": 700,
+          "fill": "$surface.panel",
+          "cornerRadius": "$radius.lg",
+          "stroke": {
+            "thickness": 1,
+            "fill": "$border.default"
+          },
+          "padding": 16,
+          "children": [
+            {
+              "type": "frame",
+              "id": "raME1",
+              "name": "diagImage",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": [
+                "$surface.canvas",
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "../../diagrams/exports/png/system-context.png",
+                  "mode": "fit"
+                }
+              ],
+              "cornerRadius": "$radius.md",
+              "stroke": {
+                "thickness": 1,
+                "fill": "$border.default"
+              }
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "gBh4q",
+          "name": "notes",
+          "width": "fill_container",
+          "height": "fill_container",
+          "gap": 10,
+          "children": [
+            {
+              "type": "frame",
+              "id": "bgQXE",
+              "name": "note1",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "$surface.panel",
+              "cornerRadius": "$radius.md",
+              "stroke": {
+                "thickness": 1,
+                "fill": "$border.default"
+              },
+              "padding": 12,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "VVBv0",
+                  "name": "n1t",
+                  "fill": "$text.secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Boundary labels and semantic colors improve executive readability.",
+                  "lineHeight": 1.4,
+                  "fontFamily": "IBM Plex Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "UujlX",
+              "name": "note2",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "$surface.panel",
+              "cornerRadius": "$radius.md",
+              "stroke": {
+                "thickness": 1,
+                "fill": "$border.default"
+              },
+              "padding": 12,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "fJjUv",
+                  "name": "n2t",
+                  "fill": "$text.secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Diagram semantics remain Mermaid-canonical while presentation quality is elevated.",
+                  "lineHeight": 1.4,
+                  "fontFamily": "IBM Plex Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "przOp",
+              "name": "note3",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "$surface.panel",
+              "cornerRadius": "$radius.md",
+              "stroke": {
+                "thickness": 1,
+                "fill": "$border.default"
+              },
+              "padding": 12,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "8IMY2",
+                  "name": "n3t",
+                  "fill": "$text.secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "16:9 framing is optimized for boardroom projection, PDF, and slide exports.",
+                  "lineHeight": 1.4,
+                  "fontFamily": "IBM Plex Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variables": {
+    "accent.connector": {
+      "type": "color",
+      "value": "#8A6BFF"
+    },
+    "accent.control": {
+      "type": "color",
+      "value": "#4A78FF"
+    },
+    "accent.customer": {
+      "type": "color",
+      "value": "#15B5A6"
+    },
+    "accent.data": {
+      "type": "color",
+      "value": "#F0A12B"
+    },
+    "accent.infra": {
+      "type": "color",
+      "value": "#8893A8"
+    },
+    "accent.operator": {
+      "type": "color",
+      "value": "#E35D7A"
+    },
+    "border.default": {
+      "type": "color",
+      "value": "#2A3F66"
+    },
+    "font.body": {
+      "type": "string",
+      "value": "IBM Plex Sans"
+    },
+    "font.display": {
+      "type": "string",
+      "value": "Space Grotesk"
+    },
+    "font.mono": {
+      "type": "string",
+      "value": "IBM Plex Mono"
+    },
+    "radius.lg": {
+      "type": "number",
+      "value": 12
+    },
+    "radius.md": {
+      "type": "number",
+      "value": 8
+    },
+    "radius.sm": {
+      "type": "number",
+      "value": 4
+    },
+    "space.1": {
+      "type": "number",
+      "value": 8
+    },
+    "space.2": {
+      "type": "number",
+      "value": 16
+    },
+    "space.3": {
+      "type": "number",
+      "value": 24
+    },
+    "space.4": {
+      "type": "number",
+      "value": 32
+    },
+    "surface.bg": {
+      "type": "color",
+      "value": "#0B1020"
+    },
+    "surface.canvas": {
+      "type": "color",
+      "value": "#F6F8FC"
+    },
+    "surface.panel": {
+      "type": "color",
+      "value": "#121A2F"
+    },
+    "surface.panelAlt": {
+      "type": "color",
+      "value": "#172541"
+    },
+    "text.primary": {
+      "type": "color",
+      "value": "#EAF0FF"
+    },
+    "text.secondary": {
+      "type": "color",
+      "value": "#A9B8D6"
+    }
+  }
+}

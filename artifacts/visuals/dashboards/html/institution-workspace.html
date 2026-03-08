@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Institution Workspace</title><link rel="icon" type="image/png" href="../../../website/assets/vl-footer-logo5.1.png" /><link rel="stylesheet" href="dashboard.css" /></head>
+<body><div class="layout">
+<aside class="sidebar"><div class="sidebar-brand"><img src="../../../website/assets/vl-footer-logo5.1.png" alt="Esheria" /><span>Tenant Scoped</span></div>
+<div class="sidebar-title">Institution Workspace Navigation</div>
+<div class="sidebar-workspace">
+<button class="sidebar-workspace-btn active" data-sidebar-workspace-id="institution-workspace" data-sidebar-workspace-index="0" type="button">Matter Inbox</button><button class="sidebar-workspace-btn " data-sidebar-workspace-id="institution-workspace" data-sidebar-workspace-index="1" type="button">Review Board</button><button class="sidebar-workspace-btn " data-sidebar-workspace-id="institution-workspace" data-sidebar-workspace-index="2" type="button">Escalations</button><button class="sidebar-workspace-btn " data-sidebar-workspace-id="institution-workspace" data-sidebar-workspace-index="3" type="button">Export Center</button>
+<button id="institution-workspace-autopilot" class="sidebar-autopilot" type="button">Autopilot: On</button>
+</div>
+</aside>
+<main class="main">
+<div class="top">
+<h1>Institution Workspace</h1>
+<div class="badge">Tenant Scoped</div>
+</div>
+<section class="cards"><div class="card"><div class="label">Active Matters</div><div id="institution-workspace-metric-0" class="metric" data-base="482">482</div></div><div class="card"><div class="label">Pending Reviews</div><div id="institution-workspace-metric-1" class="metric" data-base="96">96</div></div><div class="card"><div class="label">SLA Risk</div><div id="institution-workspace-metric-2" class="metric" data-base="12%">12%</div></div><div class="card"><div class="label">High Severity</div><div id="institution-workspace-metric-3" class="metric" data-base="18">18</div></div></section>
+<section class="context">
+<article class="context-card">
+<div class="kicker">Executive Context</div>
+<h2>Customer value is operational certainty, not model novelty.</h2>
+<p>This view ties legal turnaround speed, risk exposure, and reviewer throughput to a single tenant outcome dashboard. It is the pane a Head of Legal uses to decide renewal, expansion, and staffing.</p>
+<div class="proof-row"><span class="proof-pill">Tenant-scoped SLA risk</span><span class="proof-pill">Case-level audit evidence</span><span class="proof-pill">Reviewer productivity</span><span class="proof-pill">Escalation traceability</span></div>
+</article>
+<article class="context-card">
+<div class="kicker">Decision Signal</div>
+<h2>CEO signal</h2>
+<ul class="decision-list"><li>Conversion and expansion improve when workflow outcomes are measurable by tenant.</li><li>Risk concentration becomes visible before it turns into churn.</li><li>This surface can anchor pricing around outcomes, not seat count.</li></ul>
+</article>
+</section>
+<section class="workspace-preview">
+<h3 id="institution-workspace-workspace-title">Matter Inbox</h3>
+<p id="institution-workspace-workspace-detail">Queue of inbound contracts grouped by SLA window and assigned counsel.</p>
+<div id="institution-workspace-workspace-tags" class="workspace-tags"><span>SLA</span><span>Intake</span><span>Assignment</span></div>
+</section>
+<section class="future-board">
+<article class="future-card">
+<h4>Future KPI Pulse</h4>
+<div id="institution-workspace-future-kpis" class="future-kpis"></div>
+</article>
+<article class="future-card">
+<h4>Automation Stack</h4>
+<ul id="institution-workspace-future-automation" class="future-list"></ul>
+</article>
+<article class="future-card">
+<h4>90-Day Moves</h4>
+<ul id="institution-workspace-future-moves" class="future-list"></ul>
+</article>
+</section>
+<section class="command-deck">
+<article class="future-card">
+<h4>Live Signal Stream</h4>
+<ul id="institution-workspace-signal-stream" class="signal-stream"></ul>
+</article>
+<article class="future-card">
+<h4>Intervention Simulator</h4>
+<div class="sim-controls">
+<label>Automation Leverage <input id="institution-workspace-sim-auto" type="range" min="0" max="100" step="1" value="68" /></label>
+<label>Policy Strictness <input id="institution-workspace-sim-policy" type="range" min="0" max="100" step="1" value="72" /></label>
+<label>Recovery Speed <input id="institution-workspace-sim-recovery" type="range" min="0" max="100" step="1" value="65" /></label>
+</div>
+<p id="institution-workspace-sim-output" class="sim-output"></p>
+</article>
+</section>
+<section class="grid">
+<div class="panel"><h3>Intake and Review Queue</h3>
+<div class="table-controls">
+<button class="filter-btn active" data-table-filter="institution-workspace" data-filter-value="all">All</button>
+<button class="filter-btn" data-table-filter="institution-workspace" data-filter-value="failed">Failed</button>
+<button class="filter-btn" data-table-filter="institution-workspace" data-filter-value="retrying">Retrying</button>
+<button class="filter-btn" data-table-filter="institution-workspace" data-filter-value="running">Running</button>
+<input class="table-search" data-table-search="institution-workspace" placeholder="Search ID, step, or service..." />
+</div>
+<table class="table"><thead><tr><th>ID</th><th>Step</th><th>Service</th><th>Status</th><th>Severity</th></tr></thead><tbody id="institution-workspace-tbody"><tr data-status="retrying" data-search="wf-1192 compliance resolve esheria-contract-engine retrying"><td>WF-1192</td><td>Compliance Resolve</td><td>esheria-contract-engine</td><td>retrying</td><td><span class="pill warn">warning</span></td></tr>
+<tr data-status="failed" data-search="wf-1198 ocr parse esheria-ocr failed"><td>WF-1198</td><td>OCR Parse</td><td>esheria-ocr</td><td>failed</td><td><span class="pill risk">critical</span></td></tr>
+<tr data-status="running" data-search="wf-1202 review assignment platform running"><td>WF-1202</td><td>Review Assignment</td><td>platform</td><td>running</td><td><span class="pill ">normal</span></td></tr>
+<tr data-status="queued" data-search="wf-1207 draft export lexdraft queued"><td>WF-1207</td><td>Draft Export</td><td>lexdraft</td><td>queued</td><td><span class="pill ">normal</span></td></tr><tr id="institution-workspace-empty" class="table-empty" style="display:none;"><td colspan="5">No rows match your filter.</td></tr></tbody></table>
+</div>
+<div class="panel"><h3>Recent Activity</h3>
+<ul id="institution-workspace-timeline" class="timeline">
+<li>09:12 - WF-1198 failed OCR parse; customer notified with retry ETA.</li><li>09:20 - Reviewer reassignment triggered to protect SLA window.</li><li>09:35 - Connector recovered and replay completed.</li><li>09:46 - Review package regenerated with evidence chain intact.</li>
+</ul>
+</div>
+</section>
+<section class="footer-note">Executive takeaway: this dashboard translates platform reliability into renewal confidence and expansion potential.</section>
+</main>
+</div>
+<script>
+(() => {
+  const tableId = "institution-workspace";
+  const pageTitle = "Institution Workspace";
+  const workspaceData = [{"label":"Matter Inbox","detail":"Queue of inbound contracts grouped by SLA window and assigned counsel.","tags":["SLA","Intake","Assignment"]},{"label":"Review Board","detail":"Clause-level risk findings, citations, and approval status at reviewer level.","tags":["Risk","Review","Evidence"]},{"label":"Escalations","detail":"Breached timelines and high-severity decisions requiring management intervention.","tags":["Escalation","Priority","Governance"]},{"label":"Export Center","detail":"Finalized packages, audit trails, and client-ready outputs.","tags":["Export","Audit","Client"]}];
+  const baseRows = [{"id":"WF-1192","step":"Compliance Resolve","service":"esheria-contract-engine","status":"retrying","severity":"warning"},{"id":"WF-1198","step":"OCR Parse","service":"esheria-ocr","status":"failed","severity":"critical"},{"id":"WF-1202","step":"Review Assignment","service":"platform","status":"running","severity":"normal"},{"id":"WF-1207","step":"Draft Export","service":"lexdraft","status":"queued","severity":"normal"}];
+  const baseTimeline = ["09:12 - WF-1198 failed OCR parse; customer notified with retry ETA.","09:20 - Reviewer reassignment triggered to protect SLA window.","09:35 - Connector recovered and replay completed.","09:46 - Review package regenerated with evidence chain intact."];
+  const baseCardValues = ["482","96","12%","18"];
+  const tbodyEl = document.getElementById(tableId + "-tbody");
+  let emptyRow = document.getElementById(tableId + "-empty");
+  const buttons = Array.from(document.querySelectorAll('[data-table-filter="' + tableId + '"]'));
+  const searchInput = document.querySelector('[data-table-search="' + tableId + '"]');
+  const workspaceButtons = Array.from(document.querySelectorAll('[data-sidebar-workspace-id="' + tableId + '"]'));
+  const autopilotBtn = document.getElementById(tableId + "-autopilot");
+  const workspaceTitle = document.getElementById(tableId + "-workspace-title");
+  const workspaceDetail = document.getElementById(tableId + "-workspace-detail");
+  const workspaceTags = document.getElementById(tableId + "-workspace-tags");
+  const timelineEl = document.getElementById(tableId + "-timeline");
+  const futureKpisEl = document.getElementById(tableId + "-future-kpis");
+  const futureAutomationEl = document.getElementById(tableId + "-future-automation");
+  const futureMovesEl = document.getElementById(tableId + "-future-moves");
+  const signalStreamEl = document.getElementById(tableId + "-signal-stream");
+  const simAutoEl = document.getElementById(tableId + "-sim-auto");
+  const simPolicyEl = document.getElementById(tableId + "-sim-policy");
+  const simRecoveryEl = document.getElementById(tableId + "-sim-recovery");
+  const simOutputEl = document.getElementById(tableId + "-sim-output");
+  const metricEls = baseCardValues.map((_, idx) => document.getElementById(tableId + "-metric-" + idx));
+  let activeFilter = "all";
+  let activeState = null;
+  let activeWorkspaceIndex = 0;
+  let autopilotEnabled = true;
+
+  const seedFrom = (text) => {
+    let hash = 0;
+    for (let i = 0; i < text.length; i += 1) hash = (hash * 31 + text.charCodeAt(i)) >>> 0;
+    return hash;
+  };
+
+  const tweakMetric = (base, seed, idx) => {
+    if (!base) return "";
+    const step = ((seed >> (idx + 1)) % 7) - 3;
+    if (base.includes("/10")) {
+      const n = Number(base.split("/")[0]);
+      if (Number.isFinite(n)) return Math.max(0, Math.min(10, n + step * 0.2)).toFixed(1) + "/10";
+    }
+    if (base.includes("%")) {
+      const n = Number(base.replace(/[^0-9.]/g, ""));
+      if (Number.isFinite(n)) return Math.max(0, n + step).toFixed(n % 1 ? 1 : 0) + "%";
+    }
+    if (base.includes("$")) {
+      const n = Number(base.replace(/[^0-9.]/g, ""));
+      if (Number.isFinite(n)) {
+        const scaled = n * (1 + step * 0.025);
+        if (base.includes("M")) return "$" + scaled.toFixed(1) + "M";
+        return "$" + Math.round(scaled).toLocaleString();
+      }
+    }
+    const intNum = Number(base.replace(/,/g, ""));
+    if (Number.isFinite(intNum) && /^[-+]?[0-9,]+$/.test(base)) {
+      return Math.max(0, intNum + step).toLocaleString();
+    }
+    return base;
+  };
+
+  const severityClass = (severity) => {
+    if (severity === "critical") return "risk";
+    if (severity === "warning") return "warn";
+    return "";
+  };
+
+  const severityFromStatus = (status, fallback) => {
+    const s = String(status || "").toLowerCase();
+    if (s.includes("fail") || s.includes("blocked")) return "critical";
+    if (s.includes("retry") || s.includes("delayed")) return "warning";
+    return fallback || "normal";
+  };
+
+  const buildRowsForWorkspace = (item, index, seed) => {
+    const statusCycle = ["running", "retrying", "failed", "queued", "running", "running"];
+    const prefix = (item?.label || "Mode")
+      .split(/\s+/)
+      .slice(0, 3)
+      .map((token) => token[0] || "")
+      .join("")
+      .toUpperCase() || "WS";
+    const tagSlug = (item?.tags?.[0] || "core").toLowerCase().replace(/\s+/g, "-");
+    return baseRows.map((row, rowIndex) => {
+      const localSeed = (seed >> ((rowIndex % 5) + 1)) + index + rowIndex;
+      const status = statusCycle[Math.abs(localSeed) % statusCycle.length];
+      const seq = 1100 + ((Math.abs(seed) + rowIndex * 19 + index * 31) % 790);
+      return {
+        id: prefix + "-" + String(seq),
+        step: row.step + " / " + (item?.label || "Workspace"),
+        service: row.service + "." + tagSlug,
+        status,
+        severity: severityFromStatus(status, row.severity),
+      };
+    });
+  };
+
+  const renderRows = (rowsData) => {
+    if (!tbodyEl) return;
+    tbodyEl.innerHTML = rowsData
+      .map((row) => {
+        const status = String(row.status || "").toLowerCase();
+        const search = [row.id, row.step, row.service, row.status].join(" ").toLowerCase().replace(/"/g, "&quot;");
+        return '<tr data-status="' + status + '" data-search="' + search + '"><td>' + row.id + "</td><td>" + row.step + "</td><td>" + row.service + "</td><td>" + row.status + '</td><td><span class="pill ' + severityClass(row.severity) + '">' + row.severity + "</span></td></tr>";
+      })
+      .join("")
+      + '<tr id="' + tableId + '-empty" class="table-empty" style="display:none;"><td colspan="5">No rows match your filter.</td></tr>';
+    emptyRow = document.getElementById(tableId + "-empty");
+  };
+
+  const buildFutureState = (item, index) => {
+    const seed = seedFrom(pageTitle + "|" + (item?.label || "") + "|" + (item?.tags || []).join("|"));
+    const t0 = item?.tags?.[0] || "Workflow";
+    const t1 = item?.tags?.[1] || "Governance";
+    const kpis = [
+      { value: String(78 + (seed % 18)) + "%", label: "Automation Confidence" },
+      { value: String(9 + ((seed >> 3) % 16)) + "m", label: "Predicted Decision Latency" },
+      { value: String(90 + ((seed >> 5) % 9)) + "%", label: "SLA Guardrail" },
+      { value: String(2 + ((seed >> 7) % 5)), label: "Risk Drift Alerts" },
+    ];
+    const automations = [
+      "<b>" + (item?.label || "Mode") + "</b> auto-builds evidence packets before human approval.",
+      "<b>" + t0 + "</b> checks trigger predictive mitigation when confidence dips.",
+      "<b>" + t1 + "</b> policy route is pre-computed for escalations and board updates.",
+    ];
+    const moves = [
+      "<b>30d</b> - launch " + (item?.label || "mode") + " with live tenant telemetry.",
+      "<b>60d</b> - automate intervention playbooks tied to reliability thresholds.",
+      "<b>90d</b> - package " + pageTitle + " as enterprise operating standard.",
+    ];
+    const timeline = [
+      ...(baseTimeline.slice(0, 2)),
+      "Forecast - " + (item?.label || "Mode") + " produces proactive risk interventions.",
+      "Target - leadership review uses this mode as renewal-confidence narrative.",
+    ];
+    const signals = [
+      "<b>" + (item?.label || "Mode") + "</b> confidence recalculated from live execution inputs.",
+      "<b>" + (item?.tags?.[0] || "Workflow") + "</b> variance moved into proactive mitigation lane.",
+      "<b>" + (item?.tags?.[1] || "Governance") + "</b> alerts routed with accountable owner + ETA.",
+    ];
+    return { seed, kpis, automations, moves, timeline, signals, index };
+  };
+
+  const renderSignals = (state, tick = 0) => {
+    if (!signalStreamEl) return;
+    const now = new Date(Date.now() + tick * 60000);
+    const hh = String(now.getHours()).padStart(2, "0");
+    const mm = String(now.getMinutes()).padStart(2, "0");
+    signalStreamEl.innerHTML = (state.signals || [])
+      .map((entry, idx) => "<li><b>" + hh + ":" + String((Number(mm) + idx) % 60).padStart(2, "0") + "</b> - " + entry + "</li>")
+      .join("");
+  };
+
+  const updateSimulator = () => {
+    if (!simOutputEl || !activeState) return;
+    const a = Number(simAutoEl?.value || 0);
+    const p = Number(simPolicyEl?.value || 0);
+    const r = Number(simRecoveryEl?.value || 0);
+    const readiness = Math.max(0, Math.min(100, Math.round(a * 0.35 + p * 0.25 + r * 0.4)));
+    const riskDrift = Math.max(1, Math.round((100 - p) / 22 + (100 - r) / 28));
+    simOutputEl.innerHTML =
+      "<b>Mode readiness:</b> " + readiness + "% &nbsp;|&nbsp; <b>Projected drift alerts:</b> " + riskDrift +
+      "<br /><span>Signal: " + (readiness >= 78 ? "board-ready operating confidence." : "strengthen recovery + policy posture before scale push.") + "</span>";
+  };
+
+  const renderFutureState = (state) => {
+    if (futureKpisEl) {
+      futureKpisEl.innerHTML = state.kpis
+        .map((kpi) => '<div class="future-kpi"><strong>' + kpi.value + "</strong><span>" + kpi.label + "</span></div>")
+        .join("");
+    }
+    if (futureAutomationEl) {
+      futureAutomationEl.innerHTML = state.automations.map((item) => "<li>" + item + "</li>").join("");
+    }
+    if (futureMovesEl) {
+      futureMovesEl.innerHTML = state.moves.map((item) => "<li>" + item + "</li>").join("");
+    }
+    if (timelineEl) {
+      timelineEl.innerHTML = state.timeline.map((item) => "<li>" + item + "</li>").join("");
+    }
+    renderSignals(state);
+    metricEls.forEach((el, idx) => {
+      if (!el) return;
+      const base = baseCardValues[idx] || el.dataset.base || el.textContent || "";
+      el.textContent = tweakMetric(base, state.seed, idx + state.index);
+    });
+    if (simAutoEl) simAutoEl.value = String(60 + (state.seed % 25));
+    if (simPolicyEl) simPolicyEl.value = String(58 + ((state.seed >> 3) % 30));
+    if (simRecoveryEl) simRecoveryEl.value = String(55 + ((state.seed >> 5) % 35));
+    updateSimulator();
+  };
+
+  const applyFilters = () => {
+    const query = (searchInput?.value || "").trim().toLowerCase();
+    const rows = Array.from(document.querySelectorAll("#" + tableId + "-tbody tr[data-status]"));
+    let shown = 0;
+    for (const row of rows) {
+      const status = (row.dataset.status || "").toLowerCase();
+      const search = (row.dataset.search || "").toLowerCase();
+      const passFilter = activeFilter === "all" || status.includes(activeFilter);
+      const passSearch = !query || search.includes(query);
+      const visible = passFilter && passSearch;
+      row.style.display = visible ? "" : "none";
+      if (visible) shown += 1;
+    }
+    if (emptyRow) emptyRow.style.display = shown === 0 ? "" : "none";
+  };
+
+  for (const button of buttons) {
+    button.addEventListener("click", () => {
+      activeFilter = button.dataset.filterValue || "all";
+      for (const b of buttons) b.classList.toggle("active", b === button);
+      applyFilters();
+    });
+  }
+
+  const setWorkspace = (index) => {
+    const item = workspaceData[index];
+    if (!item || !workspaceTitle || !workspaceDetail || !workspaceTags) return;
+    activeWorkspaceIndex = index;
+    workspaceTitle.textContent = item.label || "Workspace";
+    workspaceDetail.textContent = item.detail || "";
+    workspaceTags.innerHTML = (item.tags || []).map((tag) => "<span>" + tag + "</span>").join("");
+    const state = buildFutureState(item, index);
+    activeState = state;
+    renderRows(buildRowsForWorkspace(item, index, state.seed));
+    renderFutureState(state);
+    applyFilters();
+    for (const b of workspaceButtons) b.classList.toggle("active", Number(b.dataset.sidebarWorkspaceIndex || "-1") === index);
+  };
+
+  for (const button of workspaceButtons) {
+    button.addEventListener("click", () => {
+      autopilotEnabled = false;
+      if (autopilotBtn) autopilotBtn.textContent = "Autopilot: Off";
+      setWorkspace(Number(button.dataset.sidebarWorkspaceIndex || "0"));
+    });
+  }
+
+  if (searchInput) searchInput.addEventListener("input", applyFilters);
+  if (simAutoEl) simAutoEl.addEventListener("input", updateSimulator);
+  if (simPolicyEl) simPolicyEl.addEventListener("input", updateSimulator);
+  if (simRecoveryEl) simRecoveryEl.addEventListener("input", updateSimulator);
+  if (autopilotBtn) {
+    autopilotBtn.addEventListener("click", () => {
+      autopilotEnabled = !autopilotEnabled;
+      autopilotBtn.textContent = "Autopilot: " + (autopilotEnabled ? "On" : "Off");
+    });
+  }
+  setInterval(() => {
+    if (!activeState) return;
+    renderSignals(activeState, Math.floor(Date.now() / 5000) % 12);
+  }, 5000);
+  setInterval(() => {
+    if (!autopilotEnabled || workspaceData.length < 2) return;
+    const nextIndex = (activeWorkspaceIndex + 1) % workspaceData.length;
+    setWorkspace(nextIndex);
+  }, 9000);
+  setWorkspace(0);
+})();
+</script>
+</body></html>
