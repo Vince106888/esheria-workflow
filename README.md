@@ -72,6 +72,72 @@ Then open `http://localhost:8080/`.
 - `npm run artifacts:hub`: build app + serve cockpit and repo artifacts from one local server
 - `npm run artifacts:serve`: lightweight static server for repository root (PowerShell/Python)
 - `npm run review`: alias of `artifacts:hub`
+- `npm run verify:artifacts`: verify document/export artifact requirements
+- `npm run verify:readiness`: verify repository + hosting readiness and write a report
+- `npm run ci:readiness`: local CI-equivalent run (build + artifact build + verification)
+
+## CI/CD Pipeline
+
+### CI (`.github/workflows/ci.yml`)
+
+Triggered on:
+- push to `main`
+- pull request targeting `main`
+
+CI performs:
+- dependency install (`npm ci`)
+- app build (`npm run build`)
+- artifact website generation (`npm run artifacts:build`)
+- artifact verification (`npm run verify:artifacts`)
+- readiness verification (`npm run verify:readiness`)
+
+CI uploads these action artifacts for review:
+- `readiness-report`
+- `webapp-dist`
+- `static-review-website`
+- `submission-pdf-exports`
+- `submission-slides-assets`
+
+### CD (`.github/workflows/deploy.yml`)
+
+Deployment target: **GitHub Pages**
+
+Deployment source folder:
+- `artifacts/website`
+
+Deploy trigger model:
+- automatic after successful `CI - Readiness` run on `main` (`workflow_run`)
+- optional manual run via `workflow_dispatch`
+
+Before deployment, CD re-runs:
+- build
+- artifact generation
+- artifact verification
+- readiness verification
+
+Deployment is executed only after those checks pass.
+
+### Production Gate (Required Approval)
+
+The deploy job uses:
+- `environment: production`
+
+Set protection rules on that environment so hosting/submission is blocked until a reviewer approves production deployment.
+
+## GitHub Settings To Enable
+
+After pushing workflows, configure:
+
+1. **Pages source**
+   - `Settings -> Pages -> Build and deployment -> Source: GitHub Actions`
+2. **Production environment**
+   - `Settings -> Environments -> New environment: production`
+   - add required reviewers (manual approval gate)
+   - optionally restrict deployment branches to `main`
+3. **Actions permissions**
+   - keep default workflow permissions compatible with Pages deploy (`pages:write`, `id-token:write` are defined in workflow)
+
+No custom deployment secrets are required for GitHub Pages in this setup.
 
 ## Artifact Lifecycle
 
@@ -136,4 +202,3 @@ Legacy static surfaces are still available:
 
 - `/artifacts/portal/index.html`
 - `/artifacts/hub/index.html`
-

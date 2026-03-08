@@ -1,0 +1,82 @@
+name: CD - Production Deploy
+
+on:
+  workflow_run:
+    workflows: ["CI - Readiness"]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+jobs:
+  build-and-verify:
+    name: Build and Verify for Production
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'workflow_run' &&
+       github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.head_branch == 'main')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build app output
+        run: npm run build
+
+      - name: Build artifact website outputs
+        run: npm run artifacts:build
+
+      - name: Verify artifact exports
+        run: npm run verify:artifacts
+
+      - name: Verify repository readiness
+        env:
+          READINESS_REPORT_PATH: ${{ runner.temp }}/readiness-report.json
+        run: npm run verify:readiness
+
+      - name: Upload deployment readiness report
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-readiness-report
+          path: ${{ runner.temp }}/readiness-report.json
+          if-no-files-found: error
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: artifacts/website
+
+  deploy:
+    name: Deploy to Production
+    needs: build-and-verify
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

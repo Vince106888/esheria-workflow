@@ -19,6 +19,8 @@ Use this checklist before publishing a review branch or sending submission artif
 
 - [ ] Install deps: `npm install`
 - [ ] Run app build: `npm run build`
+- [ ] Run artifact verification: `npm run verify:artifacts`
+- [ ] Run readiness verification: `npm run verify:readiness`
 - [ ] Start unified review surface: `npm run artifacts:hub`
 - [ ] Verify key routes load: `/overview`, `/executive`, `/blueprint`, `/diagrams`, `/documents`, `/website`
 
@@ -57,3 +59,11 @@ Use this checklist before publishing a review branch or sending submission artif
 - [ ] Push with:
   - `git push -u origin <branch>`
 
+## 8) CI/CD + Hosting Gate
+
+- [ ] CI workflow (`CI - Readiness`) is green on latest commit
+- [ ] Readiness report artifact is present in CI run
+- [ ] Deploy workflow (`CD - Production Deploy`) completed successfully
+- [ ] Production deployment was approved through GitHub `production` environment gate
+- [ ] Hosted URL is reachable and reviewed (GitHub Pages output from `artifacts/website`)
+- [ ] Submission exports (PDFs + slides assets) match approved release content
