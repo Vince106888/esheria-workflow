@@ -48,7 +48,6 @@ export default function TopNav() {
           <div className="top-nav-meta">
             {totalSections} Sections | {totalAssets} Assets
           </div>
-          <div className="top-nav-meta top-nav-meta-mono">npm run artifacts:hub</div>
           <button
             type="button"
             className="theme-toggle"
