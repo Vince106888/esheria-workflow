@@ -6,6 +6,7 @@ dist/
 
 # Temporary/local process outputs
 artifacts/.tmp-server*.log
+artifacts/generated/
 artifacts/reports/
 .codex_status_short*.txt
 
