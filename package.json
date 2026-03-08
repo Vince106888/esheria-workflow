@@ -1,0 +1,33 @@
+{
+  "name": "b2b-platform",
+  "version": "1.0.0",
+  "description": "Esheria legal workflow architecture and artifact workspace",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "artifacts:build": "node scripts/build-artifacts.mjs",
+    "artifacts:compile-docs": "node scripts/compile-docs.mjs",
+    "artifacts:render-images": "node scripts/render-artifact-images.mjs",
+    "artifacts:publish": "node scripts/publish-artifacts.mjs",
+    "artifacts:verify": "node scripts/verify-artifacts.mjs",
+    "publish:artifacts": "npm run artifacts:publish",
+    "artifacts:serve": "powershell -ExecutionPolicy Bypass -File scripts/serve-artifacts.ps1 8080",
+    "artifacts:hub": "npm run build && node scripts/artifact-cockpit.mjs 8080",
+    "review": "npm run artifacts:hub"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mermaid": "^11.12.3",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-router-dom": "^7.13.1"
+  },
+  "devDependencies": {
+    "@mermaid-js/mermaid-cli": "^11.12.0",
+    "@vitejs/plugin-react": "^5.1.4",
+    "vite": "^7.3.1"
+  }
+}
