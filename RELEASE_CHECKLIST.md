@@ -71,5 +71,5 @@ Use this checklist before publishing a review branch or sending submission artif
 - [ ] Readiness report artifact is present in CI run
 - [ ] Deploy workflow (`CD - Production Deploy`) completed successfully
 - [ ] Production deployment was approved through GitHub `production` environment gate
-- [ ] Hosted URL is reachable and reviewed (GitHub Pages output from `artifacts/website`)
+- [ ] Hosted URL is reachable and reviewed (GitHub Pages output from `dist/`)
 - [ ] Submission exports (PDFs + slides assets) match approved release content

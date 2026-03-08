@@ -103,7 +103,7 @@ CI uploads these action artifacts for review:
 Deployment target: **GitHub Pages**
 
 Deployment source folder:
-- `artifacts/website`
+- `dist` (Vite production build output)
 
 Deploy trigger model:
 - automatic after successful `CI - Readiness` run on `main` (`workflow_run`)
@@ -116,6 +116,9 @@ Before deployment, CD re-runs:
 - readiness verification
 
 Deployment is executed only after those checks pass.
+
+This repository intentionally uses a single production deployment workflow (`deploy.yml`).
+Legacy "deploy entire repo" workflows are not used, to avoid bypassing CI/readiness gates.
 
 ### Production Gate (Required Approval)
 
