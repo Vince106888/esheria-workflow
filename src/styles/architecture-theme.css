@@ -44,6 +44,10 @@
   --tone-text: #d8e2f0;
   --tone-text-strong: #f0f4ff;
   --tone-glow: #0d1e3a;
+  --artifact-hero-surface-start: #101827;
+  --artifact-hero-surface-end: #0d121d;
+  --artifact-hero-kicker-shadow: 0 0 12px color-mix(in srgb, var(--artifact-accent) 40%, transparent);
+  --artifact-hero-title-shadow: 0 0 22px color-mix(in srgb, var(--artifact-accent) 18%, transparent);
 }
 
 :root[data-theme="light"] {
@@ -90,6 +94,10 @@
   --tone-text: #1d2e4a;
   --tone-text-strong: #10213d;
   --tone-glow: #d6e5ff;
+  --artifact-hero-surface-start: #ffffff;
+  --artifact-hero-surface-end: #eaf1ff;
+  --artifact-hero-kicker-shadow: 0 0 0 transparent;
+  --artifact-hero-title-shadow: 0 0 0 transparent;
 }
 
 * {
@@ -552,7 +560,7 @@ button.inline:hover {
   padding: clamp(24px, 4.2vw, 40px);
   background:
     radial-gradient(ellipse 62% 42% at 18% -22%, color-mix(in srgb, var(--artifact-accent) 18%, transparent) 0%, transparent 70%),
-    linear-gradient(148deg, #101827, #0d121d 68%);
+    linear-gradient(148deg, var(--artifact-hero-surface-start), var(--artifact-hero-surface-end) 68%);
 }
 
 .artifact-breadcrumb {
@@ -602,7 +610,7 @@ button.inline:hover {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   margin-bottom: 20px;
-  text-shadow: 0 0 12px color-mix(in srgb, var(--artifact-accent) 40%, transparent);
+  text-shadow: var(--artifact-hero-kicker-shadow);
 }
 
 .artifact-hero-dot {
@@ -620,7 +628,7 @@ button.inline:hover {
   letter-spacing: -0.02em;
   color: var(--tone-text-strong);
   font-family: "DM Sans", "IBM Plex Sans", sans-serif;
-  text-shadow: 0 0 22px color-mix(in srgb, var(--artifact-accent) 18%, transparent);
+  text-shadow: var(--artifact-hero-title-shadow);
 }
 
 .artifact-title-accent {
@@ -933,9 +941,13 @@ button.inline:hover {
 }
 
 .dashboard-shell .artifact-hero-frame {
-  background:
-    radial-gradient(ellipse 62% 42% at 18% -22%, color-mix(in srgb, var(--artifact-accent) 18%, transparent) 0%, transparent 70%),
-    linear-gradient(148deg, color-mix(in srgb, var(--tone-surface) 84%, #091326 16%), color-mix(in srgb, var(--tone-bg) 82%, #08111f 18%) 68%);
+  --artifact-hero-surface-start: color-mix(in srgb, var(--tone-surface) 84%, #091326 16%);
+  --artifact-hero-surface-end: color-mix(in srgb, var(--tone-bg) 82%, #08111f 18%);
+}
+
+:root[data-theme="light"] .dashboard-shell .artifact-hero-frame {
+  --artifact-hero-surface-start: color-mix(in srgb, var(--tone-surface) 94%, #f4f8ff 6%);
+  --artifact-hero-surface-end: color-mix(in srgb, var(--tone-bg) 92%, #dbe7ff 8%);
 }
 
 .dashboard-gallery-wrap {
@@ -1360,9 +1372,13 @@ button.inline:hover {
 }
 
 .module-shell .artifact-hero-frame {
-  background:
-    radial-gradient(ellipse 62% 42% at 18% -22%, color-mix(in srgb, var(--artifact-accent) 18%, transparent) 0%, transparent 70%),
-    linear-gradient(148deg, color-mix(in srgb, var(--tone-surface) 84%, #10231f 16%), color-mix(in srgb, var(--tone-bg) 82%, #0a1d1a 18%) 68%);
+  --artifact-hero-surface-start: color-mix(in srgb, var(--tone-surface) 84%, #10231f 16%);
+  --artifact-hero-surface-end: color-mix(in srgb, var(--tone-bg) 82%, #0a1d1a 18%);
+}
+
+:root[data-theme="light"] .module-shell .artifact-hero-frame {
+  --artifact-hero-surface-start: color-mix(in srgb, var(--tone-surface) 94%, #f2fcf9 6%);
+  --artifact-hero-surface-end: color-mix(in srgb, var(--tone-bg) 92%, #def6ef 8%);
 }
 
 .module-layout {
