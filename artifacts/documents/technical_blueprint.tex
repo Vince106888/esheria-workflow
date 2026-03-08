@@ -1,67 +1,1192 @@
-\documentclass[10pt]{article}
-\usepackage[margin=0.9in]{geometry}
+%% ============================================================
+\documentclass[10pt, a4paper]{article}
+
+%% ── Core layout ──────────────────────────────────────────────
+\usepackage[
+  top=26mm, bottom=22mm,
+  left=16mm, right=16mm,
+  includeheadfoot,
+  headheight=16pt
+]{geometry}
+\usepackage{parskip}
+\usepackage{setspace}
+\usepackage{microtype}
+\usepackage{ragged2e}
+\usepackage{multicol}
+
+%% ── Fonts (XeLaTeX) ──────────────────────────────────────────
+\usepackage{fontspec}
+\setmainfont{Liberation Sans}[
+  BoldFont       = Liberation Sans Bold,
+  ItalicFont     = Liberation Sans Italic,
+  BoldItalicFont = Liberation Sans Bold Italic
+]
+\setsansfont{Liberation Sans}[
+  BoldFont       = Liberation Sans Bold,
+  ItalicFont     = Liberation Sans Italic
+]
+\setmonofont{Liberation Mono}[
+  BoldFont  = Liberation Mono Bold,
+  Scale     = 0.85
+]
+\newfontfamily\headingfont{Liberation Sans}[BoldFont=Liberation Sans Bold]
+\newfontfamily\monofont{Liberation Mono}[Scale=0.82]
+\newfontfamily\serifbody{Liberation Serif}[
+  BoldFont       = Liberation Serif Bold,
+  ItalicFont     = Liberation Serif Italic
+]
+
+%% ── Colours ──────────────────────────────────────────────────
+\usepackage[dvipsnames, svgnames, x11names, table]{xcolor}
+\definecolor{Navy}      {HTML}{07090F}
+\definecolor{Navy2}     {HTML}{0D1628}
+\definecolor{Navy3}     {HTML}{1A2E50}
+\definecolor{Teal}      {HTML}{00A884}
+\definecolor{TealDk}    {HTML}{007A61}
+\definecolor{TealLt}    {HTML}{E8F7F4}
+\definecolor{Blue}      {HTML}{2C5282}
+\definecolor{BlueLt}    {HTML}{EBF4FF}
+\definecolor{BlueMid}   {HTML}{3B6CB5}
+\definecolor{Amber}     {HTML}{B7791F}
+\definecolor{AmberLt}   {HTML}{FEFCE8}
+\definecolor{Rose}      {HTML}{9B2C2C}
+\definecolor{RoseLt}    {HTML}{FFF5F5}
+\definecolor{Violet}    {HTML}{553C9A}
+\definecolor{VioletLt}  {HTML}{FAF5FF}
+\definecolor{CodeBg}    {HTML}{0F1923}
+\definecolor{CodeBorder}{HTML}{1E3050}
+\definecolor{CodeText}  {HTML}{A8C4D8}
+\definecolor{Light}     {HTML}{F7FAFC}
+\definecolor{LightMid}  {HTML}{EDF2F7}
+\definecolor{BorderLt}  {HTML}{E2E8F0}
+\definecolor{Border}    {HTML}{CBD5E0}
+\definecolor{Mid}       {HTML}{718096}
+\definecolor{Muted}     {HTML}{A0AEC0}
+\definecolor{Text}      {HTML}{1A202C}
+\definecolor{TextLt}    {HTML}{4A5568}
+\definecolor{White}     {HTML}{FFFFFF}
+\definecolor{GreenOk}   {HTML}{276749}
+\definecolor{GreenOkLt} {HTML}{F0FFF4}
+\definecolor{OrangeWarn}{HTML}{C05621}
+\definecolor{OrangeWarnLt}{HTML}{FFFAF0}
+
+%% ── Graphics & Drawing ───────────────────────────────────────
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{calc, shapes.misc, fit, backgrounds, positioning, arrows.meta}
+
+%% ── Tables ───────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{longtable}
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\RaggedLeft\arraybackslash}p{#1}}
+\renewcommand{\arraystretch}{1.3}
+
+%% ── Callout / code boxes ─────────────────────────────────────
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{skins, breakable, listings}
+
+%% Code listing style
+\tcbset{
+  codebox/.style={
+    enhanced, breakable,
+    colback=CodeBg, colframe=CodeBorder,
+    boxrule=0.5pt, arc=3pt,
+    left=10pt, right=8pt, top=7pt, bottom=7pt,
+    fontupper=\monofont\small\color{CodeText},
+  }
+}
+
+%% ── Lists ────────────────────────────────────────────────────
+\usepackage{enumitem}
+\setlist{nosep, leftmargin=1.4em}
+\setlist[itemize]{label={\color{Teal}\small$\circ$}, itemsep=2pt}
+\setlist[enumerate]{label={\color{Navy2}\bfseries\small\arabic*.}, itemsep=2pt}
+
+%% ── Section headers ──────────────────────────────────────────
+\usepackage{titlesec}
+\titleformat{\section}{\headingfont\bfseries\large\color{Navy}}{}{0em}{}[%
+  \vspace{1pt}{\color{Teal}\hrule height 1.5pt}\vspace{-1pt}%
+]
+\titleformat{\subsection}{\headingfont\bfseries\normalsize\color{Navy2}}{}{0em}{}[%
+  \vspace{0pt}{\color{BorderLt}\hrule height 0.4pt}%
+]
+\titleformat{\subsubsection}{\headingfont\bfseries\small\color{Navy3}}{}{0em}{}
+\titlespacing{\section}{0pt}{16pt}{6pt}
+\titlespacing{\subsection}{0pt}{10pt}{3pt}
+\titlespacing{\subsubsection}{0pt}{7pt}{2pt}
+
+%% ── Header / footer ──────────────────────────────────────────
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[L]{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \fill[Navy2] (current page.north west)
+      rectangle ([yshift=-10.5mm]current page.north east);
+    \fill[Blue!80!Teal]  ([yshift=-10.5mm]current page.north west)
+      rectangle ([yshift=-11.2mm]current page.north east);
+  \end{tikzpicture}%
+  \vspace{-2pt}%
+  {\monofont\color{Teal}\scriptsize\bfseries ESHERIA~·~LEGAL WORKFLOW OS}%
+}
+\fancyhead[R]{%
+  {\monofont\color{Muted}\tiny TECHNICAL BLUEPRINT~·~ENGINEERING REFERENCE}%
+}
+\fancyfoot[L]{%
+  \color{BorderLt}\rule{\linewidth}{0.3pt}\\[-3pt]
+  {\monofont\tiny\color{Muted} Esheria Legal Workflow OS~·~Technical Blueprint}%
+}
+\fancyfoot[R]{%
+  {\monofont\tiny\color{Muted} Page~\thepage}%
+}
+
+%% ── Hyperlinks ───────────────────────────────────────────────
 \usepackage{hyperref}
-\title{Esheria Legal Workflow OS: Technical Blueprint}
-\date{2026-03-07}
+\hypersetup{colorlinks=false, hidelinks,
+  pdftitle={Esheria Legal Workflow OS — Technical Blueprint},
+  pdfauthor={Esheria Engineering}}
+
+%% ════════════════════════════════════════════════════════════
+%%  CUSTOM COMMANDS
+%% ════════════════════════════════════════════════════════════
+
+%% ── Inline code / mono tokens ───────────────────────────────
+\newcommand{\code}[1]{{\monofont\color{TealDk}\small\texttt{#1}}}
+\newcommand{\apiendpoint}[1]{{\monofont\color{BlueMid}\small\texttt{#1}}}
+\newcommand{\entity}[1]{{\monofont\bfseries\color{Navy2}\small #1}}
+\newcommand{\layer}[1]{{\monofont\bfseries\color{Teal}\small #1}}
+
+%% ── Section eyebrow ──────────────────────────────────────────
+\newcommand{\kicker}[1]{%
+  {\monofont\tiny\bfseries\color{Teal}\MakeUppercase{// #1}}\par\vspace{2pt}%
+}
+
+%% ── Thin / teal rule ─────────────────────────────────────────
+\newcommand{\thinrule}{\vspace{8pt}{\color{BorderLt}\hrule height 0.3pt}\vspace{10pt}}
+\newcommand{\tealrule}{\vspace{3pt}{\color{Teal}\hrule height 1.5pt}\vspace{7pt}}
+
+%% ── Decision badge ───────────────────────────────────────────
+\newcommand{\decision}[1]{%
+  \tikz[baseline=-1pt]\node[
+    fill=Amber!10, draw=Amber!40, rounded corners=2pt,
+    inner xsep=4pt, inner ysep=2pt,
+    font=\monofont\bfseries\tiny\color{Amber}
+  ]{DECISION};~{\small\color{TextLt} #1}%
+  \par\vspace{2pt}%
+}
+
+%% ── Constraint badge ─────────────────────────────────────────
+\newcommand{\constraint}[1]{%
+  \tikz[baseline=-1pt]\node[
+    fill=Rose!10, draw=Rose!40, rounded corners=2pt,
+    inner xsep=4pt, inner ysep=2pt,
+    font=\monofont\bfseries\tiny\color{Rose}
+  ]{CONSTRAINT};~{\small\color{TextLt} #1}%
+  \par\vspace{2pt}%
+}
+
+%% ── Note badge ───────────────────────────────────────────────
+\newcommand{\noteitem}[1]{%
+  \tikz[baseline=-1pt]\node[
+    fill=Blue!8, draw=Blue!30, rounded corners=2pt,
+    inner xsep=4pt, inner ysep=2pt,
+    font=\monofont\bfseries\tiny\color{Blue}
+  ]{NOTE};~{\small\color{TextLt} #1}%
+  \par\vspace{2pt}%
+}
+
+%% ── Section banner ───────────────────────────────────────────
+\newcommand{\sectionbanner}[4]{%
+  \vspace{4pt}%
+  \begin{tikzpicture}
+    \node[
+      fill=Light,
+      minimum width=\linewidth,
+      minimum height=16mm,
+      anchor=west,
+      inner sep=0pt,
+      rounded corners=2pt,
+    ] (banner) at (0,0) {};
+    \fill[#4] (banner.north west)
+      rectangle ([xshift=3pt]banner.south west);
+    \node[
+      fill=#4, rounded corners=2pt,
+      minimum width=7mm, minimum height=6mm,
+      anchor=west,
+      font=\monofont\bfseries\small\color{White},
+    ] (badge) at ([xshift=9pt]banner.west) {#1};
+    \node[
+      anchor=west,
+      font=\headingfont\bfseries\normalsize\color{Navy2},
+    ] at ([xshift=7pt]badge.east) {#2};
+    \node[
+      anchor=north west,
+      font=\itshape\tiny\color{Mid},
+    ] at ([xshift=7pt, yshift=-1pt]badge.south east) {#3};
+    \node[
+      anchor=east,
+      font=\monofont\tiny\color{Muted},
+    ] at ([xshift=-5pt]banner.east) {// SEC #1};
+  \end{tikzpicture}%
+  \vspace{5pt}%
+}
+
+%% ── Diagram include with fallback ───────────────────────────
+\newcommand{\diagram}[2]{%
+  \begin{figure}[H]
+    \centering
+    \IfFileExists{#1}{%
+      \includegraphics[width=\linewidth]{#1}%
+    }{%
+      \begin{tikzpicture}
+        \draw[dashed, Border, rounded corners=3pt, fill=Light]
+          (0,0) rectangle (\linewidth, 48mm);
+        \node[font=\monofont\footnotesize\color{Muted}, align=center]
+          at (.5\linewidth, 28mm) {DIAGRAM PLACEHOLDER};
+        \node[font=\monofont\tiny\color{Border}, align=center, text width=130mm]
+          at (.5\linewidth, 20mm) {#1};
+        \node[font=\itshape\tiny\color{Muted}, align=center]
+          at (.5\linewidth, 13mm) {Place PNG at the path above to render.};
+      \end{tikzpicture}%
+    }%
+    \caption*{\footnotesize\itshape\color{Mid} #2}
+  \end{figure}%
+}
+
+%% ── Callout box environments ─────────────────────────────────
+\newtcolorbox{notebox}[2][]{
+  enhanced, breakable,
+  colback=BlueLt, colframe=Blue!50,
+  leftrule=3pt, toprule=0pt, bottomrule=0pt, rightrule=0pt,
+  sharp corners, arc=2pt,
+  left=9pt, right=9pt, top=6pt, bottom=6pt,
+  title={\monofont\bfseries\tiny\color{Blue} #2},
+  attach title to upper={\par\vspace{2pt}},
+  detach title,
+  fontupper=\small\color{TextLt},
+  #1
+}
+\newtcolorbox{warnbox}[2][]{
+  enhanced, breakable,
+  colback=AmberLt, colframe=Amber!60,
+  leftrule=3pt, toprule=0pt, bottomrule=0pt, rightrule=0pt,
+  sharp corners, arc=2pt,
+  left=9pt, right=9pt, top=6pt, bottom=6pt,
+  title={\monofont\bfseries\tiny\color{Amber} #2},
+  attach title to upper={\par\vspace{2pt}},
+  detach title,
+  fontupper=\small\color{TextLt},
+  #1
+}
+\newtcolorbox{decisionbox}[2][]{
+  enhanced, breakable,
+  colback=GreenOkLt, colframe=GreenOk!50,
+  leftrule=3pt, toprule=0pt, bottomrule=0pt, rightrule=0pt,
+  sharp corners, arc=2pt,
+  left=9pt, right=9pt, top=6pt, bottom=6pt,
+  title={\monofont\bfseries\tiny\color{GreenOk} #2},
+  attach title to upper={\par\vspace{2pt}},
+  detach title,
+  fontupper=\small\color{TextLt},
+  #1
+}
+\newtcolorbox{codebox}[1][]{
+  codebox, #1
+}
+
+%% ── Two-column spec table ────────────────────────────────────
+%  Usage: \begin{spectable}{left-width}...\end{spectable}
+\newenvironment{spectable}[1]{%
+  \rowcolors{2}{Light}{White}%
+  \tabularx{\linewidth}{>{\monofont\small\color{TealDk}}L{#1} >{\small\color{Text}}X}%
+  \rowcolor{Navy2}%
+  \multicolumn{1}{l}{\thead{Field / Key}} & \multicolumn{1}{l}{\thead{Value / Description}} \\%
+  \midrule%
+}{%
+  \bottomrule%
+  \endtabularx%
+}
+
+%% ── Table header shorthand ───────────────────────────────────
+\newcommand{\thead}[1]{\headingfont\bfseries\scriptsize\color{White} #1}
+\newcommand{\tmono}[1]{{\monofont\small\color{TealDk} #1}}
+\newcommand{\tmonobl}[1]{{\monofont\bfseries\small\color{Navy2} #1}}
+\newcommand{\tsmall}[1]{{\small\color{TextLt} #1}}
+\newcommand{\tbold}[1]{{\headingfont\bfseries\small\color{Text} #1}}
+
+
+%% ════════════════════════════════════════════════════════════
+%%  COVER PAGE
+%% ════════════════════════════════════════════════════════════
+\newcommand{\makecover}{%
+  \thispagestyle{empty}
+  \begin{tikzpicture}[remember picture, overlay]
+    %% Background
+    \fill[Navy] (current page.south west) rectangle (current page.north east);
+    \fill[Navy2]
+      (current page.north west) rectangle
+      ([yshift=-120mm]current page.north east);
+
+    %% Left engineering grid lines (subtle)
+    \foreach \x in {0, 0.08, 0.16, 0.24} {
+      \draw[Navy3!40, line width=0.3pt]
+        ([xshift=\x\paperwidth]current page.south west) --
+        ([xshift=\x\paperwidth]current page.north west);
+    }
+    \foreach \y in {0.2, 0.4, 0.6, 0.8} {
+      \draw[Navy3!30, line width=0.3pt]
+        ([yshift=\y\paperheight]current page.west) --
+        ([yshift=\y\paperheight]current page.east);
+    }
+
+    %% Top accent — blue-teal gradient simulation
+    \fill[Blue!80!Teal]
+      (current page.north west) rectangle
+      ([yshift=-5pt]current page.north east);
+    \fill[Teal]
+      ([yshift=-5pt]current page.north west) rectangle
+      ([yshift=-7pt]current page.north east);
+
+    %% Left vertical accent bar
+    \fill[Teal]
+      ([xshift=14mm]current page.south west)
+      rectangle ([xshift=16.5mm, yshift=-108mm]current page.north west);
+    \fill[Blue]
+      ([xshift=16.5mm]current page.south west)
+      rectangle ([xshift=17.5mm, yshift=-108mm]current page.north west);
+
+    %% ESHERIA logotype line
+    \node[anchor=north west,
+      font=\monofont\scriptsize\color{Teal}]
+      at ([xshift=20mm, yshift=-14mm]current page.north west)
+      {ESHERIA  ·  LEGAL WORKFLOW OS};
+
+    %% Separator
+    \draw[Navy3, line width=0.4pt]
+      ([xshift=20mm, yshift=-22mm]current page.north west) --
+      ([xshift=-16mm, yshift=-22mm]current page.north east);
+
+    %% Document type label
+    \node[anchor=north west,
+      font=\monofont\bfseries\scriptsize\color{Blue!80!Teal}]
+      at ([xshift=20mm, yshift=-30mm]current page.north west)
+      {// TECHNICAL BLUEPRINT  ·  ENGINEERING REFERENCE};
+
+    %% Main title
+    \node[anchor=north west,
+      text width=150mm,
+      font=\headingfont\bfseries\fontsize{36}{44}\selectfont\color{White}]
+      at ([xshift=20mm, yshift=-50mm]current page.north west)
+      {Implementation Blueprint};
+
+    \node[anchor=north west,
+      font=\headingfont\bfseries\fontsize{36}{44}\selectfont\color{Teal}]
+      at ([xshift=20mm, yshift=-94mm]current page.north west)
+      {for the Workflow OS.};
+
+    %% Teal underline rule
+    \fill[Teal]
+      ([xshift=20mm, yshift=-103mm]current page.north west)
+      rectangle ++(80mm, 2.5pt);
+
+    %% Subtitle
+    \node[anchor=north west,
+      font=\monofont\small\color{Muted}]
+      at ([xshift=20mm, yshift=-111mm]current page.north west)
+      {Platform layers · Module contracts · API boundaries · Deployment};
+
+    %% Separator 2
+    \draw[Navy3, line width=0.4pt]
+      ([xshift=20mm, yshift=-122mm]current page.north west) --
+      ([xshift=-16mm, yshift=-122mm]current page.north east);
+
+    %% Abstract block
+    \node[anchor=north west,
+      text width=158mm,
+      font=\fontsize{9}{14}\selectfont\color{TextLt}]
+      at ([xshift=20mm, yshift=-130mm]current page.north west) {%
+      This document is the engineering reference for the Esheria Legal Workflow OS.
+      It maps the five-layer platform architecture, defines module responsibilities
+      and connector contracts, specifies the canonical object model and workflow state
+      machine, establishes the tenancy and auth model, and provides deployment
+      topology guidance. Use after the Executive Proposal for implementation planning.%
+    };
+
+    %% Spec cards row
+    \newcommand{\speccard}[3]{%
+      \node[fill=Navy3, rounded corners=2pt,
+        minimum width=35mm, minimum height=18mm,
+        text width=31mm, align=flush left,
+        inner sep=5pt, anchor=north west] (sc##1) at (##2) {
+        {\monofont\tiny\color{Muted} ##3}\\[2pt]
+        {\monofont\bfseries\small\color{White} ##1}
+      };
+      \fill[Teal] (sc##1.north west) rectangle ([xshift=35mm, yshift=-2pt]sc##1.north west);
+    }
+
+    \node[fill=Navy3, rounded corners=2pt, minimum width=35mm, minimum height=18mm,
+      text width=31mm, align=flush left, inner sep=5pt, anchor=north west]
+      (sc1) at ([xshift=20mm, yshift=-198mm]current page.north west) {
+      {\monofont\tiny\color{Muted} SECTIONS}\\[2pt]
+      {\monofont\bfseries\large\color{White} 8}
+    };
+    \fill[Teal] (sc1.north west) rectangle ([xshift=35mm, yshift=-2pt]sc1.north west);
+
+    \node[fill=Navy3, rounded corners=2pt, minimum width=35mm, minimum height=18mm,
+      text width=31mm, align=flush left, inner sep=5pt, anchor=north west]
+      (sc2) at ([xshift=58mm, yshift=-198mm]current page.north west) {
+      {\monofont\tiny\color{Muted} ENTITIES}\\[2pt]
+      {\monofont\bfseries\large\color{White} 9}
+    };
+    \fill[Blue] (sc2.north west) rectangle ([xshift=35mm, yshift=-2pt]sc2.north west);
+
+    \node[fill=Navy3, rounded corners=2pt, minimum width=35mm, minimum height=18mm,
+      text width=31mm, align=flush left, inner sep=5pt, anchor=north west]
+      (sc3) at ([xshift=96mm, yshift=-198mm]current page.north west) {
+      {\monofont\tiny\color{Muted} DIAGRAMS}\\[2pt]
+      {\monofont\bfseries\large\color{White} 8}
+    };
+    \fill[Violet] (sc3.north west) rectangle ([xshift=35mm, yshift=-2pt]sc3.north west);
+
+    \node[fill=Navy3, rounded corners=2pt, minimum width=35mm, minimum height=18mm,
+      text width=31mm, align=flush left, inner sep=5pt, anchor=north west]
+      (sc4) at ([xshift=134mm, yshift=-198mm]current page.north west) {
+      {\monofont\tiny\color{Muted} LAYERS}\\[2pt]
+      {\monofont\bfseries\large\color{White} L1--L5}
+    };
+    \fill[Amber] (sc4.north west) rectangle ([xshift=35mm, yshift=-2pt]sc4.north west);
+
+    %% Bottom meta panel
+    \fill[black!85]
+      (current page.south west) rectangle
+      ([yshift=48mm]current page.south east);
+    \fill[Navy2]
+      ([yshift=48mm]current page.south west) rectangle
+      ([yshift=52mm]current page.south east);
+
+    \node[anchor=north west, font=\monofont\tiny\color{Muted}]
+      at ([xshift=20mm, yshift=47mm]current page.south west) {DOCUMENT TYPE};
+    \node[anchor=north west, font=\headingfont\bfseries\small\color{White}]
+      at ([xshift=20mm, yshift=40mm]current page.south west) {Technical Architecture Blueprint};
+
+    \node[anchor=north west, font=\monofont\tiny\color{Muted}]
+      at ([xshift=95mm, yshift=47mm]current page.south west) {AUDIENCE};
+    \node[anchor=north west, font=\headingfont\bfseries\small\color{White}]
+      at ([xshift=95mm, yshift=40mm]current page.south west) {Engineering · CTO · Technical leads};
+
+    \node[anchor=north west, font=\monofont\tiny\color{Muted}]
+      at ([xshift=20mm, yshift=29mm]current page.south west) {COMPILE WITH};
+    \node[anchor=north west, font=\monofont\small\color{Teal}]
+      at ([xshift=20mm, yshift=22mm]current page.south west) {xelatex esheria-technical-blueprint.tex};
+
+    \node[anchor=east, font=\monofont\tiny\color{Muted}]
+      at ([xshift=-16mm, yshift=11mm]current page.south east) {esheria.io};
+
+    \fill[Teal!80!Blue]
+      (current page.south west) rectangle ([yshift=3pt]current page.south east);
+  \end{tikzpicture}
+  \newpage
+}
+
+
+%% ════════════════════════════════════════════════════════════
+%%  DOCUMENT BEGIN
+%% ════════════════════════════════════════════════════════════
 \begin{document}
-\maketitle
+\makecover
 
-\section{System Architecture}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/layered-architecture.png}
-\caption{System architecture layers and boundaries}
-\end{figure}
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{0pt}
 
-\section{API Boundaries}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/api-boundary-map.png}
-\caption{Platform API and connector boundary map}
-\end{figure}
+%% ════════════════════════════════════════════════════════════
+%%  SECTION 01 — SYSTEM ARCHITECTURE
+%% ════════════════════════════════════════════════════════════
+\sectionbanner{01}{System Architecture}{Five-layer stack — control plane, data plane, and experience surfaces}{Teal}
 
-\section{Ontology Model}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/ontology-er.png}
-\caption{Canonical ontology and key entity relationships}
-\end{figure}
+\subsection{Architecture Overview}
 
-\section{Workflow Engine Design}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/workflow-state-machine.png}
-\caption{Workflow state machine with deterministic transitions}
-\end{figure}
+The platform is structured as five horizontal layers. Each layer has a bounded responsibility
+and communicates only with adjacent layers. The canonical architecture fact: \textbf{no layer
+has a direct dependency on a non-adjacent layer.}
 
-\section{Tenancy Model}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/dashboard-topology.png}
-\caption{Tenant-scoped customer analytics separated from internal analytics}
-\end{figure}
+\medskip
+\rowcolors{2}{Light}{White}
+\begin{tabularx}{\linewidth}{%
+  C{11mm}%
+  >{\headingfont\bfseries\small\color{Text}}L{28mm}%
+  L{38mm}%
+  >{\small\color{TextLt}}X%
+}
+\rowcolor{Navy2}
+\thead{Layer} & \thead{Name} & \thead{Canonical Prefix} & \thead{Responsibility} \\
+\midrule
+\tmono{L5} & Experience
+  & \code{/} (frontend routing)
+  & Institution Workspace, Operator Console, Public surface. Never calls \code{/internal/*}. \\
+\tmono{L4} & Control Plane
+  & \code{/api/workflows/*}
+  & Workflow Engine, State Machine, Approval Router, Escalation Manager, Audit/Event Log. \\
+\tmono{L3} & Object Model
+  & \code{schema.*}
+  & Nine canonical entities shared across all layers. Schema is locked in P1 before service code. \\
+\tmono{L2} & Connectors
+  & \code{/internal/*}
+  & Connector Gateway mediating all platform-to-service calls. Owns retry, auth, error normalisation. \\
+\tmono{L1} & Existing Services
+  & \code{(service-native)}
+  & Current repos: \code{esheria-ocr}, \code{contract-engine}, \code{esheria-ai}, \code{lexdraft}, \code{esheria-analytics}. Unchanged. \\
+\bottomrule
+\end{tabularx}
 
-\section{Control vs Data Plane}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/control-vs-data-plane.png}
-\caption{Control-plane and data-plane responsibility split}
-\end{figure}
+\medskip
 
-\section{Deployment Topology}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/deployment-topology.png}
-\caption{Deployment topology for runtime services and shared infrastructure}
-\end{figure}
+\begin{decisionbox}{// CANONICAL ARCHITECTURE DECISION}
+The Canonical Object Model (L3) must be defined and locked in Phase~1 before any service code
+is written in Phase~2. Schema changes within a major version are treated as public API breaking
+changes and require migration plans, backward-compat periods, and explicit engineering approval.
+\end{decisionbox}
 
-\section{Integration Architecture}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/service-integration-map.png}
-\caption{Connector integration architecture}
-\end{figure}
+\subsection{Control Plane vs Data Plane}
+
+\begin{itemize}
+  \item \textbf{Control Plane (L4):} Governs workflow lifecycle — creates \code{WorkflowRun} objects,
+    routes steps to operators, enforces SLAs, manages approval chains, and writes every state
+    transition to the immutable audit log.
+  \item \textbf{Data Plane (L2+L1):} Executes capability operations — OCR, extraction, compliance
+    check, research, drafting. Reads and writes canonical objects at L3. Never controls workflow
+    routing decisions.
+  \item \textbf{Boundary rule:} A capability service \emph{never} triggers workflow transitions.
+    It returns results to the Control Plane, which decides the next step.
+\end{itemize}
+
+\diagram{../visuals/diagrams/source/png/layered-architecture.png}%
+  {Figure~01 — Five-layer platform architecture with control/data plane boundary}
+
+\thinrule
+
+%% ════════════════════════════════════════════════════════════
+%%  SECTION 02 — API BOUNDARIES
+%% ════════════════════════════════════════════════════════════
+\sectionbanner{02}{API Boundaries}{External /api/* vs internal /internal/* — no cross-contamination}{Blue}
+
+\subsection{Boundary Contract}
+
+Two API namespaces exist. They must never be conflated:
+
+\medskip
+\rowcolors{2}{Light}{White}
+\begin{tabularx}{\linewidth}{%
+  >{\monofont\small\color{BlueMid}}L{38mm}%
+  >{\headingfont\bfseries\small\color{Text}}L{28mm}%
+  L{24mm}%
+  >{\small\color{TextLt}}X%
+}
+\rowcolor{Navy2}
+\thead{Prefix} & \thead{Caller} & \thead{Auth} & \thead{Purpose} \\
+\midrule
+\code{/api/*}      & L5 frontends, external clients
+  & JWT (org-scoped)
+  & All customer and operator product actions. Versioned, documented. \\
+\code{/internal/*} & L2 Connector Gateway only
+  & Service-to-service token
+  & Platform-to-capability service calls. Never exposed externally. \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\subsection{External API Catalog}
+
+\rowcolors{2}{Light}{White}
+\begin{tabularx}{\linewidth}{%
+  >{\monofont\small\color{BlueMid}}L{52mm}%
+  C{18mm}%
+  >{\small\color{TextLt}}X%
+}
+\rowcolor{Navy2}
+\thead{Endpoint Group} & \thead{Method(s)} & \thead{Description} \\
+\midrule
+\code{/api/auth/token}        & POST   & Exchange credentials for org-scoped JWT \\
+\code{/api/auth/refresh}      & POST   & Refresh access token \\
+\code{/api/orgs/\{id\}}       & GET, PATCH & Org profile and policy set \\
+\code{/api/matters}           & GET, POST  & List and create legal matters \\
+\code{/api/matters/\{id\}}    & GET, PATCH, DELETE & Matter detail and lifecycle \\
+\code{/api/documents}         & GET, POST  & Upload and list documents \\
+\code{/api/documents/\{id\}}  & GET, DELETE & Document detail and deletion \\
+\code{/api/workflows}         & GET, POST  & List and trigger workflow runs \\
+\code{/api/workflows/\{id\}}  & GET        & WorkflowRun state + step history \\
+\code{/api/reviews}           & GET, POST  & List and submit human reviews \\
+\code{/api/tasks}             & GET, PATCH & Assignee-scoped task queue \\
+\code{/api/analytics/summary} & GET        & Org-level workflow metrics \\
+\code{/api/analytics/sla}     & GET        & SLA compliance by matter type \\
+\code{/api/integrations}      & GET, POST  & DMS/CRM/ERP connector config \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\subsection{Internal Connector Endpoints}
+
+\rowcolors{2}{Light}{White}
+\begin{tabularx}{\linewidth}{%
+  >{\monofont\small\color{TealDk}}L{54mm}%
+  >{\headingfont\bfseries\small\color{Text}}L{32mm}%
+  >{\small\color{TextLt}}X%
+}
+\rowcolor{Navy2}
+\thead{Internal Endpoint} & \thead{Target Service} & \thead{Contract} \\
+\midrule
+\code{/internal/ocr/parse}          & esheria-ocr        & Submit PDF/image, receive parsed text + metadata \\
+\code{/internal/ocr/classify}       & esheria-ocr        & Classify document type from parsed content \\
+\code{/internal/contracts/extract}  & contract-engine    & Extract clauses, parties, obligations from text \\
+\code{/internal/contracts/risk}     & contract-engine    & Score risk per clause against policy set \\
+\code{/internal/research/search}    & esheria-ai         & Semantic search over precedent corpus \\
+\code{/internal/research/cite}      & esheria-ai         & Retrieve citations for a given risk or clause \\
+\code{/internal/drafting/suggest}   & lexdraft           & Generate fallback language for risky clauses \\
+\code{/internal/drafting/redline}   & lexdraft           & Produce tracked-change redline document \\
+\code{/internal/analytics/emit}     & esheria-analytics  & Emit workflow event to analytics pipeline \\
+\code{/internal/analytics/query}    & esheria-analytics  & Query institution metrics (internal only) \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\begin{notebox}{// BOUNDARY ENFORCEMENT}
+The Connector Gateway is the \emph{only} component permitted to call \code{/internal/*} endpoints.
+No frontend, no workflow operator, and no other backend service may bypass it.
+This is the primary isolation mechanism between the platform and capability services.
+\end{notebox}
+
+\diagram{../visuals/diagrams/source/png/api-boundary-map.png}%
+  {Figure~02 — Platform API and connector boundary map}
+
+\thinrule
+
+%% ════════════════════════════════════════════════════════════
+%%  SECTION 03 — ONTOLOGY MODEL
+%% ════════════════════════════════════════════════════════════
+\sectionbanner{03}{Canonical Ontology Model}{Nine entities — the shared data contract for the entire platform}{Violet}
+
+\subsection{Entity Registry}
+
+All platform services operate on the same nine canonical entities. No service maintains private
+copies of these objects — they are the authoritative state of the platform.
+
+\medskip
+\rowcolors{2}{Light}{White}
+\begin{tabularx}{\linewidth}{%
+  >{\monofont\bfseries\small\color{Violet}}L{30mm}%
+  C{8mm}%
+  >{\small\color{TextLt}}X%
+  >{\monofont\tiny\color{TealDk}}L{42mm}%
+}
+\rowcolor{Navy2}
+\thead{Entity} & \thead{ID} & \thead{Description} & \thead{Key Fields} \\
+\midrule
+Organization & E1
+  & Root tenant. Owns all nested objects.
+  & \code{org\_id, name, sector, policy\_set\_id, jurisdiction} \\
+User & E2
+  & Identity scoped to an Org.
+  & \code{user\_id, org\_id, email, role, permissions} \\
+Matter & E3
+  & Legal business context (case, contract, compliance review).
+  & \code{matter\_id, org\_id, matter\_type, status, owner} \\
+Document & E4
+  & Uploaded file with OCR status and version chain.
+  & \code{doc\_id, matter\_id, source\_type, ocr\_status, version} \\
+Clause & E5
+  & Extracted clause attached to a Document.
+  & \code{clause\_id, doc\_id, clause\_type, text, risk\_ids} \\
+Risk & E6
+  & Compliance finding linked to a Clause.
+  & \code{risk\_id, clause\_id, severity, policy\_violated, remediation} \\
+WorkflowRun & E7
+  & Single execution of a named workflow template.
+  & \code{run\_id, matter\_id, workflow\_type, current\_step, status} \\
+Action & E8
+  & Atomic step record within a WorkflowRun.
+  & \code{action\_id, run\_id, actor\_id, type, input, output (jsonb)} \\
+Review & E9
+  & Human reviewer decision on a Document.
+  & \code{review\_id, doc\_id, reviewer\_id, findings (jsonb), decision} \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\subsection{Relationship Rules}
+
+\begin{itemize}
+  \item Every entity except \entity{Organization} carries an \code{org\_id} foreign key. Row-level
+    security enforces org-scoped isolation at the database layer.
+  \item \entity{Matter} is the primary grouping unit. All documents, workflow runs, and reviews
+    attach to a Matter.
+  \item \entity{Clause} and \entity{Risk} are write-once after extraction. Risk findings are
+    appended, never mutated — only resolved through a \entity{Review} decision.
+  \item \entity{Action} records are immutable once written. They form the audit trail for a
+    \entity{WorkflowRun}.
+  \item A \entity{Citation} (not listed above as a top-level entity) is an evidence record linking
+    an \entity{Action} to a source document — used by the Research and Compliance operators.
+\end{itemize}
+
+\medskip
+
+\begin{warnbox}{// SCHEMA LOCK POLICY}
+The entity schema is treated as a public API contract. All field additions require a non-breaking
+migration. Field removals or type changes require a major version increment, a migration plan,
+and a deprecation window of at minimum one full sprint cycle before enforcement.
+\end{warnbox}
+
+\diagram{../visuals/diagrams/source/png/ontology-er.png}%
+  {Figure~03 — Canonical entity-relationship diagram for the nine platform objects}
+
+\thinrule
+
+%% ════════════════════════════════════════════════════════════
+%%  SECTION 04 — WORKFLOW ENGINE
+%% ════════════════════════════════════════════════════════════
+\sectionbanner{04}{Workflow Engine Design}{State machine runtime with deterministic transitions and full audit}{Teal}
+
+\subsection{Design Principles}
+
+\begin{itemize}
+  \item \textbf{Deterministic transitions:} Every step has a single defined next-state for each
+    possible outcome. No implicit routing logic.
+  \item \textbf{Idempotent operators:} Each operator step can be safely retried without side
+    effects — output objects are upserted by \code{(run\_id, step\_id)}.
+  \item \textbf{Immutable audit log:} Every state transition writes an append-only record to the
+    event log. Log records are never updated or deleted.
+  \item \textbf{Human-in-loop:} The Approval Router is a first-class step, not an afterthought.
+    Workflows pause in \code{AWAITING\_REVIEW} until a human decision is received.
+  \item \textbf{SLA enforcement:} The Escalation Manager polls pending reviews and fires escalation
+    events at configured deadline thresholds (typically 80\% and 100\% of SLA window).
+\end{itemize}
+
+\subsection{WorkflowRun Lifecycle States}
+
+\medskip
+\rowcolors{2}{Light}{White}
+\begin{tabularx}{\linewidth}{%
+  >{\monofont\small\color{TealDk}}L{40mm}%
+  >{\small\color{TextLt}}X%
+  >{\monofont\tiny\color{Muted}}L{40mm}%
+}
+\rowcolor{Navy2}
+\thead{State} & \thead{Description} & \thead{Valid Transitions} \\
+\midrule
+\code{PENDING}          & Run created, not yet started             & \code{-> RUNNING} \\
+\code{RUNNING}          & Active operator step in execution        & \code{-> AWAITING\_REVIEW, FAILED} \\
+\code{AWAITING\_REVIEW} & Paused pending human reviewer decision   & \code{-> RUNNING, ESCALATED} \\
+\code{ESCALATED}        & SLA threshold exceeded, escalation fired & \code{-> AWAITING\_REVIEW} \\
+\code{APPROVED}         & Reviewer accepted; routing to close      & \code{-> COMPLETED} \\
+\code{REJECTED}         & Reviewer rejected; routing to remediate  & \code{-> RUNNING} (remediation step) \\
+\code{COMPLETED}        & All steps done, analytics emitted        & (terminal) \\
+\code{FAILED}           & Operator error beyond retry budget       & \code{-> RUNNING} (manual restart only) \\
+\code{CANCELLED}        & Explicitly terminated by operator        & (terminal) \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\subsection{Operator Registry — Contract Intake \& Review}
+
+\medskip
+\rowcolors{2}{Light}{White}
+\begin{tabularx}{\linewidth}{%
+  >{\monofont\small\color{TealDk}}L{36mm}%
+  C{16mm}%
+  L{38mm}%
+  >{\small\color{TextLt}}X%
+}
+\rowcolor{Navy2}
+\thead{Operator} & \thead{Type} & \thead{Input} & \thead{Output Object} \\
+\midrule
+\code{IngestionOperator}   & AI    & \code{doc\_id}
+  & \code{DocumentVersion}, parsed text \\
+\code{ExtractionOperator}  & AI    & \code{doc\_id}, parsed text
+  & \code{Clause[]} attached to \code{doc\_id} \\
+\code{ComplianceOperator}  & AI    & \code{Clause[]}, \code{policy\_set\_id}
+  & \code{Risk[]} with severity scores \\
+\code{ResearchOperator}    & AI    & \code{Risk[]}, \code{Clause[]}
+  & \code{Citation[]} linked to findings \\
+\code{DraftingOperator}    & AI    & \code{Risk[]}, \code{Clause[]}
+  & Draft suggestions per clause \\
+\code{ReviewOperator}      & AI    & All prior outputs
+  & \code{Review} briefing record \\
+\code{HumanReviewer}       & Human & \code{Review} briefing
+  & Decision (\code{APPROVED} / \code{REJECTED}) \\
+\code{ApprovalRouter}      & System& \code{Review} decision
+  & Routes to \code{APPROVED} or \code{REJECTED} state \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\begin{notebox}{// OPERATOR ISOLATION}
+Operators must not communicate with each other directly.
+All inter-step data flows through the canonical object model (L3).
+An operator reads its input from the \code{Action.input} record created by the Control Plane,
+executes via its connector, and writes results back as the \code{Action.output} jsonb field.
+\end{notebox}
+
+\diagram{../visuals/diagrams/source/png/workflow-state-machine.png}%
+  {Figure~04 — Workflow state machine with deterministic transitions and operator registry}
+
+\thinrule
+
+%% ════════════════════════════════════════════════════════════
+%%  SECTION 05 — TENANCY MODEL
+%% ════════════════════════════════════════════════════════════
+\sectionbanner{05}{Tenancy \& Auth Model}{Multi-tenant with org-scoped JWT, RBAC, and analytics domain separation}{Amber}
+
+\subsection{Tenancy Architecture}
+
+The platform uses a \textbf{logical multi-tenancy model} with shared infrastructure and database-layer
+isolation. Org-scoped row-level security (RLS) on PostgreSQL enforces data isolation at the query
+layer — no application-level filtering is trusted as the primary isolation mechanism.
+
+\medskip
+
+\subsection{JWT Structure}
+
+Every authenticated request carries a JWT containing:
+
+\medskip
+\begin{codebox}
+\{
+  "sub":    "<user\_id>",
+  "org":    "<org\_id>",
+  "role":   "reviewer | admin | api\_client | operator | super\_admin | auditor",
+  "scopes": ["matters:read", "documents:write", "workflows:trigger", ...],
+  "exp":    <unix\_timestamp>,
+  "iss":    "esheria-auth"
+\}
+\end{codebox}
+
+\medskip
+
+\subsection{Role Definitions}
+
+\rowcolors{2}{Light}{White}
+\begin{tabularx}{\linewidth}{%
+  >{\monofont\small\color{TealDk}}L{28mm}%
+  C{14mm}%
+  >{\small\color{TextLt}}X%
+}
+\rowcolor{Navy2}
+\thead{Role} & \thead{Surface} & \thead{Capabilities} \\
+\midrule
+\code{reviewer}    & Institution & Read matters, documents. Submit review decisions. View own analytics. \\
+\code{admin}       & Institution & Full org management. Configure workflows, users, integrations, policy sets. \\
+\code{api\_client} & Institution & Machine-to-machine. Scoped to explicit permission grants only. \\
+\code{operator}    & Esheria internal & Monitor workflow runs. Access operator console. View all org analytics. \\
+\code{super\_admin}& Esheria internal & Full platform control. Maintenance mode, service drain, force-advance. \\
+\code{auditor}     & Esheria internal & Read-only access to all audit logs and event streams. \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\begin{warnbox}{// OPERATOR CONSOLE ISOLATION}
+The Operator Console is a completely separate auth flow from the Institution Workspace.
+Institution users cannot access it under any circumstance — not via role elevation,
+not via URL manipulation. The Operator Console is served from a separate subdomain with
+a separate JWT issuer. All operator impersonation actions create immutable audit records
+with a mandatory justification field.
+\end{warnbox}
+
+\medskip
+
+\subsection{Analytics Domain Separation}
+
+Two analytics domains exist and must remain architecturally isolated:
+
+\begin{itemize}
+  \item \textbf{Institution Analytics:} Customer-facing. Scoped to a single \code{org\_id}.
+    Exposed via \code{/api/analytics/*}. Shows workflow throughput, SLA compliance,
+    risk trends, and reviewer performance for that org only.
+  \item \textbf{Esheria Internal Analytics:} Operator-facing. Cross-org. Never accessible to
+    customers. Exposed only inside the Operator Console. Shows platform health, service
+    latency, error rates, and cross-org usage patterns.
+\end{itemize}
+
+\diagram{../visuals/diagrams/source/png/dashboard-topology.png}%
+  {Figure~05 — Tenant-scoped institution analytics separated from Esheria internal analytics}
+
+\thinrule
+
+%% ════════════════════════════════════════════════════════════
+%%  SECTION 06 — CONTROL VS DATA PLANE
+%% ════════════════════════════════════════════════════════════
+\sectionbanner{06}{Control vs Data Plane}{Responsibility split — orchestration above, execution below}{Blue}
+
+\subsection{Plane Responsibilities}
+
+\medskip
+\rowcolors{2}{Light}{White}
+\begin{tabularx}{\linewidth}{%
+  >{\headingfont\bfseries\small\color{Text}}L{42mm}%
+  L{60mm}%
+  >{\small\color{TextLt}}X%
+}
+\rowcolor{Navy2}
+\thead{Concern} & \thead{Control Plane (L4)} & \thead{Data Plane (L2 + L1)} \\
+\midrule
+Primary role       & Orchestration and governance
+  & Capability execution \\
+State ownership    & \code{WorkflowRun} lifecycle, step routing
+  & \code{Action.output}, entity writes \\
+Routing decisions  & Yes — next step, branching, escalation
+  & No — never controls routing \\
+Audit trail        & Writes every state transition to event log
+  & Writes \code{Action} records only \\
+Auth model         & Validates org-scoped JWT on every request
+  & Service-to-service token from Gateway \\
+SLA enforcement    & Escalation Manager fires threshold events
+  & Not applicable \\
+Human interaction  & Routes to Approval Router, parks run
+  & Not applicable \\
+Retry logic        & Sets retry budget per step type
+  & Connector implements retry with backoff \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\subsection{Key Boundary Rules}
+
+\constraint{A capability operator (L1/L2) must never trigger a \code{WorkflowRun} state
+transition directly. It returns a result and the Control Plane decides next-state.}
+
+\constraint{The Connector Gateway (L2) must never hold business logic. It is a routing and
+normalisation layer only — auth, retry, circuit-break, error-shape.}
+
+\decision{Emergency platform controls (maintenance mode, service drain, force-advance workflow)
+require a 4-eyes confirmation inside the Operator Console. Single-operator execution is
+blocked at the API level.}
+
+\diagram{../visuals/diagrams/source/png/control-vs-data-plane.png}%
+  {Figure~06 — Control-plane and data-plane responsibility split with boundary enforcement rules}
+
+\thinrule
+
+%% ════════════════════════════════════════════════════════════
+%%  SECTION 07 — DEPLOYMENT TOPOLOGY
+%% ════════════════════════════════════════════════════════════
+\sectionbanner{07}{Deployment Topology}{Recommended MVP infrastructure stack and service boundaries}{Navy3}
+
+\subsection{Infrastructure Components}
+
+\rowcolors{2}{Light}{White}
+\begin{tabularx}{\linewidth}{%
+  >{\headingfont\bfseries\small\color{Text}}L{38mm}%
+  >{\monofont\small\color{TealDk}}L{32mm}%
+  >{\small\color{TextLt}}X%
+}
+\rowcolor{Navy2}
+\thead{Component} & \thead{Technology} & \thead{Responsibility} \\
+\midrule
+API Gateway          & nginx / AWS ALB    & TLS termination, rate limiting, header validation \\
+Auth Service         & custom JWT issuer  & Token generation, refresh, revocation \\
+Platform Backend     & Node.js / Go       & Workflow Engine, Control Plane, Connector Gateway \\
+Message Queue        & Redis Streams      & Async step execution, decouples operators from engine \\
+Primary Database     & PostgreSQL + RLS   & Canonical object persistence with org-scoped isolation \\
+Document Store       & S3-compatible      & Raw files, OCR output, redline documents \\
+Vector Store         & pgvector / Pinecone& Research operator semantic search index \\
+Cache                & Redis              & Session tokens, workflow step debounce \\
+Analytics Pipeline   & ClickHouse / Kafka & Append-only event stream for institution analytics \\
+Monitoring           & Prometheus + Grafana & Service health, latency, error rate dashboards \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\subsection{Request Flow (Contract Intake)}
+
+\begin{codebox}
+Client
+  -> API Gateway (TLS + rate limit)
+     -> Auth Service (JWT validate)
+        -> Platform Backend /api/documents (POST)
+           -> PostgreSQL (create Document record)
+           -> Redis Streams (emit step:ingestion event)
+              -> Platform Backend (consume event)
+                 -> Connector Gateway /internal/ocr/parse
+                    -> esheria-ocr (parse + classify)
+                 -> PostgreSQL (write DocumentVersion)
+                 -> Redis Streams (emit step:extraction event)
+                    -> ... (continues per operator)
+\end{codebox}
+
+\medskip
+
+\subsection{Out-of-Scope for MVP Phase 2}
+
+\begin{itemize}
+  \item Full enterprise SSO / SAML integration (post-P3)
+  \item Multi-region active-active deployment (post-P4)
+  \item Universal DMS/CRM/ERP connector suite (post-P4 — one reference integration only in P4)
+  \item Auth system unification across existing repos (each repo retains its own auth in P2)
+  \item All nine workflow types — only Contract Intake \& Review in P2
+  \item Bi-directional analytics (institution can read, not write, in P2)
+\end{itemize}
+
+\diagram{../visuals/diagrams/source/png/deployment-topology.png}%
+  {Figure~07 — Deployment topology for MVP: API gateway, backend, queues, and data stores}
+
+\thinrule
+
+%% ════════════════════════════════════════════════════════════
+%%  SECTION 08 — INTEGRATION ARCHITECTURE
+%% ════════════════════════════════════════════════════════════
+\sectionbanner{08}{Integration Architecture}{Connector Gateway contracts and service integration map}{Amber}
+
+\subsection{Connector Contract Specification}
+
+Each connector in L2 must implement the following interface contract:
+
+\medskip
+\begin{codebox}
+interface Connector {
+  id:            string;           // e.g. "ocr-connector"
+  targetService: string;           // e.g. "esheria-ocr"
+  status:        "active" | "planned" | "future";
+
+  // Called by Connector Gateway for every request
+  call(endpoint: string, payload: object): Promise<ConnectorResult>;
+
+  // Error normalisation — maps service errors to platform error codes
+  normalise(error: ServiceError): PlatformError;
+
+  // Health check — called by monitoring every 30s
+  health(): Promise<{ ok: boolean; latencyMs: number }>;
+}
+
+interface ConnectorResult {
+  success:  boolean;
+  data:     object;
+  metadata: { serviceVersion: string; latencyMs: number };
+}
+\end{codebox}
+
+\medskip
+
+\subsection{Connector Registry}
+
+\rowcolors{2}{Light}{White}
+\begin{tabularx}{\linewidth}{%
+  >{\monofont\small\color{TealDk}}L{40mm}%
+  >{\monofont\small\color{BlueMid}}L{36mm}%
+  C{18mm}%
+  >{\small\color{TextLt}}X%
+}
+\rowcolor{Navy2}
+\thead{Connector ID} & \thead{Target Service} & \thead{MVP Status} & \thead{Notes} \\
+\midrule
+\code{ocr-connector}        & \code{esheria-ocr}        & Active  & P2 priority. First connector to build. \\
+\code{contract-connector}   & \code{contract-engine}    & Active  & P2 priority. Extraction + risk scoring. \\
+\code{research-connector}   & \code{esheria-ai}         & Active  & P2 priority. Semantic search + citations. \\
+\code{drafting-connector}   & \code{lexdraft}           & Planned & P3. Drafting can use stub in P2. \\
+\code{analytics-connector}  & \code{esheria-analytics}  & Planned & P3. Analytics emit stubbed in P2. \\
+\code{lexchat-connector}    & \code{lexchat-plugin}     & Future  & Post-P4. Experimental surface only. \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+
+\subsection{Gateway Behaviour}
+
+\begin{itemize}
+  \item \textbf{Retry policy:} Exponential backoff, max 3 retries, 500ms base delay.
+    \code{4xx} errors are \emph{not} retried (client error). \code{5xx} and timeouts are retried.
+  \item \textbf{Circuit breaker:} Opens after 5 consecutive failures within a 30-second window.
+    Half-open probe every 10s. Failing-open is never permitted — the workflow step fails cleanly.
+  \item \textbf{Timeout budget:} Per-connector timeout configured in registry.
+    Default 10s. OCR has 60s budget. Research has 30s budget.
+  \item \textbf{Error normalisation:} Every connector maps its service's error taxonomy to the
+    platform's 6-class error model: \code{AUTH\_ERROR}, \code{VALIDATION\_ERROR},
+    \code{SERVICE\_UNAVAILABLE}, \code{RATE\_LIMITED}, \code{TIMEOUT}, \code{INTERNAL\_ERROR}.
+\end{itemize}
+
+\medskip
+
+\begin{decisionbox}{// CONNECTOR PRIORITY ORDER — P2}
+Build in this order: \code{ocr-connector} first (simplest, no ML dependency, validates
+gateway plumbing), then \code{contract-connector} (highest business value in MVP),
+then \code{research-connector} (needed for citation evidence in Review briefing).
+Stub \code{drafting-connector} and \code{analytics-connector} in P2 to unblock demo.
+\end{decisionbox}
+
+\diagram{../visuals/diagrams/source/png/service-integration-map.png}%
+  {Figure~08 — Connector gateway integration architecture across all five capability services}
+
+\thinrule
+
+%% ════════════════════════════════════════════════════════════
+%%  IMPLEMENTATION GUIDANCE
+%% ════════════════════════════════════════════════════════════
+\kicker{Implementation Guidance}
+{\headingfont\bfseries\Large\color{Navy} Phase 2 Build Priorities}
+
+\tealrule
+
+\subsection{Priority Order}
+
+\begin{enumerate}
+  \item \textbf{Schema definition (P1 exit gate):} Define all nine canonical entities in a
+    PostgreSQL migration. Apply RLS policies. Review and lock with all repo owners before
+    writing any application code.
+  \item \textbf{Workflow Engine core:} \code{WorkflowRun} CRUD, state machine transitions,
+    event log writes. No connector calls yet — use stubs.
+  \item \textbf{Connector Gateway skeleton:} Auth passthrough, retry/backoff, error normalisation.
+    Implement against stubs before wiring real services.
+  \item \textbf{OCR connector:} First real connector. Validates the gateway contract end-to-end.
+  \item \textbf{Contract connector:} Extraction and risk scoring. Unlocks the core value step.
+  \item \textbf{Research connector:} Citation retrieval. Completes the evidence chain.
+  \item \textbf{Reviewer dashboard v1:} Minimal UI — matter list, document viewer, risk findings,
+    approve/reject action. Authentication via institution workspace auth flow.
+  \item \textbf{End-to-end demo flow:} Single contract through all 10 steps. Audit log visible.
+    Human reviewer makes a decision. Analytics event emitted (stubbed).
+\end{enumerate}
+
+\subsection{Explicit Out-of-Scope for P2}
+
+\begin{itemize}
+  \item Full enterprise SSO, SAML, or external IdP integration
+  \item Auth unification across existing repos (each keeps its own auth in P2)
+  \item Universal DMS/CRM/ERP integration suite (one reference only in P4)
+  \item All nine workflow type templates (Contract Intake only in P2)
+  \item Bi-directional analytics (institution read-only in P2; full dashboard in P3)
+  \item Production multi-region or disaster recovery configuration
+  \item Drafting and analytics connectors (stub in P2, build in P3)
+\end{itemize}
+
+\medskip
+
+\begin{warnbox}{// SCHEMA FIRST — ALWAYS}
+The single most common cause of platform architecture failures is writing service code before
+agreeing on the canonical data model. In P1, the schema review meeting is the most important
+engineering meeting. No P2 code is written before the schema is signed off by all repo owners.
+\end{warnbox}
+
+\medskip
+
+\subsection{Deep Evidence}
+
+\begin{itemize}
+  \item \code{docs/discovery/repo-deep-scan.md} — full assessment of all five existing repos
+  \item \code{docs/discovery/api-catalog.md} — current endpoint inventory per service
+  \item \code{docs/architecture/consistency-report.md} — 7 resolved canonical conflicts, 11 confirmed decisions
+  \item Executive Proposal — \code{esheria-executive-proposal.tex} — strategic context for this blueprint
+\end{itemize}
 
 \end{document}

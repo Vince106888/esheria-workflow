@@ -1,63 +1,1036 @@
-\documentclass[11pt]{article}
-\usepackage[margin=1in]{geometry}
+%% ============================================================
+\documentclass[11pt, a4paper]{article}
+
+%% ── Core layout ──────────────────────────────────────────────
+\usepackage[
+  top=28mm, bottom=24mm,
+  left=18mm, right=18mm,
+  includeheadfoot,
+  headheight=16pt
+]{geometry}
+\usepackage{parskip}
+\usepackage{setspace}
+\usepackage{microtype}
+\usepackage{ragged2e}
+
+%% ── Fonts (XeLaTeX) ──────────────────────────────────────────
+\usepackage{fontspec}
+\setmainfont{Liberation Serif}[
+  BoldFont       = Liberation Serif Bold,
+  ItalicFont     = Liberation Serif Italic,
+  BoldItalicFont = Liberation Serif Bold Italic
+]
+\setsansfont{Liberation Sans}[
+  BoldFont       = Liberation Sans Bold,
+  ItalicFont     = Liberation Sans Italic,
+  BoldItalicFont = Liberation Sans Bold Italic
+]
+\setmonofont{Liberation Mono}[
+  BoldFont  = Liberation Mono Bold,
+  Scale     = 0.88
+]
+\newfontfamily\headingfont{Liberation Sans}[BoldFont=Liberation Sans Bold]
+\newfontfamily\monofont{Liberation Mono}[Scale=0.84]
+
+%% ── Colours ──────────────────────────────────────────────────
+\usepackage[dvipsnames, svgnames, x11names, table]{xcolor}
+\definecolor{Navy}      {HTML}{07090F}
+\definecolor{Navy2}     {HTML}{0D1628}
+\definecolor{Navy3}     {HTML}{1A2E50}
+\definecolor{Teal}      {HTML}{00A884}
+\definecolor{TealDk}    {HTML}{007A61}
+\definecolor{TealLt}    {HTML}{E8F7F4}
+\definecolor{Blue}      {HTML}{2C5282}
+\definecolor{BlueLt}    {HTML}{EBF4FF}
+\definecolor{Amber}     {HTML}{B7791F}
+\definecolor{AmberLt}   {HTML}{FEFCE8}
+\definecolor{Rose}      {HTML}{9B2C2C}
+\definecolor{RoseLt}    {HTML}{FFF5F5}
+\definecolor{Violet}    {HTML}{553C9A}
+\definecolor{VioletLt}  {HTML}{FAF5FF}
+\definecolor{Slate}     {HTML}{2D3748}
+\definecolor{Light}     {HTML}{F7FAFC}
+\definecolor{BorderLt}  {HTML}{E2E8F0}
+\definecolor{Border}    {HTML}{CBD5E0}
+\definecolor{Mid}       {HTML}{718096}
+\definecolor{Muted}     {HTML}{A0AEC0}
+\definecolor{Text}      {HTML}{1A202C}
+\definecolor{TextLt}    {HTML}{4A5568}
+
+%% ── Graphics & Drawing ───────────────────────────────────────
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{calc, shapes.misc, fit, backgrounds, patterns, positioning}
+
+%% ── Tables ───────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{longtable}
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\RaggedLeft\arraybackslash}p{#1}}
+\renewcommand{\arraystretch}{1.35}
+
+%% ── Callout boxes ────────────────────────────────────────────
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{skins, breakable}
+
+%% ── Lists ────────────────────────────────────────────────────
+\usepackage{enumitem}
+\setlist{nosep, leftmargin=1.4em}
+\setlist[itemize]{label={\color{Teal}\small\textbullet}, itemsep=2pt}
+
+%% ── Section headers ──────────────────────────────────────────
+\usepackage{titlesec}
+\titleformat{\section}{\headingfont\bfseries\large\color{Navy2}}{}{0em}{}[\vspace{-4pt}\color{BorderLt}\rule{\linewidth}{0.5pt}]
+\titleformat{\subsection}{\headingfont\bfseries\normalsize\color{Navy3}}{}{0em}{}
+\titleformat{\subsubsection}{\headingfont\bfseries\small\color{Slate}}{}{0em}{}
+\titlespacing{\section}{0pt}{18pt}{8pt}
+\titlespacing{\subsection}{0pt}{12pt}{4pt}
+\titlespacing{\subsubsection}{0pt}{8pt}{2pt}
+
+%% ── Header / footer ──────────────────────────────────────────
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[L]{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \fill[Navy2] (current page.north west)
+      rectangle ([yshift=-11mm]current page.north east);
+    \fill[Teal]  ([yshift=-11mm]current page.north west)
+      rectangle ([yshift=-11.8mm]current page.north east);
+  \end{tikzpicture}%
+  \vspace{-2pt}%
+  {\monofont\color{Teal}\footnotesize\bfseries ESHERIA~·~LEGAL WORKFLOW OS}%
+}
+\fancyhead[R]{%
+  {\monofont\color{Muted}\scriptsize EXECUTIVE PROPOSAL~·~CONFIDENTIAL}%
+}
+\fancyfoot[L]{%
+  \color{BorderLt}\rule{\linewidth}{0.4pt}\\[-2pt]
+  {\monofont\scriptsize\color{Muted} Esheria Legal Workflow OS~·~Executive Proposal}%
+}
+\fancyfoot[R]{%
+  {\monofont\scriptsize\color{Muted} Page~\thepage}%
+}
+
+%% ── Hyperlinks ───────────────────────────────────────────────
 \usepackage{hyperref}
-\title{Esheria Legal Workflow OS: Executive Proposal}
-\date{2026-03-07}
+\hypersetup{
+  colorlinks=false,
+  hidelinks,
+  pdftitle={Esheria Legal Workflow OS — Executive Proposal},
+  pdfauthor={Vincent Nyamao},
+  pdfsubject={Executive Proposal — CEO Review Copy},
+}
+
+%% ════════════════════════════════════════════════════════════
+%%  CUSTOM COMMANDS & ENVIRONMENTS
+%% ════════════════════════════════════════════════════════════
+
+%% ── Graceful diagram include ─────────────────────────────────
+%  \diagram{path}{caption-text}
+%  Shows image if found; placeholder box if not.
+\newcommand{\diagram}[2]{%
+  \begin{figure}[H]
+    \centering
+    \IfFileExists{#1}{%
+      \includegraphics[width=\linewidth]{#1}%
+    }{%
+      \begin{tikzpicture}
+        \draw[dashed, Border, rounded corners=4pt, fill=Light]
+          (0,0) rectangle (\linewidth, 55mm);
+        \node[font=\monofont\small\color{Muted}, align=center]
+          at (.5\linewidth, 30mm) {DIAGRAM PLACEHOLDER};
+        \node[font=\monofont\tiny\color{Border}, align=center, text width=120mm]
+          at (.5\linewidth, 20mm) {#1};
+        \node[font=\itshape\footnotesize\color{Muted}, align=center, text width=120mm]
+          at (.5\linewidth, 11mm) {Place diagram PNG at the path above to include image.};
+      \end{tikzpicture}%
+    }%
+    \caption*{\footnotesize\itshape\color{Mid} #2}
+  \end{figure}%
+}
+
+%% ── Eyebrow / kicker label ───────────────────────────────────
+\newcommand{\kicker}[1]{%
+  {\monofont\scriptsize\bfseries\color{Teal}\MakeUppercase{#1}}\par\vspace{2pt}%
+}
+
+%% ── Monospace tag ────────────────────────────────────────────
+\newcommand{\mono}[1]{{\monofont\color{TealDk}\small #1}}
+\newcommand{\monokey}[1]{{\monofont\bfseries\footnotesize\color{Navy3} #1}}
+
+%% ── Section banner ───────────────────────────────────────────
+%  \sectionbanner{num}{title}{subtitle}{accent-color}
+\newcommand{\sectionbanner}[4]{%
+  \vspace{6pt}%
+  \begin{tikzpicture}
+    \node[
+      fill=Light,
+      minimum width=\linewidth,
+      minimum height=18mm,
+      anchor=west,
+      inner sep=0pt,
+      rounded corners=2pt,
+    ] (banner) at (0,0) {};
+    % Left accent bar
+    \fill[#4] (banner.north west)
+      rectangle ([xshift=3.5pt]banner.south west);
+    % Number badge
+    \node[
+      fill=#4,
+      rounded corners=2pt,
+      minimum width=7mm,
+      minimum height=6.5mm,
+      anchor=west,
+      font=\monofont\bfseries\small\color{white},
+    ] (badge) at ([xshift=10pt]banner.west) {#1};
+    % Title
+    \node[
+      anchor=west,
+      font=\headingfont\bfseries\large\color{Navy2},
+    ] at ([xshift=6pt]badge.east) {#2};
+    % Subtitle
+    \node[
+      anchor=north west,
+      font=\itshape\footnotesize\color{Mid},
+    ] at ([xshift=6pt, yshift=-2pt]badge.south east) {#3};
+    % Section label right
+    \node[
+      anchor=east,
+      font=\monofont\tiny\color{Border},
+    ] at ([xshift=-6pt]banner.east) {// SECTION #1};
+  \end{tikzpicture}%
+  \vspace{6pt}%
+}
+
+%% ── Teal horizontal rule ─────────────────────────────────────
+\newcommand{\tealrule}{\vspace{4pt}\color{Teal}\hrule height 1.5pt\color{Text}\vspace{8pt}}
+
+%% ── Thin rule ────────────────────────────────────────────────
+\newcommand{\thinrule}{\vspace{8pt}{\color{BorderLt}\hrule height 0.4pt}\vspace{10pt}}
+
+%% ── Callout box: teal (insight) ──────────────────────────────
+\newtcolorbox{insightbox}[1][]{
+  enhanced, breakable,
+  colback=TealLt, colframe=Teal,
+  leftrule=3.5pt, toprule=0pt, bottomrule=0pt, rightrule=0pt,
+  sharp corners, arc=3pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  before upper={\kicker{// #1}},
+  #1
+}
+\newtcolorbox{tealbox}[2][]{
+  enhanced, breakable,
+  colback=TealLt, colframe=Teal,
+  leftrule=3.5pt, toprule=0pt, bottomrule=0pt, rightrule=0pt,
+  sharp corners, arc=2pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  title={\monofont\bfseries\scriptsize\color{Teal} #2},
+  attach title to upper={\par\vspace{2pt}},
+  detach title,
+  before upper app={},
+  fontupper=\small\itshape\color{Text},
+  #1
+}
+\newtcolorbox{amberbox}[2][]{
+  enhanced, breakable,
+  colback=AmberLt, colframe=Amber,
+  leftrule=3.5pt, toprule=0pt, bottomrule=0pt, rightrule=0pt,
+  sharp corners, arc=2pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  title={\monofont\bfseries\scriptsize\color{Amber} #2},
+  attach title to upper={\par\vspace{2pt}},
+  detach title,
+  fontupper=\small\itshape\color{Text},
+  #1
+}
+\newtcolorbox{rosebox}[2][]{
+  enhanced, breakable,
+  colback=RoseLt, colframe=Rose,
+  leftrule=3.5pt, toprule=0pt, bottomrule=0pt, rightrule=0pt,
+  sharp corners, arc=2pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  title={\monofont\bfseries\scriptsize\color{Rose} #2},
+  attach title to upper={\par\vspace{2pt}},
+  detach title,
+  fontupper=\small\itshape\color{Text},
+  #1
+}
+
+%% ── Phase pill (inline) ──────────────────────────────────────
+\newcommand{\phasepill}[2]{%
+  \tikz[baseline=-1pt]\node[
+    fill=#2!15, draw=#2!50, rounded corners=2pt,
+    inner sep=2pt 4pt, font=\monofont\bfseries\scriptsize\color{#2}
+  ]{#1};%
+}
+
+%% ── Status badge ─────────────────────────────────────────────
+\newcommand{\badge}[2]{%
+  \tikz[baseline=-1pt]\node[
+    fill=#2!12, draw=#2!35, rounded corners=2pt,
+    inner xsep=4pt, inner ysep=2pt,
+    font=\monofont\bfseries\tiny\color{#2}
+  ]{#1};%
+}
+
+%% ── Table header setup ───────────────────────────────────────
+\newcommand{\thead}[1]{\headingfont\bfseries\footnotesize\color{white} #1}
+\newcommand{\trow}[1]{\headingfont\bfseries\small\color{Text} #1}
+\newcommand{\tmono}[1]{{\monofont\footnotesize\color{TealDk} #1}}
+\newcommand{\tsmall}[1]{{\small\color{TextLt} #1}}
+
+
+%% ════════════════════════════════════════════════════════════
+%%  COVER PAGE
+%% ════════════════════════════════════════════════════════════
+\newcommand{\makecover}{%
+  \thispagestyle{empty}
+  \begin{tikzpicture}[remember picture, overlay]
+    %% Full page background
+    \fill[Navy] (current page.south west) rectangle (current page.north east);
+
+    %% Subtle mid-panel
+    \fill[Navy2]
+      (current page.north west)
+      rectangle ([yshift=-140mm]current page.north east);
+
+    %% Teal top stripe
+    \fill[Teal]
+      ([yshift=-2mm]current page.north west)
+      rectangle (current page.north east);
+
+    %% Left accent bar
+    \fill[Teal]
+      ([xshift=12mm]current page.south west)
+      rectangle ([xshift=14.5mm, yshift=-148mm]current page.north west);
+
+    %% Diagonal accent shape (top right)
+    \fill[Teal!8]
+      ([xshift=-60mm]current page.north east)
+      --
+      (current page.north east)
+      --
+      ([yshift=-55mm]current page.north east)
+      -- cycle;
+
+    %% ESHERIA wordmark
+    \node[
+      anchor=north west,
+      font=\headingfont\bfseries\fontsize{42}{50}\selectfont\color{white},
+    ] at ([xshift=18mm, yshift=-30mm]current page.north west)
+      {ESHERIA};
+
+    %% Teal underline
+    \draw[Teal, line width=3pt]
+      ([xshift=18mm, yshift=-53mm]current page.north west)
+      -- ++(50mm,0);
+
+    %% Platform subtitle
+    \node[
+      anchor=north west,
+      font=\monofont\bfseries\fontsize{10}{14}\selectfont\color{Teal},
+    ] at ([xshift=18mm, yshift=-58mm]current page.north west)
+      {LEGAL WORKFLOW OPERATING SYSTEM};
+
+    %% Separator
+    \draw[Navy3, line width=0.4pt]
+      ([xshift=18mm, yshift=-68mm]current page.north west)
+      -- ([xshift=-18mm, yshift=-68mm]current page.north east);
+
+    %% Document title
+    \node[
+      anchor=north west,
+      text width=150mm,
+      font=\headingfont\bfseries\fontsize{30}{38}\selectfont\color{white},
+    ] at ([xshift=18mm, yshift=-80mm]current page.north west)
+      {From Fragmented\\Capabilities to a\\Legal Workflow OS.};
+
+    %% Teal rule under title
+    \fill[Teal]
+      ([xshift=18mm, yshift=-146mm]current page.north west)
+      rectangle ++(90mm, 3pt);
+
+    %% Subtitle
+    \node[
+      anchor=north west,
+      font=\itshape\fontsize{12}{16}\selectfont\color{Muted},
+    ] at ([xshift=18mm, yshift=-155mm]current page.north west)
+      {The strategic case for platform-first legal AI.};
+
+    %% Separator 2
+    \draw[Navy3, line width=0.4pt]
+      ([xshift=18mm, yshift=-168mm]current page.north west)
+      -- ([xshift=-18mm, yshift=-168mm]current page.north east);
+
+    %% Abstract text
+    \node[
+      anchor=north west,
+      text width=155mm,
+      font=\itshape\fontsize{9.5}{15}\selectfont\color{TextLt},
+    ] at ([xshift=18mm, yshift=-176mm]current page.north west)
+      {Esheria moves from product-fragmented legal AI capabilities to a unified
+       multi-tenant operating system with orchestration, shared canonical objects,
+       governance controls, and institutional audit trails. This proposal argues the
+       case, maps the architecture, defines the MVP, and names the four decisions
+       needed to greenlight Phase 0.};
+
+    %% Bottom metadata panel
+    \fill[Navy2, rounded corners=4pt]
+      ([xshift=18mm, yshift=50mm]current page.south west)
+      rectangle ([xshift=-18mm, yshift=130mm]current page.south west |- current page.south east);
+    \fill[Teal]
+      ([xshift=18mm, yshift=50mm]current page.south west)
+      rectangle ++(3pt, 80pt);
+
+    \node[anchor=north west, font=\monofont\tiny\color{Muted}]
+      at ([xshift=24mm, yshift=127mm]current page.south west) {PREPARED BY};
+    \node[anchor=north west, font=\headingfont\bfseries\small\color{white}]
+      at ([xshift=24mm, yshift=120mm]current page.south west) {Vincent Nyamao};
+
+    \node[anchor=north west, font=\monofont\tiny\color{Muted}]
+      at ([xshift=24mm, yshift=107mm]current page.south west) {PREPARED FOR};
+    \node[anchor=north west, font=\headingfont\bfseries\small\color{white}]
+      at ([xshift=24mm, yshift=100mm]current page.south west) {Chief Executive Officer, Esheria};
+
+    \node[anchor=north west, font=\monofont\tiny\color{Muted}]
+      at ([xshift=105mm, yshift=127mm]current page.south west) {CLASSIFICATION};
+    \node[anchor=north west, font=\headingfont\bfseries\small\color{white}]
+      at ([xshift=105mm, yshift=120mm]current page.south west) {CONFIDENTIAL · CEO Review};
+
+    \node[anchor=north west, font=\monofont\tiny\color{Muted}]
+      at ([xshift=105mm, yshift=107mm]current page.south west) {DOCUMENT DATE};
+    \node[anchor=north west, font=\headingfont\bfseries\small\color{white}]
+      at ([xshift=105mm, yshift=100mm]current page.south west) {2025};
+
+    %% Bottom identity strip
+    \fill[black!90]
+      (current page.south west) rectangle ([yshift=12mm]current page.south east);
+    \node[
+      anchor=west,
+      font=\monofont\tiny\color{Muted},
+    ] at ([xshift=18mm, yshift=5mm]current page.south west)
+      {Esheria Architecture Review Package · Confidential};
+    \node[
+      anchor=east,
+      font=\monofont\tiny\color{Muted},
+    ] at ([xshift=-18mm, yshift=5mm]current page.south east)
+      {esheria.io};
+  \end{tikzpicture}
+  \newpage
+}
+
+
+%% ════════════════════════════════════════════════════════════
+%%  DOCUMENT BEGIN
+%% ════════════════════════════════════════════════════════════
 \begin{document}
-\maketitle
+\makecover
 
-\section{Strategic Shift}
-Esheria moves from product-fragmented capabilities to a unified multi-tenant legal workflow operating system. The strategic thesis is orchestration-first integration with strict tenancy, governance, and auditability controls.
+\setlength{\parskip}{5pt}
+\setlength{\parindent}{0pt}
 
-\section{Current Architecture}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/system-context.png}
-\caption{Current system context across actors, services, and enterprise integrations}
-\end{figure}
+%% ════════════════════════════════════════════════════════════
+%%  EXECUTIVE SUMMARY
+%% ════════════════════════════════════════════════════════════
+\kicker{// Executive Summary}
+{\headingfont\bfseries\Huge\color{Navy} The Platform Shift}
 
-\section{Platform Architecture}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/layered-architecture.png}
-\caption{Target layered architecture with control and data plane split}
-\end{figure}
+\tealrule
 
-\section{Workflow Example}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/contract-intake-sequence.png}
-\caption{Contract intake and review workflow sequence}
-\end{figure}
+Esheria currently operates five strong legal AI capabilities: document OCR and ingestion, contract
+compliance analysis, legal research and retrieval, AI-assisted drafting, and analytics
+infrastructure. Each operates as a credible, functioning service. However, they share no data
+model, no workflow state, and no orchestration layer—making them five separate products rather
+than one coherent platform.
 
-\section{Dashboards}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/dashboard-topology.png}
-\caption{Customer vs operator dashboard topology and analytics separation}
-\end{figure}
+\medskip
 
-\section{Integrations}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/service-integration-map.png}
-\caption{Connector gateway integration map across Esheria services}
-\end{figure}
+This proposal argues that Esheria's most significant near-term strategic opportunity is not to add
+a sixth capability, but to build the orchestration layer above the five that already exist: a
+\textbf{Legal Workflow Operating System} with shared canonical objects, workflow state machines,
+human-in-loop review, approval chains, and institutional analytics.
 
-\section{Deployment}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/deployment-topology.png}
-\caption{Deployment topology across EKS, SageMaker, and shared data services}
-\end{figure}
+\bigskip
 
-\section{Roadmap}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{../visuals/diagrams/source/png/current-vs-target-architecture.png}
-\caption{Transformation roadmap from current to target architecture}
-\end{figure}
+\begin{tealbox}{// KEY INSIGHT}
+Esheria's strongest long-term moat comes from becoming the programmable operating layer through
+which organisations run intelligent legal workflows—not from accumulating isolated AI features.
+Platform businesses compound. Feature businesses plateau.
+\end{tealbox}
+
+\thinrule
+
+%% ════════════════════════════════════════════════════════════
+%%  SECTION 01: THE PROBLEM
+%% ════════════════════════════════════════════════════════════
+\sectionbanner{01}{The Strategic Problem}{Why five capabilities without a platform creates a growth ceiling}{Teal}
+
+\subsection{Current State Diagnosis}
+
+The current state across Esheria's ecosystem shows clear signs of capability fragmentation.
+Authentication and identity models differ across product surfaces. There is no shared canonical
+representation of Documents, Matters, or Clauses. Workflow state is not preserved between services.
+Analytics serves Esheria's internal operations but not customer organisations. There are no
+approval chains, escalation paths, or SLA enforcement mechanisms.
+
+\subsection{What Enterprise Buyers Actually Need}
+
+B2B enterprise buyers in legal, compliance, procurement, and financial services do not buy
+isolated AI features indefinitely. Their buying criteria are fundamentally different from
+individual user adoption:
+
+\bigskip
+
+\rowcolors{2}{Light}{white}
+\begin{tabularx}{\linewidth}{%
+  >{\headingfont\bfseries\small\color{Text}}L{72mm}%
+  >{\small\color{TextLt}}X%
+}
+\rowcolor{Navy2}
+\thead{Enterprise Requirement} & \thead{Esheria Current Position} \\
+\midrule
+Repeatable, auditable workflows       & Features without shared workflow state \\
+Role-based access and controls        & Varies by product surface \\
+DMS, CRM, ERP integrations            & Not yet systematised across services \\
+Approval chains and escalation        & Not present as platform primitives \\
+Institution-facing analytics          & Internal to Esheria operations only \\
+Evidence-backed AI outputs            & Output-only, not linked to citation source \\
+Compliance and audit trails           & Not a first-class architectural concern \\
+\bottomrule
+\end{tabularx}
+
+\bigskip
+
+\begin{amberbox}{// THE ENTERPRISE WORKFLOW IMPERATIVE}
+Upload a contract. Analyse it. Flag risks. Draft corrections. Route for review.
+Obtain approval. Close the matter. Generate a compliance report.
+That is one workflow. That is what enterprise legal teams will pay for at scale.
+\end{amberbox}
+
+\thinrule
+
+%% ════════════════════════════════════════════════════════════
+%%  SECTION 02: PLATFORM THESIS
+%% ════════════════════════════════════════════════════════════
+\sectionbanner{02}{The Platform Thesis}{Orchestration-first integration with governance, tenancy, and audit}{Teal}
+
+\subsection{From Features to Operating Layer}
+
+The core thesis is direct: Esheria should evolve from a collection of legal AI capabilities into
+a \textbf{programmable legal operations platform}—the operating layer through which organisations
+run intelligent legal workflows. This is a category shift, not merely a product expansion. The
+five existing repos become Layer~1 of a five-layer architecture. They are not rebuilt—they are
+connected.
+
+\subsection{Platform Capabilities}
+
+\bigskip
+\rowcolors{2}{Light}{white}
+\begin{tabularx}{\linewidth}{%
+  >{\headingfont\bfseries\small\color{Text}}L{42mm}%
+  >{\small\color{Text}}X%
+}
+\rowcolor{Navy2}
+\thead{Component} & \thead{Description} \\
+\midrule
+Canonical Object Model
+  & Nine shared legal business objects—\tmono{Organization}, \tmono{Matter}, \tmono{Document},
+    \tmono{Clause}, \tmono{Risk}, \tmono{WorkflowRun}, \tmono{Action}, \tmono{Review},
+    \tmono{Citation}—that all services operate on. \\
+Workflow Engine
+  & State machine executing multi-step legal workflows with step routing, human review,
+    approval chains, escalation logic, SLA enforcement, and full audit trails. \\
+Connector Gateway
+  & Single internal API gateway abstracting all five capability services.
+    Frontends call \tmono{/api/*} only. Gateway routes to \tmono{/internal/*} services. \\
+Multi-Tenant Core
+  & Enterprise tenancy with isolated org data, users, roles, and workflow configs.
+    Centralised Esheria operator console—never customer-accessible. \\
+Institution Analytics
+  & Customer-facing analytics layer, architecturally separate from Esheria internal analytics,
+    giving legal teams operational intelligence over their own workflows. \\
+\bottomrule
+\end{tabularx}
+
+\subsection{The Platform Moat}
+
+\bigskip
+\rowcolors{2}{Light}{white}
+\begin{tabularx}{\linewidth}{%
+  C{8mm}%
+  >{\headingfont\bfseries\small\color{Text}}L{38mm}%
+  >{\small\color{TextLt}}X%
+}
+\rowcolor{Navy2}
+\thead{\#} & \thead{Moat Source} & \thead{How It Compounds} \\
+\midrule
+\tmono{1} & Workflow Depth
+  & Embedded workflow logic creates switching cost that isolated features never produce. \\
+\tmono{2} & Ontology Quality
+  & When Esheria defines the canonical model for legal business objects, it becomes hard to replace. \\
+\tmono{3} & Institutional Memory
+  & Audit logs, approval histories, and clause decisions accumulate as irreplaceable org assets. \\
+\tmono{4} & Integration Surface
+  & DMS, CRM, ERP integrations embed Esheria in core business infrastructure. \\
+\tmono{5} & Platform Narrative
+  & A platform business is more expandable, more fundable, and harder to replace than a feature company. \\
+\bottomrule
+\end{tabularx}
+
+\thinrule
+
+%% ════════════════════════════════════════════════════════════
+%%  SECTION 03: ARCHITECTURE
+%% ════════════════════════════════════════════════════════════
+\sectionbanner{03}{Platform Architecture}{Five-layer stack — existing services connected, not rebuilt}{Blue}
+
+The platform is structured as five horizontal layers. Each has a distinct purpose and a bounded
+responsibility. No layer has a direct dependency on a non-adjacent layer. Existing capability
+repos plug into Layer~1 as-is.
+
+\bigskip
+\rowcolors{2}{Light}{white}
+\begin{tabularx}{\linewidth}{%
+  C{11mm}%
+  >{\headingfont\bfseries\small\color{Text}}L{28mm}%
+  L{46mm}%
+  >{\small\color{TextLt}}X%
+}
+\rowcolor{Navy2}
+\thead{Layer} & \thead{Name} & \thead{Purpose} & \thead{Key Components} \\
+\midrule
+\tmono{L5} & Experience
+  & Customer and operator frontend surfaces
+  & Institution Workspace, Operator Console, Public Surface \\
+\tmono{L4} & Control Plane
+  & Orchestration, governance, audit
+  & Workflow Engine, State Machine, Approval Router, Audit Log \\
+\tmono{L3} & Object Model
+  & Shared canonical legal business objects
+  & Org, Matter, Document, Clause, Risk, WorkflowRun, Action, Citation \\
+\tmono{L2} & Connectors
+  & Stable gateway to all capability services
+  & OCR, Contract, Research, Drafting, Analytics Connectors \\
+\tmono{L1} & Existing Services
+  & Current Esheria capability repos, unchanged
+  & esheria-ocr, contract-engine, esheria-ai, lexdraft, esheria-analytics \\
+\bottomrule
+\end{tabularx}
+
+\bigskip
+
+\begin{amberbox}{// CRITICAL ARCHITECTURAL DECISION}
+Define and lock the Canonical Object Model (Layer~3) before writing any service code.
+The schema is the contract between all services, operators, and frontends.
+Treat schema changes within a major version with the same rigour as a public API breaking change.
+\end{amberbox}
+
+\thinrule
+
+%% ════════════════════════════════════════════════════════════
+%%  SECTION 04: MVP
+%% ════════════════════════════════════════════════════════════
+\sectionbanner{04}{The MVP: Contract Intake \& Review}{One workflow across all five services. One audit trail.}{Teal}
+
+The recommended Phase~2 MVP is a Contract Intake and Review workflow. It is the narrowest,
+highest-value path to proving the platform thesis. It is commercially validated, technically
+achievable using existing capabilities, and architecturally complete—requiring orchestration
+across all five services in sequence.
+
+\subsection{End-to-End Workflow — 10 Steps}
+
+\bigskip
+\rowcolors{2}{Light}{white}
+\begin{tabularx}{\linewidth}{%
+  C{10mm}%
+  >{\headingfont\bfseries\footnotesize}L{32mm}%
+  L{58mm}%
+  >{\monofont\footnotesize\color{TealDk}}X%
+}
+\rowcolor{Navy2}
+\thead{Step} & \thead{Actor} & \thead{Action} & \thead{Output Object} \\
+\midrule
+\badge{01}{Mid}      & User            & Upload contract document              & Document + WorkflowRun \\
+\badge{02}{Teal}     & Ingestion Op    & OCR + validate + classify             & Parsed text, DocumentVersion \\
+\badge{03}{Teal}     & Extraction Op   & Extract clauses, parties, obligations & Clause{[}{]} on Document \\
+\badge{04}{Amber}    & Compliance Op   & Check policies and regulations        & Risk{[}{]} with severity \\
+\badge{05}{Blue}     & Research Op     & Retrieve precedents + citations       & Citation{[}{]} linked \\
+\badge{06}{Violet}   & Drafting Op     & Generate fallback language            & Draft suggestions \\
+\badge{07}{Violet}   & Review Op       & Compile briefing + score risk         & Review record \\
+\badge{08}{Rose}     & Human Reviewer  & Decide + annotate                     & Decision on Review \\
+\badge{09}{Amber}    & Routing Op      & Approve or escalate + enforce SLA     & Approval + SLA \\
+\badge{10}{Mid}      & Analytics Op    & Emit events + update dashboards       & Analytics updated \\
+\bottomrule
+\end{tabularx}
+
+\thinrule
+
+%% ════════════════════════════════════════════════════════════
+%%  SECTION 05: DECISION METRICS
+%% ════════════════════════════════════════════════════════════
+\sectionbanner{05}{Decision Metrics}{Four measurements that define the before and after}{Violet}
+
+Four metrics define the measurable difference between the current feature-level position and the
+platform target. Each maps a current state limitation to a specific, verifiable outcome.
+
+\bigskip
+\begin{tabularx}{\linewidth}{%
+  >{\headingfont\bfseries\small\color{Text}}L{38mm}%
+  >{\small\color{Rose}}L{58mm}%
+  >{\small\color{TealDk}}X%
+}
+\rowcolor{Navy2}
+\thead{Metric} &
+\thead{\color{Rose!80}Current State} &
+\thead{\color{Teal!80}Target State} \\
+\midrule
+\rowcolor{Light}
+Workflow Throughput
+  & Per-service, measured per API call per capability
+  & End-to-end per tenant — matters closed, SLA compliance rate \\
+Compliance Assurance
+  & Point-in-time checks, isolated, no audit chain
+  & Workflow-level — risk linked to clause, citation, reviewer decision, timestamp \\
+\rowcolor{Light}
+Platform Leverage
+  & Feature-by-feature value, no compounding between services
+  & OS-level retention — workflow depth creates switching cost \\
+Enterprise Sales Motion
+  & Individual user acquisition, demo-by-demo
+  & Org subscription — sold to Head of Legal, CCO, procurement director \\
+\bottomrule
+\end{tabularx}
+
+\thinrule
+
+%% ════════════════════════════════════════════════════════════
+%%  SECTION 06: ROADMAP
+%% ════════════════════════════════════════════════════════════
+\sectionbanner{06}{Phased Roadmap}{18 to 27 weeks from greenlight to first B2B pilot}{Amber}
+
+\vspace{4pt}
+
+%% Roadmap visual strip
+\begin{tikzpicture}[node distance=2pt]
+  \newcommand{\phasenode}[4]{%
+    \node[
+      fill=Navy2, rounded corners=3pt,
+      minimum width=36mm, minimum height=18mm,
+      text width=32mm, align=flush left,
+      inner sep=4pt,
+    ] (#1) {
+      {\monofont\bfseries\scriptsize\color{#4} #1}\\[1pt]
+      {\headingfont\bfseries\fontsize{8}{10}\selectfont\color{white} #2}\\[2pt]
+      {\monofont\tiny\color{Muted} #3}
+    };
+    \fill[#4] (#1.north west) rectangle ([xshift=36mm, yshift=-2.5pt]#1.north west);
+  }
+
+  \phasenode{P0}{Validation \& Alignment}{2--3 wks}{Mid}
+  \phasenode{P1}{Design}{3--4 wks}{Blue}
+  \phasenode{P2}{MVP Build}{6--8 wks}{Teal}
+  \phasenode{P3}{Internal Pilot}{3--4 wks}{Violet}
+  \phasenode{P4}{B2B Launch}{4--6 wks}{Amber}
+
+  % Auto-position: place nodes manually in a row
+  \node[fill=Navy2, rounded corners=3pt, minimum width=36mm, minimum height=18mm,
+        text width=32mm, align=flush left, inner sep=4pt] (P0box) at (0,0) {
+    {\monofont\bfseries\scriptsize\color{Mid} P0}\\[1pt]
+    {\headingfont\bfseries\fontsize{8}{10}\selectfont\color{white} Validation}\\[2pt]
+    {\monofont\tiny\color{Muted} 2--3 wks}
+  };
+  \fill[Mid] (P0box.north west) rectangle ([xshift=36mm, yshift=-2.5pt]P0box.north west);
+
+  \node[fill=Navy2, rounded corners=3pt, minimum width=36mm, minimum height=18mm,
+        text width=32mm, align=flush left, inner sep=4pt, right=4pt of P0box] (P1box) {
+    {\monofont\bfseries\scriptsize\color{Blue} P1}\\[1pt]
+    {\headingfont\bfseries\fontsize{8}{10}\selectfont\color{white} Design}\\[2pt]
+    {\monofont\tiny\color{Muted} 3--4 wks}
+  };
+  \fill[Blue] (P1box.north west) rectangle ([xshift=36mm, yshift=-2.5pt]P1box.north west);
+
+  \node[fill=Navy2, rounded corners=3pt, minimum width=36mm, minimum height=18mm,
+        text width=32mm, align=flush left, inner sep=4pt, right=4pt of P1box] (P2box) {
+    {\monofont\bfseries\scriptsize\color{Teal} P2}\\[1pt]
+    {\headingfont\bfseries\fontsize{8}{10}\selectfont\color{white} MVP Build}\\[2pt]
+    {\monofont\tiny\color{Muted} 6--8 wks}
+  };
+  \fill[Teal] (P2box.north west) rectangle ([xshift=36mm, yshift=-2.5pt]P2box.north west);
+
+  \node[fill=Navy2, rounded corners=3pt, minimum width=36mm, minimum height=18mm,
+        text width=32mm, align=flush left, inner sep=4pt, right=4pt of P2box] (P3box) {
+    {\monofont\bfseries\scriptsize\color{Violet} P3}\\[1pt]
+    {\headingfont\bfseries\fontsize{8}{10}\selectfont\color{white} Internal Pilot}\\[2pt]
+    {\monofont\tiny\color{Muted} 3--4 wks}
+  };
+  \fill[Violet] (P3box.north west) rectangle ([xshift=36mm, yshift=-2.5pt]P3box.north west);
+
+  \node[fill=Navy2, rounded corners=3pt, minimum width=36mm, minimum height=18mm,
+        text width=32mm, align=flush left, inner sep=4pt, right=4pt of P3box] (P4box) {
+    {\monofont\bfseries\scriptsize\color{Amber} P4}\\[1pt]
+    {\headingfont\bfseries\fontsize{8}{10}\selectfont\color{white} B2B Launch}\\[2pt]
+    {\monofont\tiny\color{Muted} 4--6 wks}
+  };
+  \fill[Amber] (P4box.north west) rectangle ([xshift=36mm, yshift=-2.5pt]P4box.north west);
+
+  %% Connectors between phases
+  \foreach \from/\to in {P0box/P1box, P1box/P2box, P2box/P3box, P3box/P4box}{
+    \node[font=\color{Border}\small, right=1pt of \from] {\textbf{>}};
+  }
+\end{tikzpicture}
+
+\medskip
+
+\rowcolors{2}{Light}{white}
+\begin{tabularx}{\linewidth}{%
+  C{11mm}%
+  >{\headingfont\bfseries\small\color{Text}}L{22mm}%
+  C{15mm}%
+  L{68mm}%
+  >{\headingfont\bfseries\small\color{Text}}X%
+}
+\rowcolor{Navy2}
+\thead{Phase} & \thead{Name} & \thead{Duration} & \thead{Key Deliverables} & \thead{Exit Milestone} \\
+\midrule
+\tmono{P0} & Validation   & \tsmall{2--3 wks}
+  & CEO alignment, scope definition, service readiness audit, success criteria
+  & Greenlight + scope agreed \\
+\tmono{P1} & Design       & \tsmall{3--4 wks}
+  & Canonical schema, workflow state machine, API contract spec, auth/tenant model
+  & Architecture doc approved \\
+\tmono{P2} & MVP Build    & \tsmall{6--8 wks}
+  & Core backend, workflow engine, 2--3 connectors, reviewer dashboard v1, audit log
+  & Live end-to-end demo \\
+\tmono{P3} & Pilot        & \tsmall{3--4 wks}
+  & Real scenario testing, refinement, operator console v1, performance baseline
+  & Validated platform \\
+\tmono{P4} & B2B Launch   & \tsmall{4--6 wks}
+  & Target customer profile, onboarding, institution analytics v1, pricing model
+  & First pilot conversation \\
+\bottomrule
+\end{tabularx}
+
+\thinrule
+
+%% ════════════════════════════════════════════════════════════
+%%  SECTION 07: THE ASK
+%% ════════════════════════════════════════════════════════════
+\sectionbanner{07}{The Ask}{Four decisions — not a full platform rebuild}{Teal}
+
+This proposal does not request a reorganisation, a new team, or a full platform rebuild. It
+requests four specific decisions that unlock the first proof-of-concept without disrupting
+anything that currently works.
+
+\bigskip
+
+%% 2×2 ask grid using TikZ
+\begin{tikzpicture}
+  \newcommand{\askcard}[5]{%
+    % #1=anchor, #2=num, #3=title, #4=color, #5=body
+    \node[
+      fill=Light, rounded corners=3pt,
+      minimum width=82mm, minimum height=38mm,
+      text width=76mm, align=flush left,
+      inner sep=6pt, anchor=north west,
+    ] (#2box) at (#1) {
+      \\[8pt]
+      {\headingfont\bfseries\small\color{Navy2} #3}\\[4pt]
+      {\fontsize{8.5}{13}\selectfont\color{TextLt} #5}
+    };
+    %% top accent bar
+    \fill[#4] (#2box.north west)
+      rectangle ([xshift=82mm, yshift=-3pt]#2box.north west);
+    %% number badge
+    \node[
+      fill=#4, rounded corners=2pt,
+      minimum width=6mm, minimum height=5.5mm,
+      font=\monofont\bfseries\small\color{white},
+      anchor=north west,
+    ] at ([xshift=5pt, yshift=-8pt]#2box.north west) {#2};
+  }
+
+  \askcard{0,0}{1}{Strategic Alignment}{Teal}{%
+    Confirm the platform direction---Esheria as a programmable legal
+    workflow OS---is the right strategic bet for this phase of growth.}
+
+  \askcard{84mm,0}{2}{MVP Greenlight}{Blue}{%
+    Approve Phase~0 through Phase~2: validation, design, and MVP build
+    culminating in a live Contract Intake and Review demo.}
+
+  \askcard{0,-42mm}{3}{Platform Ownership}{Violet}{%
+    Name a platform lead to coordinate across existing repo owners.
+    Without this, the orchestration layer will stall.}
+
+  \askcard{84mm,-42mm}{4}{Pilot Target}{Amber}{%
+    Identify one B2B customer type or named prospect as the north star
+    for MVP and B2B packaging phases.}
+\end{tikzpicture}
+
+\bigskip
+
+\begin{tealbox}{// CLOSING STATEMENT}
+We are not asking to rebuild Esheria. We are asking for permission to prove that what Esheria
+has already built can operate as one coherent system---and that this coherence creates the
+enterprise story that drives the next phase of growth.
+\end{tealbox}
+
+\thinrule
+
+%% ════════════════════════════════════════════════════════════
+%%  SUPPORTING DOCUMENTATION
+%% ════════════════════════════════════════════════════════════
+\kicker{// Supporting Documentation}
+{\headingfont\bfseries\Huge\color{Navy} Full Reference Package}
+
+\tealrule
+
+The following documents have been prepared alongside this proposal and are available for
+deep-review sessions with engineering, product, and design stakeholders.
+
+\bigskip
+\rowcolors{2}{Light}{white}
+\begin{tabularx}{\linewidth}{%
+  >{\headingfont\bfseries\small\color{Text}}L{50mm}%
+  X%
+  >{\small\color{TextLt}}L{34mm}%
+}
+\rowcolor{Navy2}
+\thead{Document} & \thead{Contents} & \thead{Audience} \\
+\midrule
+Technical Architecture Blueprint
+  & Full engineering specification: 5-layer architecture, deployment topology, API contracts,
+    data model, tenancy and auth model, implementation guidance
+  & Engineering, CTO \\
+Architecture Diagram Pack
+  & 8 engineering-grade SVG/PNG diagrams: system context, layered architecture,
+    workflow sequence, data model, control/data plane, deployment, dashboard topology
+  & All technical stakeholders \\
+Product \& Design Appendix
+  & Screen-level design briefs for 5 surfaces: Institution Workspace, Operator Console,
+    Workflow Monitor, Institution Analytics, Support \& Incident Center
+  & Product, design, engineering \\
+Consistency Report
+  & 7 resolved inconsistencies across source artifacts; canonical architecture fact table
+    confirming 11 agreed-correct design decisions
+  & Engineering leads \\
+\bottomrule
+\end{tabularx}
+
+\clearpage
+
+%% ════════════════════════════════════════════════════════════
+%%  ARCHITECTURE DIAGRAM SECTIONS
+%% ════════════════════════════════════════════════════════════
+
+%% ── Figure A: System Context ─────────────────────────────────
+\sectionbanner{A}{Current Architecture}{System context — all actors, platform services, and external integrations}{Blue}
+
+The system context diagram maps all actors interacting with the Esheria platform: institution
+users (legal reviewers, compliance officers, procurement leads), Esheria operators, API
+consumers, and external enterprise systems including DMS, CRM, and ERP. It establishes the trust
+boundaries and communication patterns the platform architecture must satisfy at the perimeter
+level.
+
+\medskip
+\diagram{../visuals/diagrams/source/png/system-context.png}%
+  {Figure~A — Current system context across actors, platform services, and enterprise integrations}
+
+\thinrule
+
+%% ── Figure B: Layered Architecture ──────────────────────────
+\sectionbanner{B}{Platform Architecture}{Target layered architecture with control and data plane separation}{Teal}
+
+The layered architecture shows how the five platform layers stack above the current capability
+repos without requiring any service to be rebuilt. The control/data plane boundary between L3
+and L4 is the primary governance mechanism. L5 surfaces only ever call \tmono{/api/*} endpoints.
+L2 connectors only ever call \tmono{/internal/*} endpoints. No layer has a direct dependency on a
+non-adjacent layer.
+
+\medskip
+\diagram{../visuals/diagrams/source/png/layered-architecture.png}%
+  {Figure~B — Target five-layer architecture from existing services to experience surfaces}
+
+\thinrule
+
+%% ── Figure C: Contract Intake Sequence ───────────────────────
+\sectionbanner{C}{Contract Intake Workflow}{End-to-end sequence for the Phase 2 MVP workflow}{Teal}
+
+The contract intake sequence demonstrates the full orchestration thesis in one workflow. Eight AI
+operators and one human reviewer collaborate across all five capability services. Each step
+persists state to the canonical object model and produces an immutable audit log entry. The output
+is a human reviewer making an evidence-backed decision---the fundamental enterprise legal workflow
+primitive.
+
+\medskip
+\diagram{../visuals/diagrams/source/png/contract-intake-sequence.png}%
+  {Figure~C — Contract intake and review sequence across 8 operators and 1 human reviewer}
+
+\thinrule
+
+%% ── Figure D: Dashboard Topology ─────────────────────────────
+\sectionbanner{D}{Dashboard Topology}{Customer vs operator surfaces and analytics domain separation}{Violet}
+
+The dashboard topology establishes three completely separate frontend surfaces: the Institution
+Workspace (customer-facing B2B product), the Esheria Operator Console (internal control plane,
+never customer-accessible), and the Public/Sales Surface. The two analytics domains---Esheria
+internal operations and institution-facing analytics---must be architecturally separated from the
+outset.
+
+\medskip
+\diagram{../visuals/diagrams/source/png/dashboard-topology.png}%
+  {Figure~D — Three distinct dashboard surfaces with separate auth flows and data scopes}
+
+\thinrule
+
+%% ── Figure E: Service Integration Map ────────────────────────
+\sectionbanner{E}{Service Integration Map}{Connector gateway routing across all five capability services}{Amber}
+
+The service integration map shows how the Connector Gateway at Layer~2 abstracts all five
+existing capability services. No frontend or workflow operator ever calls a service directly. All
+platform-to-service calls route through the gateway's \tmono{/internal/*} namespace. Each
+connector owns the auth, retry, circuit-breaking, and error normalisation contract for its target
+service.
+
+\medskip
+\diagram{../visuals/diagrams/source/png/service-integration-map.png}%
+  {Figure~E — Connector gateway integration map — all internal calls mediated by L2}
+
+\thinrule
+
+%% ── Figure F: Deployment Topology ────────────────────────────
+\sectionbanner{F}{Deployment Topology}{Infrastructure stack, service boundaries, and data store configuration}{Blue}
+
+The deployment topology shows the recommended MVP infrastructure: API gateway with TLS
+termination and rate limiting, stateless platform backend behind a load balancer, Redis Streams
+message queue for async step execution, PostgreSQL with row-level security for canonical object
+persistence, S3-compatible object storage for documents, and a vector store for research and
+retrieval.
+
+\medskip
+\diagram{../visuals/diagrams/source/png/deployment-topology.png}%
+  {Figure~F — Deployment topology across API gateway, backend services, queues, and data stores}
+
+\thinrule
+
+%% ── Figure G: Transformation Roadmap ─────────────────────────
+\sectionbanner{G}{Transformation Roadmap}{Architecture evolution from current state to target platform}{Teal}
+
+The transformation diagram maps the journey from current state (five isolated repos with
+independent auth and no shared model) to target state (unified platform with canonical objects,
+shared workflow state, and institutional analytics). The key design decision is preserved
+throughout: existing repos remain operational and are connected into the platform as Layer~1,
+not replaced.
+
+\medskip
+\diagram{../visuals/diagrams/source/png/current-vs-target-architecture.png}%
+  {Figure~G — Transformation from five isolated capabilities to one coherent platform}
 
 \end{document}
